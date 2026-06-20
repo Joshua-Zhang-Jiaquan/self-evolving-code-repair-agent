@@ -1,0 +1,16 @@
+{
+  "command": "python scripts/check_model_gate.py --model qwable --no-dry-run --models-config configs/models.yaml --resources configs/resources.yaml --out-dir outputs/model_gates --max-new-tokens 1024",
+  "framework": "PyTorch",
+  "framework_config": [
+    {
+      "image": "RESOLVE_BEFORE_SUBMISSION",
+      "image_type": "RESOLVE_BEFORE_SUBMISSION",
+      "instance_count": 1,
+      "spec_id": "RESOLVE_BEFORE_SUBMISSION"
+    }
+  ],
+  "logic_compute_group_id": "RESOLVE_BEFORE_SUBMISSION",
+  "name": "qwable-gate-local-inference",
+  "project_id": "RESOLVE_BEFORE_SUBMISSION",
+  "workspace_id": "RESOLVE_BEFORE_SUBMISSION"
+}

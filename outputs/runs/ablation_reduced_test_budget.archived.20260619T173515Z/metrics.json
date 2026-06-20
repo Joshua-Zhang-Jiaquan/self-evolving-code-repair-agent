@@ -1,0 +1,66 @@
+{
+  "completed": 3,
+  "learning": {
+    "all_step_rewards_zero": false,
+    "episode_returns": [
+      0.44999999999999996,
+      3.4499999999999997,
+      3.4499999999999997
+    ],
+    "mean_return": 2.4499999999999997,
+    "policy_baseline_value": 0.6919499999999998,
+    "rollout_count": 3,
+    "schema": "safe-tool-selection-v1",
+    "update_summaries": [
+      {
+        "baseline_after": 0.044999999999999984,
+        "baseline_before": 0.0,
+        "episode_return": 0.44999999999999996,
+        "returns": [
+          0.44999999999999996,
+          -0.25,
+          -0.2,
+          -0.15000000000000002,
+          -0.1,
+          -0.05
+        ],
+        "total_abs_update": 0.8374241075565725,
+        "transition_count": 6
+      },
+      {
+        "baseline_after": 0.3854999999999999,
+        "baseline_before": 0.044999999999999984,
+        "episode_return": 3.45,
+        "returns": [
+          3.45,
+          2.75,
+          2.8,
+          2.0999999999999996,
+          1.4,
+          0.7
+        ],
+        "total_abs_update": 7.8065697329689065,
+        "transition_count": 6
+      },
+      {
+        "baseline_after": 0.6919499999999998,
+        "baseline_before": 0.3854999999999999,
+        "episode_return": 3.45,
+        "returns": [
+          3.45,
+          2.75,
+          2.8,
+          2.0999999999999996,
+          1.4,
+          0.7
+        ],
+        "total_abs_update": 4.619855111809213,
+        "transition_count": 6
+      }
+    ]
+  },
+  "policy_checkpoint": "outputs/runs/ablation_reduced_test_budget/policy.json",
+  "skipped": 0,
+  "status": "COMPLETED",
+  "total": 3
+}

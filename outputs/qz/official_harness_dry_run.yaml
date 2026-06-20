@@ -1,0 +1,17 @@
+DRY RUN: POST https://qz.sii.edu.cn/api/v2/train?Action=CreateJob
+Body: {
+  "command": "python -m repair_agent.env.harness --predictions outputs/runs/gold_patch_smoke/predictions.jsonl --run-id official_gold_smoke --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/baseline_main/predictions.jsonl --run-id official_baseline_main --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_baseline_main.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/feedback_main/predictions.jsonl --run-id official_feedback_main --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_feedback_main.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/learning_main/predictions.jsonl --run-id official_learning_main --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_learning_main.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/ablation_no_process_reward/predictions.jsonl --run-id official_ablation_no_process_reward --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_ablation_no_process_reward.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/ablation_no_feedback_features/predictions.jsonl --run-id official_ablation_no_feedback_features --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_ablation_no_feedback_features.json --timeout-seconds 1800 --strict-official && python -m repair_agent.env.harness --predictions outputs/runs/ablation_reduced_test_budget/predictions.jsonl --run-id official_ablation_reduced_test_budget --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status_ablation_reduced_test_budget.json --timeout-seconds 1800 --strict-official",
+  "framework": "RESOLVE_BEFORE_SUBMISSION",
+  "framework_config": [
+    {
+      "image": "RESOLVE_BEFORE_SUBMISSION",
+      "image_type": "RESOLVE_BEFORE_SUBMISSION",
+      "instance_count": 1,
+      "spec_id": "RESOLVE_BEFORE_SUBMISSION"
+    }
+  ],
+  "logic_compute_group_id": "RESOLVE_BEFORE_SUBMISSION",
+  "name": "RESOLVE_BEFORE_SUBMISSION",
+  "project_id": "RESOLVE_BEFORE_SUBMISSION",
+  "workspace_id": "RESOLVE_BEFORE_SUBMISSION"
+}

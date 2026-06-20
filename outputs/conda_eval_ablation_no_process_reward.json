@@ -1,0 +1,258 @@
+{
+  "timestamp": "2026-06-20T07:58:57+00:00",
+  "mode": "conda_no_docker",
+  "docker_used": false,
+  "official_harness_executed": true,
+  "execution_backend": "local_conda",
+  "dataset_name": "princeton-nlp/SWE-bench_Lite",
+  "split": "test",
+  "run_id": "conda_ablation_no_process_reward",
+  "conda_prefix": "/opt/miniconda3",
+  "testbed": "/testbed",
+  "total": 40,
+  "resolved": 0,
+  "resolved_rate": 0.0,
+  "nonempty_patches": 0,
+  "results": [
+    {
+      "instance_id": "astropy__astropy-12907",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "astropy__astropy-14182",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-10914",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-10924",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11001",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11019",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11039",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11049",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11133",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11179",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11283",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11422",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11564",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11583",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11620",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11630",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11742",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11797",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11815",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "django__django-11964",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-18869",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-22711",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-22835",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-23299",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "matplotlib__matplotlib-23314",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "mwaskom__seaborn-3010",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "pallets__flask-4045",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "psf__requests-1963",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "pytest-dev__pytest-5221",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-12471",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "scikit-learn__scikit-learn-13439",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10325",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-10451",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-11870",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-12419",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-13480",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-13895",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-15345",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-17630",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    },
+    {
+      "instance_id": "sympy__sympy-18189",
+      "resolved": false,
+      "reason": "empty_patch",
+      "patch_applied": null
+    }
+  ]
+}

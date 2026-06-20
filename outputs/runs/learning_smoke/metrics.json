@@ -1,0 +1,40 @@
+{
+  "completed": 1,
+  "learning": {
+    "all_step_rewards_zero": false,
+    "episode_returns": [
+      0.1499999999999999
+    ],
+    "mean_return": 0.1499999999999999,
+    "policy_baseline_value": 0.015,
+    "rollout_count": 1,
+    "schema": "safe-tool-selection-v1",
+    "update_summaries": [
+      {
+        "baseline_after": 0.015,
+        "baseline_before": 0.0,
+        "episode_return": 0.15000000000000002,
+        "returns": [
+          0.15000000000000002,
+          -0.5499999999999999,
+          -0.49999999999999994,
+          -0.44999999999999996,
+          -0.39999999999999997,
+          -0.35,
+          -0.3,
+          -0.25,
+          -0.2,
+          -0.15000000000000002,
+          -0.1,
+          -0.05
+        ],
+        "total_abs_update": 2.708819606876009,
+        "transition_count": 12
+      }
+    ]
+  },
+  "policy_checkpoint": "outputs/runs/learning_smoke/policy.json",
+  "skipped": 0,
+  "status": "COMPLETED",
+  "total": 1
+}

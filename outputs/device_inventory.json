@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-06-19T09:52:56Z",
+  "hostname": "jiaquan-test01--c070296d6b39-5lxoc3pmyy",
+  "python_version": "3.12.3 (main, Feb  4 2025, 14:48:35) [GCC 13.3.0]",
+  "gpus": [
+    {
+      "index": 0,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mb": 49140,
+      "memory_free_mb": 48628,
+      "memory_used_mb": 511,
+      "probe_method": "pynvml"
+    },
+    {
+      "index": 1,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mb": 49140,
+      "memory_free_mb": 48626,
+      "memory_used_mb": 513,
+      "probe_method": "pynvml"
+    },
+    {
+      "index": 2,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mb": 49140,
+      "memory_free_mb": 48627,
+      "memory_used_mb": 513,
+      "probe_method": "pynvml"
+    },
+    {
+      "index": 3,
+      "name": "NVIDIA GeForce RTX 4090",
+      "memory_total_mb": 49140,
+      "memory_free_mb": 48627,
+      "memory_used_mb": 512,
+      "probe_method": "pynvml"
+    }
+  ],
+  "gpu_count_detected": 4,
+  "gpus_expected": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "gpus_missing": [],
+  "cpu": {
+    "logical_cores": 128,
+    "architecture": "x86_64",
+    "platform": "Linux-5.15.0-141-generic-x86_64-with-glibc2.39",
+    "physical_cores": 64,
+    "cpu_percent": 31.6
+  },
+  "memory": {
+    "total_mb": 1031694,
+    "available_mb": 618321,
+    "used_mb": 274676,
+    "free_mb": 123529,
+    "percent_used": 40.1
+  },
+  "disk": {
+    "path": "/inspire/hdd/project/multimodal-diffusion-language-model/zhangjiaquan-253108540222/homework/rl",
+    "total_gb": 1024.0,
+    "used_gb": 316.11,
+    "free_gb": 707.89
+  },
+  "swebench_workers": {
+    "cpu_logical": 128,
+    "ram_available_mb": 618321,
+    "cpu_based_workers": 32,
+    "ram_based_workers": 75,
+    "recommended_swebench_max_workers": 16,
+    "rationale": "min(cpu_cores//4=32, ram_gb//8=75) = 16"
+  },
+  "fallback": {
+    "missing_gpus": [],
+    "all_gpus_available": true
+  },
+  "resource_summary": {
+    "gpu_usable": 4,
+    "cpu_cores": 128,
+    "ram_mb": 618321,
+    "disk_free_gb": 707.89,
+    "swebench_max_workers": 16
+  }
+}

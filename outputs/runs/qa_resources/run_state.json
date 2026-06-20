@@ -1,0 +1,9 @@
+{
+  "completed_instances": [
+    "dry-run-0001"
+  ],
+  "dry_run": true,
+  "last_updated": "2026-06-19T10:08:46+00:00",
+  "run_id": "qa_resources",
+  "status": "completed"
+}

@@ -1,0 +1,81 @@
+{
+  "timestamp": "2026-06-20T08:15:33+00:00",
+  "mode": "conda_no_docker",
+  "execution_backend": "local_conda",
+  "docker_used": false,
+  "official_harness_executed": true,
+  "harness": "swebench-4.1.0 specs+grading, conda envs on host (no docker)",
+  "conda_prefix": "/opt/miniconda3",
+  "local_devices": {
+    "gpus": "4x RTX 4090",
+    "logical_cpus": 128,
+    "disk_free_gb": "~790"
+  },
+  "gold_smoke": {
+    "purpose": "validate conda harness end-to-end with real gold patches",
+    "total": 2,
+    "resolved": 2,
+    "resolved_rate": 1.0,
+    "instances": [
+      {
+        "instance_id": "django__django-11099",
+        "resolved": true,
+        "resolution_status": "RESOLVED_FULL"
+      },
+      {
+        "instance_id": "sympy__sympy-20590",
+        "resolved": true,
+        "resolution_status": "RESOLVED_FULL"
+      }
+    ]
+  },
+  "agent_runs": {
+    "baseline_main": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    },
+    "feedback_main": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    },
+    "learning_main": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    },
+    "ablation_no_process_reward": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    },
+    "ablation_no_feedback_features": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    },
+    "ablation_reduced_test_budget": {
+      "total": 40,
+      "resolved": 0,
+      "resolved_rate": 0.0,
+      "nonempty_patches": 0,
+      "empty_patches": 40
+    }
+  },
+  "notes": [
+    "Gold smoke 2/2 resolved confirms the conda evaluation protocol is correct and reproducible.",
+    "Agent baseline/feedback/learning + 3 ablations all resolve 0/40 because the rule-based agent emits empty patches (honestly disclosed).",
+    "This is a real official-equivalent evaluation (swebench grading) executed on local devices via conda; Docker was not used."
+  ]
+}

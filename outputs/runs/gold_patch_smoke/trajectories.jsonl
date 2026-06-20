@@ -1,0 +1,2 @@
+{"actions":["load_actual_gold_patch","write_prediction_jsonl"],"event":"gold_patch_smoke","instance_id":"django__django-11099","run_id":"gold_patch_smoke","run_name":"gold_smoke","status":"completed","timestamp":"2026-06-19T17:35:25+00:00"}
+{"actions":["load_actual_gold_patch","write_prediction_jsonl"],"event":"gold_patch_smoke","instance_id":"sympy__sympy-20590","run_id":"gold_patch_smoke","run_name":"gold_smoke","status":"completed","timestamp":"2026-06-19T17:35:25+00:00"}

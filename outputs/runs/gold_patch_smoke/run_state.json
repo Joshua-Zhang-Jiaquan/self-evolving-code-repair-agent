@@ -1,0 +1,8 @@
+{
+  "completed_instances": [
+    "django__django-11099",
+    "sympy__sympy-20590"
+  ],
+  "run_id": "gold_patch_smoke",
+  "status": "completed"
+}

@@ -1,0 +1,170 @@
+{
+  "agent_runs": {
+    "ablation_no_feedback_features": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_ablation_no_feedback_features",
+      "status_file": "outputs/harness_status_ablation_no_feedback_features.json"
+    },
+    "ablation_no_process_reward": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_ablation_no_process_reward",
+      "status_file": "outputs/harness_status_ablation_no_process_reward.json"
+    },
+    "ablation_reduced_test_budget": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_ablation_reduced_test_budget",
+      "status_file": "outputs/harness_status_ablation_reduced_test_budget.json"
+    },
+    "baseline_main": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_baseline_main",
+      "status_file": "outputs/harness_status_baseline_main.json"
+    },
+    "feedback_main": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_feedback_main",
+      "status_file": "outputs/harness_status_feedback_main.json"
+    },
+    "learning_main": {
+      "blockers": [
+        "swebench_package_unavailable",
+        "docker_cli_unavailable"
+      ],
+      "execution_backend": "qz_pending_approval",
+      "official_harness_executed": false,
+      "predictions": 40,
+      "resolved": 0,
+      "run_id": "official_learning_main",
+      "status_file": "outputs/harness_status_learning_main.json"
+    }
+  },
+  "blocked_reason": "swebench_package_unavailable",
+  "blockers": [
+    "swebench_package_unavailable",
+    "docker_cli_unavailable"
+  ],
+  "cache_level": "env",
+  "command": [
+    "/usr/bin/python",
+    "-m",
+    "swebench.harness.run_evaluation",
+    "--dataset_name",
+    "princeton-nlp/SWE-bench_Lite",
+    "--split",
+    "test",
+    "--predictions_path",
+    "outputs/runs/gold_patch_smoke/predictions.jsonl",
+    "--max_workers",
+    "16",
+    "--run_id",
+    "official_gold_smoke",
+    "--cache_level",
+    "env"
+  ],
+  "cpu_snapshot": {
+    "logical_cores": 128,
+    "worker_settings": {
+      "cpu_max_workers": 32,
+      "docker_cache_level": "env",
+      "rollout_parallelism": 4,
+      "swebench_max_workers": 16
+    }
+  },
+  "dataset_name": "princeton-nlp/SWE-bench_Lite",
+  "execution_backend": "qz_pending_approval",
+  "fallback_reason": "swebench_package_unavailable",
+  "gold_smoke": {
+    "blockers": [
+      "swebench_package_unavailable",
+      "docker_cli_unavailable"
+    ],
+    "execution_backend": "qz_pending_approval",
+    "official_harness_executed": false,
+    "predictions": 2,
+    "resolved": 0,
+    "run_id": "official_gold_smoke",
+    "status_file": "outputs/harness_status_gold_patch_smoke.json"
+  },
+  "max_workers": 16,
+  "max_workers_source": "resources",
+  "memory_snapshot": {
+    "available_mb": 618321,
+    "free_mb": 123529,
+    "percent_used": 40.1,
+    "total_mb": 1031694,
+    "used_mb": 274676
+  },
+  "official_harness_executed": false,
+  "predictions": "outputs/runs/gold_patch_smoke/predictions.jsonl",
+  "qz_offload": {
+    "available": true,
+    "dry_run": "outputs/qz/official_harness_dry_run.yaml",
+    "job_spec": "outputs/qz/official_harness_job.json",
+    "schema_path": "outputs/qz/train.CreateJob.schema.yaml",
+    "submitted": false
+  },
+  "report_dir": "logs/run_evaluation/official_gold_smoke",
+  "resolved": 0,
+  "resolved_rate": 0.0,
+  "resources": {
+    "assigned_device": "cuda:0",
+    "device_policy": "maximize_local",
+    "fallback": {
+      "missing_gpus": [],
+      "reasons": []
+    },
+    "inventory_source": "outputs/device_inventory.json",
+    "visible_gpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "worker_settings": {
+      "cpu_max_workers": 32,
+      "docker_cache_level": "env",
+      "rollout_parallelism": 4,
+      "swebench_max_workers": 16
+    }
+  },
+  "run_id": "official_gold_smoke",
+  "split": "test",
+  "status": "blocked",
+  "timestamp": "2026-06-19T17:39:26+00:00",
+  "total": 2
+}

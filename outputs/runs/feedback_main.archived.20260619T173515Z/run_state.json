@@ -1,0 +1,9 @@
+{
+  "completed_instances": [
+    "feedback-local-0001"
+  ],
+  "dry_run": false,
+  "last_updated": "2026-06-19T12:32:55+00:00",
+  "run_id": "feedback_main",
+  "status": "completed"
+}

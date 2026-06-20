@@ -1,0 +1,90 @@
+run:
+  name: learning
+  output_dir: outputs/runs
+
+agent:
+  type: learning
+  model_name_or_path: rule_based_local
+  max_steps: 12
+  max_test_runs: 1
+  test_timeout_seconds: 10.0
+  max_output_chars: 4000
+  instances:
+    - instance_id: learning-local-0001
+      repo: local/learning-fixture
+      problem_statement: The visible test for add_numbers fails because the helper should add two numbers.
+      visible_tests:
+        - tests/test_math_utils.py
+      visible_failures:
+        learning-visible-failure: "AssertionError: add_numbers(2, 3) should equal 5"
+      fixture:
+        files:
+          README.md: |
+            Local learning smoke fixture. The policy selects tools; heuristic content generation proposes the edit.
+          math_utils.py: |
+            def add_numbers(left, right):
+                return left - right
+          tests/test_math_utils.py: |
+            from math_utils import add_numbers
+
+
+            def test_add_numbers_visible():
+                assert add_numbers(2, 3) == 5
+    - instance_id: learning-local-0002
+      repo: local/learning-fixture
+      problem_statement: The add_numbers helper should add its arguments so the visible test passes.
+      visible_tests:
+        - tests/test_math_utils.py
+      visible_failures:
+        learning-visible-failure: "AssertionError: expected add_numbers to add two values"
+      fixture:
+        files:
+          README.md: |
+            Second local learning smoke fixture with identical budgets for fair comparison.
+          math_utils.py: |
+            def add_numbers(left, right):
+                return left - right
+          tests/test_math_utils.py: |
+            from math_utils import add_numbers
+
+
+            def test_add_numbers_visible():
+                assert add_numbers(4, 6) == 10
+    - instance_id: learning-local-0003
+      repo: local/learning-fixture
+      problem_statement: Fix add_numbers by replacing subtraction with addition.
+      visible_tests:
+        - tests/test_math_utils.py
+      visible_failures:
+        learning-visible-failure: "AssertionError: add_numbers must use addition"
+      fixture:
+        files:
+          README.md: |
+            Third deterministic learning fixture for limit=3 smoke runs.
+          math_utils.py: |
+            def add_numbers(left, right):
+                return left - right
+          tests/test_math_utils.py: |
+            from math_utils import add_numbers
+
+
+            def test_add_numbers_visible():
+                assert add_numbers(-1, 8) == 7
+
+learning:
+  tool_schema_version: safe-tool-selection-v1
+  action_vocabulary: [search, read_file, inspect_test, edit_file, run_tests, rollback, git_diff, final_answer]
+  reward_config: configs/rewards.yaml
+  learning_rate: 0.05
+  gamma: 1.0
+  baseline_decay: 0.9
+  checkpoint_format: policy.json
+  deterministic_smoke: true
+  no_signal_status: NO_SIGNAL
+
+dry_run:
+  instances:
+    - instance_id: dry-run-0001
+      repo: local/dry-run
+      problem_statement: Exercise learning config loading without SWE-bench or Docker.
+      expected_behavior: Creates deterministic learning artifacts through the trainer.

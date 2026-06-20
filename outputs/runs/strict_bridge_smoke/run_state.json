@@ -1,0 +1,16 @@
+{
+  "completed_instances": [
+    "astropy__astropy-12907",
+    "astropy__astropy-14182"
+  ],
+  "dry_run": false,
+  "last_updated": "2026-06-19T17:05:33+00:00",
+  "metadata": {
+    "instance_count": 2,
+    "instance_split": "main",
+    "official_instance_source": "swebench_lite",
+    "strict_official": true
+  },
+  "run_id": "strict_bridge_smoke",
+  "status": "completed"
+}

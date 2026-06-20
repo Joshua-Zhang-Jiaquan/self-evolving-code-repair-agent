@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-06-20T08:10:18+00:00",
+  "mode": "conda_no_docker",
+  "docker_used": false,
+  "official_harness_executed": true,
+  "execution_backend": "local_conda",
+  "dataset_name": "princeton-nlp/SWE-bench_Lite",
+  "split": "test",
+  "run_id": "sympy_conda",
+  "conda_prefix": "/opt/miniconda3",
+  "testbed": "/testbed",
+  "total": 1,
+  "resolved": 1,
+  "resolved_rate": 1.0,
+  "nonempty_patches": 1,
+  "results": [
+    {
+      "instance_id": "sympy__sympy-20590",
+      "resolved": true,
+      "reason": "evaluated",
+      "patch_applied": true,
+      "resolution_status": "RESOLVED_FULL",
+      "tests_found": true,
+      "report": {
+        "FAIL_TO_PASS": {
+          "success": [
+            "test_immutable"
+          ],
+          "failure": []
+        },
+        "PASS_TO_PASS": {
+          "success": [
+            "test__aresame",
+            "test_structure",
+            "test_equality",
+            "test_matches_basic",
+            "test_has",
+            "test_subs",
+            "test_subs_with_unicode_symbols",
+            "test_atoms",
+            "test_free_symbols_empty",
+            "test_doit",
+            "test_S",
+            "test_xreplace",
+            "test_preorder_traversal",
+            "test_sorted_args",
+            "test_call",
+            "test_rewrite",
+            "test_literal_evalf_is_number_is_zero_is_comparable",
+            "test_as_Basic",
+            "test_atomic",
+            "test_as_dummy",
+            "test_canonical_variables"
+          ],
+          "failure": []
+        },
+        "FAIL_TO_FAIL": {
+          "success": [],
+          "failure": []
+        },
+        "PASS_TO_FAIL": {
+          "success": [],
+          "failure": []
+        }
+      }
+    }
+  ]
+}

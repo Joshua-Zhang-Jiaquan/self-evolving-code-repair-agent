@@ -1,0 +1,15 @@
+{
+  "completed": 2,
+  "instances": [
+    {
+      "final_status": "completed",
+      "instance_id": "django__django-11099"
+    },
+    {
+      "final_status": "completed",
+      "instance_id": "sympy__sympy-20590"
+    }
+  ],
+  "skipped": 0,
+  "total": 2
+}

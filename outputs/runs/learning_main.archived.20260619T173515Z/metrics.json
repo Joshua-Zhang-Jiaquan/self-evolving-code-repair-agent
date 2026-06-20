@@ -1,0 +1,84 @@
+{
+  "completed": 3,
+  "learning": {
+    "all_step_rewards_zero": false,
+    "episode_returns": [
+      0.1499999999999999,
+      7.6499999999999995,
+      7.6499999999999995
+    ],
+    "mean_return": 5.1499999999999995,
+    "policy_baseline_value": 1.4656499999999997,
+    "rollout_count": 3,
+    "schema": "safe-tool-selection-v1",
+    "update_summaries": [
+      {
+        "baseline_after": 0.015,
+        "baseline_before": 0.0,
+        "episode_return": 0.15000000000000002,
+        "returns": [
+          0.15000000000000002,
+          -0.5499999999999999,
+          -0.49999999999999994,
+          -0.44999999999999996,
+          -0.39999999999999997,
+          -0.35,
+          -0.3,
+          -0.25,
+          -0.2,
+          -0.15000000000000002,
+          -0.1,
+          -0.05
+        ],
+        "total_abs_update": 2.708819606876009,
+        "transition_count": 12
+      },
+      {
+        "baseline_after": 0.7784999999999999,
+        "baseline_before": 0.015,
+        "episode_return": 7.650000000000001,
+        "returns": [
+          7.650000000000001,
+          6.950000000000001,
+          7.000000000000001,
+          6.300000000000001,
+          5.6000000000000005,
+          4.9,
+          4.2,
+          3.5,
+          2.8,
+          2.0999999999999996,
+          1.4,
+          0.7
+        ],
+        "total_abs_update": 19.40329707158643,
+        "transition_count": 12
+      },
+      {
+        "baseline_after": 1.4656499999999997,
+        "baseline_before": 0.7784999999999999,
+        "episode_return": 7.650000000000001,
+        "returns": [
+          7.650000000000001,
+          6.950000000000001,
+          7.000000000000001,
+          6.300000000000001,
+          5.6000000000000005,
+          4.9,
+          4.2,
+          3.5,
+          2.8,
+          2.0999999999999996,
+          1.4,
+          0.7
+        ],
+        "total_abs_update": 10.521884714374522,
+        "transition_count": 12
+      }
+    ]
+  },
+  "policy_checkpoint": "outputs/runs/learning_main/policy.json",
+  "skipped": 0,
+  "status": "COMPLETED",
+  "total": 3
+}

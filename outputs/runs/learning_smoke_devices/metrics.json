@@ -1,0 +1,75 @@
+{
+  "rollout_allocation": {
+    "action_schema_version": "safe-tool-selection-v1",
+    "expected_gpu_ids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "fallback": {
+      "missing_gpus": [],
+      "reasons": []
+    },
+    "healthy_visible_gpus": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "missing_gpus": [],
+    "resource_plan": {
+      "assigned_device": "cuda:0",
+      "device_policy": "maximize_local",
+      "fallback": {
+        "missing_gpus": [],
+        "reasons": []
+      },
+      "inventory_source": "outputs/device_inventory.json",
+      "visible_gpus": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "worker_settings": {
+        "cpu_max_workers": 32,
+        "docker_cache_level": "env",
+        "rollout_parallelism": 4,
+        "swebench_max_workers": 16
+      }
+    },
+    "rollout_parallelism": 4,
+    "workers": [
+      {
+        "assigned_device": "cuda:0",
+        "cuda_visible_devices": "0",
+        "gpu_id": 0,
+        "planned_rollouts": 2,
+        "worker_id": "rollout-0"
+      },
+      {
+        "assigned_device": "cuda:1",
+        "cuda_visible_devices": "1",
+        "gpu_id": 1,
+        "planned_rollouts": 2,
+        "worker_id": "rollout-1"
+      },
+      {
+        "assigned_device": "cuda:2",
+        "cuda_visible_devices": "2",
+        "gpu_id": 2,
+        "planned_rollouts": 1,
+        "worker_id": "rollout-2"
+      },
+      {
+        "assigned_device": "cuda:3",
+        "cuda_visible_devices": "3",
+        "gpu_id": 3,
+        "planned_rollouts": 1,
+        "worker_id": "rollout-3"
+      }
+    ]
+  },
+  "status": "DRY_RUN_DEVICES"
+}

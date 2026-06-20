@@ -1,0 +1,999 @@
+{
+  "service": "train",
+  "action": "CreateJob",
+  "description": "Create and submit a new training job via OpenAPI with simplified config",
+  "parameters": [
+    {
+      "name": "LogicComputeGroupId",
+      "jsonField": "logic_compute_group_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "Name",
+      "jsonField": "name",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "ProjectId",
+      "jsonField": "project_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "WorkspaceId",
+      "jsonField": "workspace_id",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "Framework",
+      "jsonField": "framework",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "Command",
+      "jsonField": "command",
+      "type": "string",
+      "required": true
+    },
+    {
+      "name": "FrameworkConfig",
+      "jsonField": "framework_config",
+      "type": "array",
+      "required": true,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "ImageType",
+            "jsonField": "image_type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Image",
+            "jsonField": "image",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "InstanceCount",
+            "jsonField": "instance_count",
+            "type": "int32",
+            "required": false
+          },
+          {
+            "name": "ShmGi",
+            "jsonField": "shm_gi",
+            "type": "float64",
+            "required": false
+          },
+          {
+            "name": "SpecId",
+            "jsonField": "spec_id",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "AutoFaultTolerance",
+      "jsonField": "auto_fault_tolerance",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "TaskPriority",
+      "jsonField": "task_priority",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "MaxRunningTimeMs",
+      "jsonField": "max_running_time_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ReserveOnFailMs",
+      "jsonField": "reserve_on_fail_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ReserveOnSuccessMs",
+      "jsonField": "reserve_on_success_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "TbSummaryPath",
+      "jsonField": "tb_summary_path",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Envs",
+      "jsonField": "envs",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "Name",
+            "jsonField": "name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Value",
+            "jsonField": "value",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnableNotification",
+      "jsonField": "enable_notification",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "DatasetInfo",
+      "jsonField": "dataset_info",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "DatasetId",
+            "jsonField": "dataset_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "VersionId",
+            "jsonField": "version_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Path",
+            "jsonField": "path",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnableTroubleshoot",
+      "jsonField": "enable_troubleshoot",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "FaultToleranceMaxRetry",
+      "jsonField": "fault_tolerance_max_retry",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "FaultToleranceRetryIntervalSec",
+      "jsonField": "fault_tolerance_retry_interval_sec",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "Description",
+      "jsonField": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ExcludeNodes",
+      "jsonField": "exclude_nodes",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "string",
+        "required": false
+      }
+    },
+    {
+      "name": "IsPublicpathReadonly",
+      "jsonField": "is_publicpath_readonly",
+      "type": "bool",
+      "required": false
+    }
+  ],
+  "response": [
+    {
+      "name": "LogicComputeGroupId",
+      "jsonField": "logic_compute_group_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "QueueId",
+      "jsonField": "queue_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Name",
+      "jsonField": "name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ProjectId",
+      "jsonField": "project_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "MaxRunningTimeMs",
+      "jsonField": "max_running_time_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ReserveOnFailMs",
+      "jsonField": "reserve_on_fail_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ReserveOnSuccessMs",
+      "jsonField": "reserve_on_success_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Framework",
+      "jsonField": "framework",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Mounts",
+      "jsonField": "mounts",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "RealPath",
+            "jsonField": "real_path",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "MountPath",
+            "jsonField": "mount_path",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Volume",
+            "jsonField": "volume",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "Command",
+      "jsonField": "command",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "TbSummaryPath",
+      "jsonField": "tb_summary_path",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "FrameworkConfig",
+      "jsonField": "framework_config",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "InstanceCount",
+            "jsonField": "instance_count",
+            "type": "int32",
+            "required": false
+          },
+          {
+            "name": "Image",
+            "jsonField": "image",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Cpu",
+            "jsonField": "cpu",
+            "type": "float64",
+            "required": false
+          },
+          {
+            "name": "MemGi",
+            "jsonField": "mem_gi",
+            "type": "float64",
+            "required": false
+          },
+          {
+            "name": "ShmGi",
+            "jsonField": "shm_gi",
+            "type": "float64",
+            "required": false
+          },
+          {
+            "name": "GpuCount",
+            "jsonField": "gpu_count",
+            "type": "int32",
+            "required": false
+          },
+          {
+            "name": "ImageType",
+            "jsonField": "image_type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ReplicasType",
+            "jsonField": "replicas_type",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "PredefId",
+            "jsonField": "predef_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "ResourceSpecPrice",
+            "jsonField": "resource_spec_price",
+            "type": "object",
+            "required": false,
+            "properties": [
+              {
+                "name": "CpuType",
+                "jsonField": "cpu_type",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "CpuCount",
+                "jsonField": "cpu_count",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "GpuType",
+                "jsonField": "gpu_type",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "GpuCount",
+                "jsonField": "gpu_count",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "MemorySizeGib",
+                "jsonField": "memory_size_gib",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "LogicComputeGroupId",
+                "jsonField": "logic_compute_group_id",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "QuotaId",
+                "jsonField": "quota_id",
+                "type": "string",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "InstanceSpecPriceInfo",
+            "jsonField": "instance_spec_price_info",
+            "type": "object",
+            "required": false,
+            "properties": [
+              {
+                "name": "CpuInfo",
+                "jsonField": "cpu_info",
+                "type": "object",
+                "required": false,
+                "properties": [
+                  {
+                    "name": "CpuType",
+                    "jsonField": "cpu_type",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "Brand",
+                    "jsonField": "brand",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "CpuProductSimple",
+                    "jsonField": "cpu_product_simple",
+                    "type": "string",
+                    "required": false
+                  }
+                ]
+              },
+              {
+                "name": "CpuCount",
+                "jsonField": "cpu_count",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "CpuPriceId",
+                "jsonField": "cpu_price_id",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "CpuPriceVersionId",
+                "jsonField": "cpu_price_version_id",
+                "type": "int32",
+                "required": false
+              },
+              {
+                "name": "CpuPrice",
+                "jsonField": "cpu_price",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "MemorySizeGib",
+                "jsonField": "memory_size_gib",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "GpuInfo",
+                "jsonField": "gpu_info",
+                "type": "object",
+                "required": false,
+                "properties": [
+                  {
+                    "name": "GpuType",
+                    "jsonField": "gpu_type",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "Brand",
+                    "jsonField": "brand",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "GpuProductSimple",
+                    "jsonField": "gpu_product_simple",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "GpuMemorySizeGb",
+                    "jsonField": "gpu_memory_size_gb",
+                    "type": "float64",
+                    "required": false
+                  },
+                  {
+                    "name": "BrandName",
+                    "jsonField": "brand_name",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "Price",
+                    "jsonField": "price",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "GpuTypeDisplay",
+                    "jsonField": "gpu_type_display",
+                    "type": "string",
+                    "required": false
+                  }
+                ]
+              },
+              {
+                "name": "GpuCount",
+                "jsonField": "gpu_count",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "GpuPriceId",
+                "jsonField": "gpu_price_id",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "GpuPriceVersionId",
+                "jsonField": "gpu_price_version_id",
+                "type": "int32",
+                "required": false
+              },
+              {
+                "name": "GpuPrice",
+                "jsonField": "gpu_price",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "TotalPricePerHour",
+                "jsonField": "total_price_per_hour",
+                "type": "float32",
+                "required": false
+              },
+              {
+                "name": "QuotaId",
+                "jsonField": "quota_id",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "MemoryPriceId",
+                "jsonField": "memory_price_id",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "MemoryPriceVersionId",
+                "jsonField": "memory_price_version_id",
+                "type": "int32",
+                "required": false
+              },
+              {
+                "name": "MemoryPrice",
+                "jsonField": "memory_price",
+                "type": "float32",
+                "required": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "AutoFaultTolerance",
+      "jsonField": "auto_fault_tolerance",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "AutoFaultToleranceParams",
+      "jsonField": "auto_fault_tolerance_params",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "WorkspaceId",
+      "jsonField": "workspace_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ConfigMode",
+      "jsonField": "config_mode",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Envs",
+      "jsonField": "envs",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "Name",
+            "jsonField": "name",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Value",
+            "jsonField": "value",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "JobId",
+      "jsonField": "job_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "Status",
+      "jsonField": "status",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "NodeInfos",
+      "jsonField": "node_infos",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "NodeName",
+            "jsonField": "node_name",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "RunningTimeMs",
+      "jsonField": "running_time_ms",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "CreatedAt",
+      "jsonField": "created_at",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "CreatedBy",
+      "jsonField": "created_by",
+      "type": "object",
+      "required": false,
+      "properties": [
+        {
+          "name": "Id",
+          "jsonField": "id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "Name",
+          "jsonField": "name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "GlobalRole",
+          "jsonField": "global_role",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "AvatarUrl",
+          "jsonField": "avatar_url",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "CreatedAt",
+          "jsonField": "created_at",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "NameEn",
+          "jsonField": "name_en",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "Email",
+          "jsonField": "email",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ExtraInfo",
+          "jsonField": "extra_info",
+          "type": "object",
+          "required": false,
+          "properties": [
+            {
+              "name": "LoginName",
+              "jsonField": "login_name",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "InstitutionId",
+              "jsonField": "institution_id",
+              "type": "string",
+              "required": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "FinishedAt",
+      "jsonField": "finished_at",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "LogicComputeGroupName",
+      "jsonField": "logic_compute_group_name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "QueueName",
+      "jsonField": "queue_name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "TbId",
+      "jsonField": "tb_id",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ProjectEnName",
+      "jsonField": "project_en_name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ProjectName",
+      "jsonField": "project_name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "NodeCount",
+      "jsonField": "node_count",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "Priority",
+      "jsonField": "priority",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "PriorityName",
+      "jsonField": "priority_name",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "PriorityLevel",
+      "jsonField": "priority_level",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "CurrentRunningRound",
+      "jsonField": "current_running_round",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "SubStatus",
+      "jsonField": "sub_status",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "FaultToleranceMaxRetry",
+      "jsonField": "fault_tolerance_max_retry",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "FaultToleranceRetryIntervalSec",
+      "jsonField": "fault_tolerance_retry_interval_sec",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "Timeline",
+      "jsonField": "timeline",
+      "type": "object",
+      "required": false,
+      "properties": [
+        {
+          "name": "Created",
+          "jsonField": "created",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "ResourcePrepared",
+          "jsonField": "resource_prepared",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "Run",
+          "jsonField": "run",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "Finished",
+          "jsonField": "finished",
+          "type": "string",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "SubMsg",
+      "jsonField": "sub_msg",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "SubCode",
+      "jsonField": "sub_code",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "EnableNotification",
+      "jsonField": "enable_notification",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "DatasetInfo",
+      "jsonField": "dataset_info",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "object",
+        "required": false,
+        "properties": [
+          {
+            "name": "DatasetId",
+            "jsonField": "dataset_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "VersionId",
+            "jsonField": "version_id",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "Path",
+            "jsonField": "path",
+            "type": "string",
+            "required": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "TaskPriority",
+      "jsonField": "task_priority",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "EnableTroubleshoot",
+      "jsonField": "enable_troubleshoot",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "EnableSlowDetect",
+      "jsonField": "enable_slow_detect",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "CpuElasticRatio",
+      "jsonField": "cpu_elastic_ratio",
+      "type": "float64",
+      "required": false
+    },
+    {
+      "name": "EnableVccl",
+      "jsonField": "enable_vccl",
+      "type": "bool",
+      "required": false
+    },
+    {
+      "name": "GpuCount",
+      "jsonField": "gpu_count",
+      "type": "int32",
+      "required": false
+    },
+    {
+      "name": "Description",
+      "jsonField": "description",
+      "type": "string",
+      "required": false
+    },
+    {
+      "name": "ExcludeNodes",
+      "jsonField": "exclude_nodes",
+      "type": "array",
+      "required": false,
+      "items": {
+        "name": "",
+        "jsonField": "",
+        "type": "string",
+        "required": false
+      }
+    },
+    {
+      "name": "IsPublicpathReadonly",
+      "jsonField": "is_publicpath_readonly",
+      "type": "bool",
+      "required": false
+    }
+  ]
+}

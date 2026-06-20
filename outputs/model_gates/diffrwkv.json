@@ -1,0 +1,91 @@
+{
+  "details": {
+    "adapter": "diffrwkv",
+    "artifact_report": {
+      "backbone": "RWKV/RWKV7-Goose-World3-2.9B-HF",
+      "backbone_local_path": "/inspire/hdd/global_user/zhangjiaquan-253108540222/models/RWKV7-Goose-World3-2.9B-HF",
+      "config_model_type": "rwkv_state_hijack_dit",
+      "diffusion_trajectory_markers": [
+        "ddpm",
+        "diffusion",
+        "trajectory",
+        "state_hijack"
+      ],
+      "existing_artifacts": [
+        "README.md",
+        "config.yaml",
+        "manifest.json",
+        "model.safetensors"
+      ],
+      "generation_type": "ddpm",
+      "instruction_following_candidate": false,
+      "instruction_markers": [],
+      "manifest_variant": "traj32x16-2.9B-s2-rwkv7-v3-ddpm",
+      "missing_artifacts": [],
+      "model_safetensors_present": true,
+      "model_safetensors_size_bytes": 564513388,
+      "read_only_inspection": true
+    },
+    "checkpoint": "traj32x16-2.9B-s2-rwkv7-v3-ddpm",
+    "dry_run": true,
+    "gate_policy": {
+      "dry_run_status": "blocked_if_ddpm_trajectory_not_instruction_model",
+      "heavy_loading": "disabled_in_unit_tests"
+    },
+    "generation_metadata": {
+      "checkpoint": "traj32x16-2.9B-s2-rwkv7-v3-ddpm",
+      "dry_run": true,
+      "local_only": true,
+      "supports_instruction_following_code_repair": false
+    },
+    "local_only": true,
+    "resource_plan": {
+      "assigned_device": "cuda:0",
+      "device_policy": "maximize_local",
+      "fallback": {
+        "missing_gpus": [],
+        "reasons": []
+      },
+      "inventory_source": "outputs/device_inventory.json",
+      "visible_gpus": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "worker_settings": {
+        "cpu_max_workers": 32,
+        "docker_cache_level": "env",
+        "rollout_parallelism": 4,
+        "swebench_max_workers": 16
+      }
+    },
+    "smoke_feasibility": {
+      "one_turn_generation": "not_attempted_heavy_weight_load_avoided",
+      "prompt_to_patch_or_tool_selection": false
+    }
+  },
+  "device_ids": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "device_strategy": "per_worker_cuda_visible_devices",
+  "fallback": {
+    "missing_gpus": [],
+    "reasons": []
+  },
+  "memory": {
+    "checkpoint_model_safetensors_size_bytes": 564513388,
+    "fallback": {
+      "missing_gpus": [],
+      "reasons": []
+    },
+    "loading": "not_loaded_in_dry_run"
+  },
+  "model": "diffrwkv",
+  "reason": "diffrwkv_is_ddpm_rwkv_trajectory_model_not_instruction_code_repair",
+  "status": "blocked",
+  "timestamp": "2026-06-19T17:35:15Z"
+}

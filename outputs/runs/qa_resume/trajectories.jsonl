@@ -1,0 +1,1 @@
+{"actions":["load_config","dry_run_noop","write_prediction"],"event":"trajectory","instance_id":"dry-run-0001","run_id":"qa_resume","run_name":"baseline","status":"completed","timestamp":"2026-06-19T10:00:30+00:00"}

@@ -1,0 +1,107 @@
+{
+  "blockers": [
+    {
+      "code": "swebench_package_unavailable",
+      "fix_command": "pip install -e \".[swebench]\""
+    },
+    {
+      "code": "docker_cli_unavailable",
+      "fix_command": "install Docker Engine and ensure 'docker' is on PATH"
+    }
+  ],
+  "dataset": {
+    "access_error": null,
+    "main_ids_count": 40,
+    "main_ids_found": [
+      "astropy__astropy-12907",
+      "astropy__astropy-14182",
+      "django__django-10914",
+      "django__django-10924",
+      "django__django-11001",
+      "django__django-11019",
+      "django__django-11039",
+      "django__django-11049",
+      "django__django-11133",
+      "django__django-11179",
+      "django__django-11283",
+      "django__django-11422",
+      "django__django-11564",
+      "django__django-11583",
+      "django__django-11620",
+      "django__django-11630",
+      "django__django-11742",
+      "django__django-11797",
+      "django__django-11815",
+      "django__django-11964",
+      "matplotlib__matplotlib-18869",
+      "matplotlib__matplotlib-22711",
+      "matplotlib__matplotlib-22835",
+      "matplotlib__matplotlib-23299",
+      "matplotlib__matplotlib-23314",
+      "mwaskom__seaborn-3010",
+      "pallets__flask-4045",
+      "psf__requests-1963",
+      "pytest-dev__pytest-5221",
+      "scikit-learn__scikit-learn-12471",
+      "scikit-learn__scikit-learn-13439",
+      "sphinx-doc__sphinx-10325",
+      "sphinx-doc__sphinx-10451",
+      "sympy__sympy-11870",
+      "sympy__sympy-12419",
+      "sympy__sympy-13480",
+      "sympy__sympy-13895",
+      "sympy__sympy-15345",
+      "sympy__sympy-17630",
+      "sympy__sympy-18189"
+    ],
+    "missing_ids": [],
+    "name": "princeton-nlp/SWE-bench_Lite",
+    "smoke_ids_count": 2,
+    "smoke_ids_found": [
+      "django__django-11099",
+      "sympy__sympy-20590"
+    ],
+    "split": "test"
+  },
+  "disk": {
+    "free_gb": 549.94,
+    "meets_threshold": true,
+    "threshold_gb": 120.0
+  },
+  "docker": {
+    "cli_path": null,
+    "daemon_reachable": false
+  },
+  "qwable": {
+    "available": true,
+    "cache_or_network": "cache",
+    "source": "cache"
+  },
+  "qz": {
+    "auth_configured": true,
+    "available": true,
+    "cli_path": "/usr/local/bin/qz",
+    "dry_run_required": true,
+    "offload_available": true,
+    "schema_checked": true,
+    "schema_path": "outputs/qz/train.CreateJob.schema.yaml",
+    "stages_requiring_offload": [
+      "official_swebench_harness"
+    ]
+  },
+  "resources": {
+    "parseable": true,
+    "worker_settings": {
+      "cpu_max_workers": 32,
+      "docker_cache_level": "env",
+      "rollout_parallelism": 4,
+      "swebench_max_workers": 32
+    }
+  },
+  "status": "blocked",
+  "strict": true,
+  "swebench": {
+    "importable": false
+  },
+  "timestamp": "2026-06-19T18:46:56+00:00"
+}
