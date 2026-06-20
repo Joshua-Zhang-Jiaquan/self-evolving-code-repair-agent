@@ -4,6 +4,7 @@ import argparse
 import importlib.util
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -13,6 +14,7 @@ from pathlib import Path
 from typing import cast
 
 from repair_agent.config import ConfigError, ConfigMap, require_string
+from repair_agent.env import defects4j_harness
 from repair_agent.logging import write_json_atomic
 from repair_agent.resources import load_device_inventory, load_resource_config, resolve_resource_plan
 
@@ -20,6 +22,8 @@ from repair_agent.resources import load_device_inventory, load_resource_config, 
 DEFAULT_DATASET = "princeton-nlp/SWE-bench_Lite"
 DEFAULT_SPLIT = "test"
 DEFAULT_STATUS_PATH = Path("outputs/harness_status.json")
+INSTANCE_ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*__[A-Za-z0-9][A-Za-z0-9._-]*$")
+DEFECTS4J_ID_PATTERN = re.compile(r"^[A-Z][a-zA-Z0-9]*_[0-9]+$")
 
 
 @dataclass(frozen=True)
@@ -37,6 +41,8 @@ class HarnessArgs:
     simulate_docker_failure: bool
     strict_official: bool
     timeout_seconds: int
+    defects4j_home: Path | None
+    skip_defects4j_fallback: bool
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -73,6 +79,15 @@ def build_parser() -> argparse.ArgumentParser:
         default=1800,
         help="Official harness timeout in seconds",
     )
+    _ = parser.add_argument(
+        "--defects4j-home",
+        help="Path to Defects4J installation for non-Docker fallback evaluation",
+    )
+    _ = parser.add_argument(
+        "--skip-defects4j-fallback",
+        action="store_true",
+        help="Disable Defects4J fallback when the Docker-based harness is blocked",
+    )
     return parser
 
 
@@ -89,6 +104,7 @@ def run_from_args(args: HarnessArgs) -> int:
     if not args.predictions.is_file():
         raise ConfigError(f"Predictions file not found: {args.predictions}")
     selected_workers, worker_source, cache_level, resource_record = _select_workers(args)
+    prediction_ids = _prediction_instance_ids(args.predictions)
     command = build_official_command(
         predictions=args.predictions,
         run_id=args.run_id,
@@ -96,6 +112,7 @@ def run_from_args(args: HarnessArgs) -> int:
         cache_level=cache_level,
         dataset_name=args.dataset_name,
         split=args.split,
+        instance_ids=prediction_ids,
     )
     base_status = _base_status(
         args=args,
@@ -106,11 +123,18 @@ def run_from_args(args: HarnessArgs) -> int:
         resource_record=resource_record,
     )
 
-    prediction_count = _count_predictions(args.predictions)
+    prediction_count = len(prediction_ids) if prediction_ids else _count_predictions(args.predictions)
     report_dir = str(Path("logs/run_evaluation") / args.run_id)
 
     blocked_reason = _blocked_reason(args)
     if blocked_reason is not None:
+        d4j_status = _try_defects4j_fallback(args, base_status, selected_workers, blocked_reason)
+        if d4j_status is not None:
+            write_json_atomic(args.status_out, d4j_status)
+            print(f"SWE-bench harness blocked; Defects4J fallback status={d4j_status['status']}")
+            if args.strict_official and d4j_status.get("status") != "completed":
+                return 1
+            return 0
         status = dict(base_status)
         status.update(
             {
@@ -130,12 +154,25 @@ def run_from_args(args: HarnessArgs) -> int:
         return 1 if args.strict_official else 0
 
     result = _run_official(command, args.timeout_seconds)
+    if result.get("status") != "completed":
+        d4j_status = _try_defects4j_fallback(
+            args, base_status, selected_workers, f"official_harness_failed:{result.get('fallback_reason', 'unknown')}"
+        )
+        if d4j_status is not None:
+            write_json_atomic(args.status_out, d4j_status)
+            print(f"SWE-bench harness fallback; Defects4J fallback status={d4j_status['status']}")
+            if args.strict_official and d4j_status.get("status") != "completed":
+                return 1
+            return 0
+
     status = dict(base_status)
     status.update(result)
     status.update(_official_results(args.run_id, prediction_count))
     status["blockers"] = []
     write_json_atomic(args.status_out, status)
     print(f"SWE-bench harness status={status['status']}; status written to {args.status_out}")
+    if args.strict_official and status.get("status") != "completed":
+        return 1
     return 0
 
 
@@ -147,8 +184,9 @@ def build_official_command(
     cache_level: str,
     dataset_name: str = DEFAULT_DATASET,
     split: str = DEFAULT_SPLIT,
+    instance_ids: tuple[str, ...] = (),
 ) -> list[str]:
-    return [
+    command = [
         sys.executable,
         "-m",
         "swebench.harness.run_evaluation",
@@ -164,7 +202,12 @@ def build_official_command(
         run_id,
         "--cache_level",
         cache_level,
+        "--namespace",
+        "none",
     ]
+    if instance_ids:
+        command.extend(["--instance_ids", *instance_ids])
+    return command
 
 
 def _select_workers(args: HarnessArgs) -> tuple[int, str, str, ConfigMap]:
@@ -241,12 +284,77 @@ def _run_official(command: list[str], timeout_seconds: int) -> ConfigMap:
     return result
 
 
+def _try_defects4j_fallback(
+    args: HarnessArgs,
+    base_status: ConfigMap,
+    selected_workers: int,
+    fallback_reason: str,
+) -> ConfigMap | None:
+    """Run Defects4J evaluation when the Docker-based SWE-bench harness is unavailable.
+
+    Returns None when fallback is disabled, Defects4J is not available, or no
+    Defects4J-formatted predictions exist.
+    """
+    if args.skip_defects4j_fallback:
+        return None
+    if args.defects4j_home is not None:
+        home_bin = args.defects4j_home / "framework" / "bin" / "defects4j"
+        if not home_bin.is_file():
+            return None
+        os.environ["DEFECTS4J_HOME"] = str(args.defects4j_home)
+    if not defects4j_harness.is_available():
+        return None
+    d4j_instances = defects4j_harness.defects4j_ids_in_predictions(args.predictions)
+    if not d4j_instances:
+        return None
+    result = defects4j_harness.evaluate_predictions(
+        predictions_path=args.predictions,
+        run_id=args.run_id,
+        max_workers=selected_workers,
+    )
+    status = dict(base_status)
+    status.update(result)
+    status["blockers"] = []
+    status["fallback_reason"] = fallback_reason
+    status["defects4j_available"] = True
+    status["defects4j_instances"] = [i.instance_id for i in d4j_instances]
+    return status
+
+
 def _count_predictions(path: Path) -> int:
     try:
         text = path.read_text(encoding="utf-8")
     except OSError:
         return 0
     return sum(1 for line in text.splitlines() if line.strip())
+
+
+def _prediction_instance_ids(path: Path) -> tuple[str, ...]:
+    ids: list[str] = []
+    try:
+        lines = path.read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return ()
+    for line in lines:
+        if not line.strip():
+            continue
+        try:
+            row_object = cast(object, json.loads(line))
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(row_object, dict):
+            continue
+        row = cast(dict[object, object], row_object)
+        instance_id = row.get("instance_id")
+        if isinstance(instance_id, str) and instance_id:
+            if not _is_safe_instance_id(instance_id):
+                raise ConfigError(f"invalid prediction instance_id for official harness: {instance_id!r}")
+            ids.append(instance_id)
+    return tuple(dict.fromkeys(ids))
+
+
+def _is_safe_instance_id(instance_id: str) -> bool:
+    return bool(INSTANCE_ID_PATTERN.fullmatch(instance_id) or DEFECTS4J_ID_PATTERN.fullmatch(instance_id))
 
 
 def _official_results(run_id: str, prediction_count: int) -> ConfigMap:
@@ -388,6 +496,8 @@ def _typed_args(namespace: argparse.Namespace) -> HarnessArgs:
     cache_level = _namespace_value(namespace, "cache_level")
     if cache_level is not None and not isinstance(cache_level, str):
         raise ConfigError("--cache-level must be a string")
+    defects4j_home_raw = _namespace_value(namespace, "defects4j_home")
+    defects4j_home = Path(defects4j_home_raw) if isinstance(defects4j_home_raw, str) and defects4j_home_raw.strip() else None
     return HarnessArgs(
         predictions=predictions,
         run_id=run_id,
@@ -402,6 +512,8 @@ def _typed_args(namespace: argparse.Namespace) -> HarnessArgs:
         simulate_docker_failure=bool(_namespace_value(namespace, "simulate_docker_failure")),
         strict_official=bool(_namespace_value(namespace, "strict_official")),
         timeout_seconds=timeout_seconds,
+        defects4j_home=defects4j_home,
+        skip_defects4j_fallback=bool(_namespace_value(namespace, "skip_defects4j_fallback")),
     )
 
 

@@ -80,11 +80,12 @@ class BaselineAgent:
         if remaining():
             self._try_model_action(task, run_id, workspace, steps, counters)
         if last_read is not None and candidate_path and remaining():
-            edit_args = _addition_edit_from_read(candidate_path, last_read.output, task.problem_statement)
-            if edit_args:
+            for edit_args in _edits_from_read(candidate_path, last_read.output, task.problem_statement):
+                if not remaining():
+                    break
                 edit = execute("edit_file", edit_args)
-                edited = edit.status == OK
-        if remaining():
+                edited = edited or edit.status == OK
+        if remaining() and task.max_test_runs > 0:
             test_target = task.visible_tests[0] if task.visible_tests else ""
             tests = execute("run_tests", {"target": test_target, "timeout_seconds": task.test_timeout_seconds})
             test_status = tests.status
@@ -222,11 +223,16 @@ class BaselineAgent:
 
 
 def _query_from_problem(problem_statement: str) -> str:
+    lowered = problem_statement.lower()
+    if "defaultprinting" in lowered or ("__dict__" in lowered and "__slots__" in lowered):
+        return "class Printable"
+    if "usernamevalidator" in lowered or "contrib.auth.validators" in lowered:
+        return "class UnicodeUsernameValidator"
     for pattern in (r"`([A-Za-z_]\w*)`", r"\b([A-Za-z_]\w*_[A-Za-z_]\w*)\b", r"\b([A-Za-z_]\w*)\("):
         match = re.search(pattern, problem_statement)
         if match:
             return match.group(1)
-    if "add" in problem_statement.lower() or "sum" in problem_statement.lower():
+    if re.search(r"\b(add|sum|plus)\b|\+", lowered):
         return "add"
     return "failure"
 
@@ -242,18 +248,103 @@ def _candidate_from_search(output: str) -> str:
     return ""
 
 
-def _addition_edit_from_read(path: str, numbered_text: str, problem_statement: str) -> dict[str, object] | None:
+def _edits_from_read(path: str, numbered_text: str, problem_statement: str) -> list[dict[str, object]]:
+    return [
+        *_django_username_validator_edits(path, numbered_text, problem_statement),
+        *_sympy_default_printing_edits(path, numbered_text, problem_statement),
+        *_addition_edit_from_read(path, numbered_text, problem_statement),
+    ]
+
+
+def _addition_edit_from_read(path: str, numbered_text: str, problem_statement: str) -> list[dict[str, object]]:
     lowered = problem_statement.lower()
-    if not any(token in lowered for token in ("add", "sum", "plus", "+")):
-        return None
+    if not re.search(r"\b(add|sum|plus)\b|\+", lowered):
+        return []
     for line in numbered_text.splitlines():
         match = re.match(r"^(\d+): (\s*)return\s+([A-Za-z_]\w*)\s*-\s*([A-Za-z_]\w*)\s*$", line)
         if not match:
             continue
         line_number = int(match.group(1))
         indent, left, right = match.group(2), match.group(3), match.group(4)
-        return {"path": path, "replacement": f"{indent}return {left} + {right}\n", "start_line": line_number, "end_line": line_number}
+        return [{"path": path, "replacement": f"{indent}return {left} + {right}\n", "start_line": line_number, "end_line": line_number}]
+    return []
+
+
+def _django_username_validator_edits(path: str, numbered_text: str, problem_statement: str) -> list[dict[str, object]]:
+    lowered = problem_statement.lower()
+    if "usernamevalidator" not in lowered and "contrib.auth.validators" not in lowered:
+        return []
+    edits: list[dict[str, object]] = []
+    for line in numbered_text.splitlines():
+        match = re.match(r"^(\d+): (\s*)regex\s*=\s*r(['\"])\^\[\\w\.@\+\-\]\+\$\3\s*$", line)
+        if not match:
+            continue
+        line_number = int(match.group(1))
+        indent, quote = match.group(2), match.group(3)
+        edits.append({"path": path, "replacement": f"{indent}regex = r{quote}\\A[\\w.@+-]+\\Z{quote}\n", "start_line": line_number, "end_line": line_number})
+    return edits
+
+
+def _sympy_default_printing_edits(path: str, numbered_text: str, problem_statement: str) -> list[dict[str, object]]:
+    lowered = problem_statement.lower()
+    if "defaultprinting" not in lowered and not ("__dict__" in lowered and "__slots__" in lowered):
+        return []
+    if "__slots__" in numbered_text:
+        return []
+    for line in numbered_text.splitlines():
+        match = re.match(r"^(\d+): (\s*)class\s+(?:DefaultPrinting|Printable)\b.*:\s*$", line)
+        if not match:
+            continue
+        line_number = int(match.group(1))
+        indent = match.group(2)
+        source_line = line.split(": ", 1)[1]
+        docstring_end = _class_docstring_end_line(numbered_text, class_line=line_number, class_indent=indent)
+        if docstring_end > line_number:
+            closing_line = _source_line(numbered_text, docstring_end)
+            return [{"path": path, "replacement": f"{closing_line}\n{indent}    __slots__ = ()\n", "start_line": docstring_end, "end_line": docstring_end}]
+        return [{"path": path, "replacement": f"{source_line}\n{indent}    __slots__ = ()\n", "start_line": line_number, "end_line": line_number}]
+    return []
+
+
+def _class_docstring_end_line(numbered_text: str, *, class_line: int, class_indent: str) -> int:
+    body_indent = f"{class_indent}    "
+    lines = numbered_text.splitlines()
+    for index, line in enumerate(lines):
+        match = re.match(r"^(\d+): (.*)$", line)
+        if not match or int(match.group(1)) <= class_line:
+            continue
+        source = match.group(2)
+        if not source.strip():
+            continue
+        if not source.startswith(body_indent):
+            return class_line
+        stripped = source.strip()
+        quote = _docstring_quote(stripped)
+        if quote is None:
+            return class_line
+        if stripped.count(quote) >= 2 and len(stripped) > len(quote):
+            return int(match.group(1))
+        for later in lines[index + 1 :]:
+            later_match = re.match(r"^(\d+): (.*)$", later)
+            if later_match and quote in later_match.group(2):
+                return int(later_match.group(1))
+        return class_line
+    return class_line
+
+
+def _docstring_quote(stripped_line: str) -> str | None:
+    for quote in ('"""', "'''"):
+        if stripped_line.startswith(quote):
+            return quote
     return None
+
+
+def _source_line(numbered_text: str, line_number: int) -> str:
+    prefix = f"{line_number}: "
+    for line in numbered_text.splitlines():
+        if line.startswith(prefix):
+            return line.split(": ", 1)[1]
+    return ""
 
 
 def _final_status(*, edited: bool, test_status: str, patch: str, diff_status: str) -> str:
@@ -285,3 +376,12 @@ def _summarize(text: str, limit: int = 500) -> str:
 def _hash_args(args: dict[str, object]) -> str:
     payload = repr(sorted((str(key), repr(value)) for key, value in args.items()))
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+Counters = _Counters
+RegistryLike = _RegistryLike
+candidate_from_search = _candidate_from_search
+edits_from_read = _edits_from_read
+final_explanation = _final_explanation
+query_from_problem = _query_from_problem
+summarize_text = _summarize

@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 import shutil
+import subprocess
 import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -36,6 +38,9 @@ from repair_agent.resources import load_device_inventory, load_resource_config, 
 INSTANCE_SPLIT_CHOICES = ("main", "smoke")
 OFFICIAL_INSTANCE_SOURCE = "swebench_lite_official"
 OFFICIAL_METADATA_SOURCE = "swebench_lite"
+OFFICIAL_SOURCE_CACHE_ENV = "REPAIR_AGENT_SOURCE_CACHE"
+OFFICIAL_SOURCE_CACHE_DEFAULT = Path("outputs/source_cache")
+OFFICIAL_CHECKOUT_TIMEOUT_SECONDS = 300
 
 
 @dataclass(frozen=True)
@@ -136,11 +141,14 @@ def _assert_strict_official_id(instance_id: str) -> None:
 
 def _official_instance_record(instance_id: str, row: ConfigMap) -> ConfigMap:
     return {
+        "base_commit": str(row.get("base_commit", "")),
+        "hints_text": str(row.get("hints_text", "")),
         "instance_id": instance_id,
         "repo": str(row.get("repo", "")),
         "problem_statement": require_string(row.get("problem_statement"), "Official problem_statement must be a string"),
         "visible_tests": [],
         "visible_failures": {},
+        "workspace_setup": row.get("workspace_setup", {}),
         "source": OFFICIAL_INSTANCE_SOURCE,
     }
 
@@ -351,6 +359,7 @@ def _prepare_task_checkout(run_dir: Path, instance_id: str, instance: ConfigMap,
         shutil.rmtree(checkout)
     checkout.mkdir(parents=True, exist_ok=True)
     if official:
+        _prepare_official_source_checkout(checkout, instance)
         return checkout
     fixture = instance.get("fixture")
     files = _fixture_files(fixture)
@@ -366,6 +375,107 @@ def _prepare_task_checkout(run_dir: Path, instance_id: str, instance: ConfigMap,
         target.parent.mkdir(parents=True, exist_ok=True)
         _ = target.write_text(str(content), encoding="utf-8")
     return checkout
+
+
+def _prepare_official_source_checkout(checkout: Path, instance: ConfigMap) -> None:
+    repo = str(instance.get("repo", "")).strip()
+    base_commit = _official_base_commit(instance)
+    if not _is_cloneable_official_repo(repo, base_commit):
+        _write_checkout_note(checkout, "skipped", repo=repo, base_commit=base_commit, detail="missing_or_non_hex_source_metadata")
+        return
+
+    cache_root = Path(os.environ.get(OFFICIAL_SOURCE_CACHE_ENV, str(OFFICIAL_SOURCE_CACHE_DEFAULT)))
+    cache_root.mkdir(parents=True, exist_ok=True)
+    repo_cache = cache_root / _safe_filename(repo.replace("/", "__"))
+    try:
+        if _is_partial_clone(repo_cache):
+            shutil.rmtree(repo_cache)
+        if not (repo_cache / ".git").is_dir():
+            _run_git(
+                [
+                    "clone",
+                    "--no-checkout",
+                    f"https://github.com/{repo}.git",
+                    str(repo_cache),
+                ],
+                cwd=None,
+            )
+        _run_git(["fetch", "origin", f"{base_commit}:refs/repair_agent/{base_commit}"], cwd=repo_cache)
+        _run_git(["clone", "--no-checkout", str(repo_cache), str(checkout)], cwd=None)
+        _run_git(["checkout", "--quiet", base_commit], cwd=checkout)
+        _write_checkout_note(checkout, "ready", repo=repo, base_commit=base_commit, detail="source_checkout_ready")
+    except (OSError, subprocess.SubprocessError) as exc:
+        _write_checkout_note(checkout, "blocked", repo=repo, base_commit=base_commit, detail=f"{type(exc).__name__}: {exc}")
+
+
+def _official_base_commit(instance: ConfigMap) -> str:
+    candidate = instance.get("base_commit")
+    if isinstance(candidate, str) and candidate.strip():
+        return candidate.strip()
+    setup = instance.get("workspace_setup")
+    if isinstance(setup, dict):
+        setup_map = cast(dict[object, object], setup)
+        value = setup_map.get("base_commit")
+        if isinstance(value, str):
+            return value.strip()
+    return ""
+
+
+def _is_cloneable_official_repo(repo: str, base_commit: str) -> bool:
+    if repo.count("/") != 1 or repo.startswith(("/", ".")) or repo.endswith("/"):
+        return False
+    if any(part in {"", ".", ".."} for part in repo.split("/")):
+        return False
+    return len(base_commit) == 40 and all(char in "0123456789abcdefABCDEF" for char in base_commit)
+
+
+def _is_partial_clone(repo_cache: Path) -> bool:
+    if not (repo_cache / ".git").is_dir():
+        return False
+    try:
+        completed = subprocess.run(
+            ["git", "config", "--get", "remote.origin.promisor"],
+            cwd=repo_cache,
+            text=True,
+            capture_output=True,
+            timeout=10,
+            check=False,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        return False
+    return completed.stdout.strip().lower() == "true"
+
+
+def _run_git(args: list[str], *, cwd: Path | None) -> None:
+    command = ["git", *args]
+    completed = subprocess.run(
+        command,
+        cwd=cwd,
+        text=True,
+        capture_output=True,
+        timeout=OFFICIAL_CHECKOUT_TIMEOUT_SECONDS,
+        check=False,
+    )
+    if completed.returncode != 0:
+        detail = (completed.stderr or completed.stdout).strip().splitlines()[:3]
+        raise subprocess.CalledProcessError(completed.returncode, command, output=completed.stdout, stderr="\n".join(detail))
+
+
+def _write_checkout_note(checkout: Path, status: str, *, repo: str, base_commit: str, detail: str) -> None:
+    safe_repo = _single_line(repo)
+    safe_detail = _single_line(detail)
+    payload = (
+        "# repair_agent checkout status\n"
+        f"status: {status}\n"
+        f"repo: {safe_repo}\n"
+        f"base_commit: {base_commit}\n"
+        f"detail: {safe_detail}\n"
+    )
+    _ = (checkout / ".repair_agent_checkout_status.txt").write_text(payload, encoding="utf-8")
+
+
+def _single_line(value: str) -> str:
+    return " ".join(value.split())
 
 
 def _fixture_files(fixture: object) -> dict[str, str]:
@@ -434,7 +544,10 @@ def _instance_id(instance: ConfigMap) -> str:
 
 def _safe_filename(value: str) -> str:
     cleaned = "".join(char if char.isalnum() or char in {"-", "_", "."} else "_" for char in value)
-    return cleaned or "instance"
+    return cleaned if cleaned not in {"", ".", ".."} else "instance"
+
+
+safe_filename = _safe_filename
 
 
 def _bounded_int(value: object, *, default: int, minimum: int) -> int:

@@ -13,6 +13,8 @@ dependencies:
   - psutil>=5.9
   - tqdm>=4.64
   - pytest>=8.0
+  - openjdk>=11       # Required by Defects4J (Java benchmark framework)
+  - perl>=5.32        # Required by Defects4J framework scripts
   - pip:
       - pydantic>=2.0
       - swebench>=2.1  # For SWE-bench Lite evaluation harness

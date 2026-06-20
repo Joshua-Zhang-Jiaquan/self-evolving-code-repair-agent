@@ -188,7 +188,7 @@ def test_gold_smoke_generation_uses_local_gold_source_fixture(project_root: Path
 def test_harness_simulated_docker_failure_writes_blocked_status(tmp_path: Path):
     predictions = tmp_path / "predictions.jsonl"
     _ = predictions.write_text(
-        '{"instance_id":"case","model_name_or_path":"unit","model_patch":""}\n',
+        '{"instance_id":"case__one","model_name_or_path":"unit","model_patch":""}\n',
         encoding="utf-8",
     )
     status_path = tmp_path / "harness_status.json"
@@ -221,7 +221,7 @@ def test_harness_simulated_docker_failure_writes_blocked_status(tmp_path: Path):
 def test_harness_auto_workers_record_resources_and_cache(project_root: Path, tmp_path: Path):
     predictions = tmp_path / "predictions.jsonl"
     _ = predictions.write_text(
-        '{"instance_id":"case","model_name_or_path":"unit","model_patch":""}\n',
+        '{"instance_id":"case__one","model_name_or_path":"unit","model_patch":""}\n',
         encoding="utf-8",
     )
     inventory = tmp_path / "device_inventory.json"

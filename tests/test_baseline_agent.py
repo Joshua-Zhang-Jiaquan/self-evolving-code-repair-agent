@@ -89,6 +89,31 @@ def test_malformed_tool_call_records_error_and_continues(tmp_path: Path):
     assert result.final.status in {"passed", "failed", "no_patch", "patch_unverified", "rolled_back"}
 
 
+def test_sympy_slots_repair_does_not_leak_numbered_read_prefix(tmp_path: Path):
+    source = tmp_path / "sympy" / "core" / "_print_helpers.py"
+    source.parent.mkdir(parents=True)
+    _ = source.write_text(
+        '"""printing helpers"""\n\nclass Printable:\n    """The default implementation of printing for SymPy classes."""\n\n    def __str__(self):\n        return "x"\n',
+        encoding="utf-8",
+    )
+    task = AgentTask(
+        instance_id="sympy__sympy-20590",
+        repo="sympy/sympy",
+        problem_statement="Symbol instances have __dict__; DefaultPrinting parent should define __slots__.",
+        checkout_root=tmp_path,
+        max_steps=12,
+        max_test_runs=0,
+        test_timeout_seconds=5.0,
+    )
+
+    result = BaselineAgent().run(task, "sympy-slots")
+
+    assert result.final.status == "patch_unverified"
+    assert "+    __slots__ = ()" in result.final.model_patch
+    assert "+3: class Printable:" not in result.final.model_patch
+    assert '    """The default implementation of printing for SymPy classes."""\n    __slots__ = ()' in source.read_text(encoding="utf-8")
+
+
 def test_baseline_uses_supplied_safe_registry_for_all_actions(tmp_path: Path):
     tmp_path.mkdir(exist_ok=True)
     registry = RecordingRegistry()

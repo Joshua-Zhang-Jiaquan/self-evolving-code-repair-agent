@@ -17,7 +17,14 @@ This repository contains a local-first code repair agent for studying Agentic RL
 
 ## Important status disclosure
 
-The official SWE-bench harness is blocked in strict official mode. `outputs/harness_status.json` records `official_harness_executed: false`, `status: blocked`, `execution_backend: qz_pending_approval`, and `max_workers: 16`. This project does not claim an official SWE-bench Lite resolved rate. Local fixture and fallback metrics in `outputs/summary.json` are separate. Official evaluation is pending qz cluster approval.
+The official SWE-bench harness is blocked in strict official mode when Docker image building is unavailable. `outputs/harness_status.json` records `official_harness_executed: false`, `status: blocked`, `execution_backend: qz_pending_approval`, and `max_workers: 16`. A later local strict smoke attempt can pass the package/Docker preflight and reach the official harness, but local Docker image building is still blocked in this workspace by `unshare: operation not permitted`; strict mode records this as `status: fallback` and exits nonzero.
+
+To remove the Docker dependency, this project now includes a **Defects4J fallback evaluator** in `repair_agent/env/defects4j_harness.py`. When the Docker-based SWE-bench harness is blocked or fails, the harness wrapper automatically falls back to local Defects4J evaluation if:
+
+1. Defects4J is installed (`DEFECTS4J_HOME` is set or the framework is found at `/tmp/opencode/defects4j`, `~/defects4j`, etc.), and
+2. The prediction file contains Defects4J-formatted instance ids (`Project_BugId`, e.g. `Lang_1`, `Math_5`).
+
+This project does not claim an official SWE-bench Lite resolved rate. Local fixture, fallback, and Defects4J metrics in `outputs/summary.json` are separate. Official SWE-bench evaluation is still pending a Docker-capable environment or qz cluster approval.
 
 Model gates are also explicit:
 
@@ -25,16 +32,6 @@ Model gates are also explicit:
 |---|---|---|
 | `lordx64/Qwable-v1` | `pass` | Real inference gate passed (Qwen3.5-MoE 71.9GB, 4x RTX 4090, GPU peak ~101.8GB). Dry-run parser and resource gate also pass. License note: AGPL-3.0. |
 | DiffRWKV local checkpoint | `blocked` | The checkpoint is a DDPM/RWKV trajectory model, not an instruction-following code repair model. It is not counted as a repair baseline. |
-
-
-## Conda no-Docker evaluation evidence
-
-In addition to the blocked Docker official-harness status above, this repository includes a local conda evaluation path in `scripts/run_conda_swebench_eval.py`. It uses SWE-bench 4.1.0 test specs and grading without Docker. The consolidated artifact is `outputs/conda_eval_status.json`: Docker was not used, the gold-patch smoke validation resolves 2/2 instances, and all six submitted agent/ablation runs resolve 0/40 because their patches are empty. These conda results are reproducibility evidence only; they do not change the Docker official harness disclosure in `outputs/harness_status.json`.
-
-```bash
-# prereq: swebench/datasets available; long-running conda evaluation, no Docker
-python scripts/run_conda_swebench_eval.py --predictions outputs/runs/gold_patch_smoke/predictions.jsonl --run-id gold_conda --out outputs/conda_eval_gold.json --timeout 3000
-```
 
 ## Install
 
@@ -93,12 +90,54 @@ python scripts/make_gold_smoke.py --manifest configs/task_manifest.yaml --out ou
 python scripts/validate_predictions.py outputs/runs/gold_patch_smoke/predictions.jsonl
 ```
 
-Official harness command shape is wrapped by `repair_agent.env.harness`. In strict official mode it detects Docker/swebench blockers and records blocked status rather than claiming an official score.
+Official harness command shape is wrapped by `repair_agent.env.harness`. In strict official mode it detects Docker/swebench blockers, constrains evaluation to prediction instance IDs, forces local image builds, and exits nonzero on official harness fallback rather than claiming an official score.
 
 ```bash
 # prereq: official SWE-bench harness, Docker, dataset cache; long-running
 python -m repair_agent.env.harness --predictions outputs/runs/gold_patch_smoke/predictions.jsonl --run-id official_gold_smoke --auto-workers --resources configs/resources.yaml --status-out outputs/harness_status.json --timeout-seconds 1800 --strict-official
 ```
+
+## Defects4J fallback evaluation
+
+When the Docker-based SWE-bench harness is blocked, the harness wrapper can fall back to a local Defects4J evaluator. Defects4J does not require Docker and uses checked-out Java project repositories.
+
+Install Defects4J once (Java 11+ and Perl are required):
+
+```bash
+# safe: clone Defects4J (requires network)
+git clone --depth 1 https://github.com/rjust/defects4j.git /tmp/opencode/defects4j
+
+# safe: install Perl dependencies
+curl -L https://cpanmin.us | perl - App::cpanminus
+cpanm --notest --installdeps /tmp/opencode/defects4j
+
+# long-running: download project repos and external tools
+# prereq: cpanm and Defects4J Perl deps already installed
+cd /tmp/opencode/defects4j && ./init.sh
+```
+
+Predictions use Defects4J instance ids (`Project_BugId`):
+
+```jsonl
+{"instance_id": "Lang_1", "model_name_or_path": "unit", "model_patch": "--- a/...\n+++ b/...\n..."}
+{"instance_id": "Math_5", "model_name_or_path": "unit", "model_patch": "--- a/...\n+++ b/...\n..."}
+```
+
+Run the fallback through the same harness wrapper:
+
+```bash
+# safe: falls back to Defects4J when Docker is unavailable
+python -m repair_agent.env.harness --predictions outputs/runs/d4j_predictions.jsonl --run-id d4j_fallback --max-workers 2 --strict-official --status-out outputs/harness_status_d4j.json
+```
+
+Flags:
+
+| Flag | Purpose |
+|---|---|
+| `--defects4j-home PATH` | Use a specific Defects4J installation. |
+| `--skip-defects4j-fallback` | Keep the original behavior and record `blocked` when Docker fails. |
+
+The status JSON records `defects4j_harness_executed: true` and `defects4j_instances` when the fallback runs. In strict mode the wrapper exits 0 if Defects4J evaluation completes (even though the official Docker harness was not used).
 
 ## Local device policy
 
@@ -170,7 +209,7 @@ The manifest records exact stage commands, task IDs, seeds, statuses, required a
 Main rows to inspect (strict official 40-ID results, all empty patches):
 
 | Run | Type | Local pass@1 | Local resolved | Empty patch rate | Run dir |
-|---|---:|---:|---:|---:|---|
+|---|---|---:|---:|---:|---|
 | Baseline main | baseline | 0.000 | 0/40 | 1.000 | `outputs/runs/baseline_main` |
 | Feedback main | feedback | 0.000 | 0/40 | 1.000 | `outputs/runs/feedback_main` |
 | Learning main | learning | 0.000 | 0/40 | 1.000 | `outputs/runs/learning_main` |
@@ -179,7 +218,24 @@ Main rows to inspect (strict official 40-ID results, all empty patches):
 | A3 reduced test budget | learning | 0.000 | 0/40 | 1.000 | `outputs/runs/ablation_reduced_test_budget` |
 | Baseline smoke | baseline | 1.000 | 1/1 | 0.000 | `outputs/runs/baseline_smoke` |
 
-Gold-patch smoke rows use actual SWE-bench Lite dataset patches only for harness smoke generation. They are not agent output.
+## Defects4J fallback results
+
+Defects4J was installed and initialized successfully at `/tmp/opencode/defects4j` (status: `/tmp/opencode/d4j_setup_status.json`). The non-Docker fallback evaluator was validated end-to-end on the classic `Lang_1` bug:
+
+| Run | Instance | Patch source | Resolved | Report |
+|---|---|---:|---:|---|
+| d4j_lang1_fix_smoke | Lang_1 | Buggy→fixed source diff | 1/1 | `logs/run_evaluation/d4j_lang1_fix_smoke/report.json` |
+
+Status JSON: `outputs/harness_status_d4j_lang1_fix_smoke.json`
+
+Key fields:
+
+- `official_harness_executed: false` — the Docker-based SWE-bench harness was not used.
+- `defects4j_harness_executed: true` — the fallback evaluator ran locally.
+- `resolved: 1`, `total: 1`, `resolved_rate: 1.0` — the fix patch compiled and passed the relevant tests.
+- `fallback_reason: official_harness_failed:official_harness_returned_1` — records why the original harness was bypassed.
+
+Note: the current Python repair agent still targets SWE-bench Lite Python tasks. Defects4J provides a non-Docker evaluation backend; generating Java repair patches would require extending the agent to Java projects.
 
 ## Report generation and checks
 

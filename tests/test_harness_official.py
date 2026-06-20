@@ -42,7 +42,7 @@ def test_missing_docker_is_not_success_in_strict_mode(tmp_path: Path, monkeypatc
     monkeypatch.chdir(tmp_path)
     predictions = tmp_path / "predictions.jsonl"
     _ = predictions.write_text(
-        '{"instance_id":"case","model_name_or_path":"unit","model_patch":""}\n',
+        '{"instance_id":"case__one","model_name_or_path":"unit","model_patch":""}\n',
         encoding="utf-8",
     )
     status_path = tmp_path / "harness_status.json"
@@ -85,8 +85,8 @@ def test_missing_docker_is_not_success_in_strict_mode(tmp_path: Path, monkeypatc
 def test_harness_status_has_required_fields(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     monkeypatch.chdir(tmp_path)
     prediction_rows = [
-        '{"instance_id":"case-1","model_name_or_path":"unit","model_patch":"diff"}',
-        '{"instance_id":"case-2","model_name_or_path":"unit","model_patch":"diff"}',
+        '{"instance_id":"case__1","model_name_or_path":"unit","model_patch":"diff"}',
+        '{"instance_id":"case__2","model_name_or_path":"unit","model_patch":"diff"}',
     ]
     predictions = tmp_path / "predictions.jsonl"
     _ = predictions.write_text("\n".join(prediction_rows) + "\n", encoding="utf-8")
@@ -131,12 +131,82 @@ def test_harness_status_has_required_fields(tmp_path: Path, monkeypatch: pytest.
     assert status["resolved_rate"] == 0.5
     assert status["blockers"] == []
     assert "official_gold_smoke" in cast(str, status["report_dir"])
+    command = cast(list[str], status["command"])
+    assert command[command.index("--namespace") + 1] == "none"
+    assert command[command.index("--instance_ids") + 1 :] == ["case__1", "case__2"]
+
+
+def test_strict_mode_fails_when_official_execution_falls_back(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    monkeypatch.chdir(tmp_path)
+    predictions = tmp_path / "predictions.jsonl"
+    _ = predictions.write_text(
+        '{"instance_id":"case__one","model_name_or_path":"unit","model_patch":"diff"}\n',
+        encoding="utf-8",
+    )
+    status_path = tmp_path / "harness_status.json"
+
+    def never_blocked(args: object) -> str | None:
+        _ = args
+        return None
+
+    def failing_run(command: object, capture_output: bool, text: bool, timeout: int, check: bool) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check)
+        return subprocess.CompletedProcess(_command_list(command), 1, stdout="", stderr="unshare: operation not permitted")
+
+    monkeypatch.setattr(harness_module, "_blocked_reason", never_blocked)
+    monkeypatch.setattr(subprocess, "run", failing_run)
+
+    result = harness_main(
+        [
+            "--predictions",
+            str(predictions),
+            "--run-id",
+            "official_failure",
+            "--max-workers",
+            "1",
+            "--strict-official",
+            "--status-out",
+            str(status_path),
+        ]
+    )
+    status = cast(dict[str, object], json.loads(status_path.read_text(encoding="utf-8")))
+
+    assert result == 1
+    assert status["status"] == "fallback"
+    assert status["official_harness_executed"] is True
+    assert status["fallback_reason"] == "official_harness_returned_1"
+
+
+def test_prediction_instance_ids_must_be_safe(tmp_path: Path, capsys: pytest.CaptureFixture[str]):
+    predictions = tmp_path / "predictions.jsonl"
+    _ = predictions.write_text(
+        '{"instance_id":"--cache_level","model_name_or_path":"unit","model_patch":"diff"}\n',
+        encoding="utf-8",
+    )
+    status_path = tmp_path / "harness_status.json"
+
+    result = harness_main(
+        [
+            "--predictions",
+            str(predictions),
+            "--run-id",
+            "bad_ids",
+            "--max-workers",
+            "1",
+            "--status-out",
+            str(status_path),
+        ]
+    )
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "invalid prediction instance_id" in captured.err
 
 
 def test_non_strict_mode_still_supports_simulate(tmp_path: Path):
     predictions = tmp_path / "predictions.jsonl"
     _ = predictions.write_text(
-        '{"instance_id":"case","model_name_or_path":"unit","model_patch":""}\n',
+        '{"instance_id":"case__one","model_name_or_path":"unit","model_patch":""}\n',
         encoding="utf-8",
     )
     status_path = tmp_path / "harness_status.json"

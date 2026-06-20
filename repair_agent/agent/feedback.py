@@ -2,18 +2,19 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from typing import override
 
 from repair_agent.agent.baseline import (
     PATCH_SUCCESS_STATUSES,
     TOOL_FAILURE_STATUSES,
     BaselineAgent,
-    _Counters,
-    _RegistryLike,
-    _addition_edit_from_read,
-    _candidate_from_search,
-    _final_explanation,
-    _query_from_problem,
-    _summarize,
+    Counters,
+    RegistryLike,
+    candidate_from_search,
+    edits_from_read,
+    final_explanation,
+    query_from_problem,
+    summarize_text,
 )
 from repair_agent.agent.interface import AgentFinalAnswer, AgentResult, AgentTask, TrajectoryStepRecord
 from repair_agent.agent.models import ModelAdapter
@@ -46,9 +47,10 @@ class FeedbackReflection:
 class FeedbackAgent(BaselineAgent):
     agent_version: str = FEEDBACK_AGENT_VERSION
 
-    def __init__(self, model: ModelAdapter | None = None, registry: _RegistryLike | ToolRegistry | None = None) -> None:
+    def __init__(self, model: ModelAdapter | None = None, registry: RegistryLike | ToolRegistry | None = None) -> None:
         super().__init__(model=model, registry=registry)
 
+    @override
     def run(self, task: AgentTask, run_id: str) -> AgentResult:
         workspace = TaskWorkspace(
             checkout_root=task.checkout_root,
@@ -58,7 +60,7 @@ class FeedbackAgent(BaselineAgent):
             test_timeout_seconds=task.test_timeout_seconds,
             max_test_runs=task.max_test_runs,
         )
-        counters = _Counters()
+        counters = Counters()
         steps: list[TrajectoryStepRecord] = []
         candidate_path = ""
         initial_candidate_path = ""
@@ -94,8 +96,8 @@ class FeedbackAgent(BaselineAgent):
             return result
 
         if remaining():
-            search = execute("search", {"query": _query_from_problem(task.problem_statement), "path": ".", "max_matches": 50})
-            initial_candidate_path = _candidate_from_search(search.output)
+            search = execute("search", {"query": query_from_problem(task.problem_statement), "path": ".", "max_matches": 50})
+            initial_candidate_path = candidate_from_search(search.output)
             candidate_path = initial_candidate_path
         if remaining():
             _ = execute("read_file", {"path": ".", "max_lines": 200})
@@ -115,17 +117,18 @@ class FeedbackAgent(BaselineAgent):
                 {"query": reflection.search_query, "path": ".", "max_matches": 50},
                 metadata={"feedback_search_query": reflection.search_query, "baseline_candidate_path": initial_candidate_path},
             )
-            candidate_path = _candidate_from_search(feedback_search.output) or candidate_path
+            candidate_path = candidate_from_search(feedback_search.output) or candidate_path
 
         last_read: ToolResult | None = None
         if candidate_path and remaining():
             last_read = execute("read_file", {"path": candidate_path, "max_lines": 300})
 
         if last_read is not None and candidate_path and remaining():
-            edit_args = _addition_edit_from_read(candidate_path, last_read.output, _problem_with_feedback(task.problem_statement, reflection))
-            if edit_args:
+            for edit_args in edits_from_read(candidate_path, last_read.output, _problem_with_feedback(task.problem_statement, reflection)):
+                if not remaining():
+                    break
                 edit = execute("edit_file", edit_args)
-                edited = edit.status == OK
+                edited = edited or edit.status == OK
 
         if not reflections and remaining():
             self._try_model_action(task, run_id, workspace, steps, counters)
@@ -179,7 +182,7 @@ class FeedbackAgent(BaselineAgent):
 
 def _reflection_from_test_failure(result: ToolResult, *, step_index: int, problem_statement: str) -> FeedbackReflection:
     summary = _summarize_test_failure(result.output or result.error or "visible test failed")
-    search_query = _query_from_failure(summary) or _query_from_problem(problem_statement)
+    search_query = _query_from_failure(summary) or query_from_problem(problem_statement)
     return FeedbackReflection(
         summary=summary,
         previous_test_status=result.status,
@@ -200,7 +203,7 @@ def _summarize_test_failure(output: str) -> str:
             interesting.append(stripped)
         if len(interesting) >= 6:
             break
-    return _summarize(" | ".join(interesting) if interesting else output, limit=600)
+    return summarize_text(" | ".join(interesting) if interesting else output, limit=600)
 
 
 def _query_from_failure(summary: str) -> str:
@@ -241,7 +244,7 @@ def _feedback_final_status(*, edited: bool, test_status: str, patch: str, diff_s
 
 
 def _feedback_final_explanation(*, final_status: str, test_status: str, edited: bool, diff_status: str, reflection: FeedbackReflection | None) -> str:
-    base = _final_explanation(final_status=final_status, test_status=test_status, edited=edited, diff_status=diff_status).replace("Baseline", "Feedback")
+    base = final_explanation(final_status=final_status, test_status=test_status, edited=edited, diff_status=diff_status).replace("Baseline", "Feedback")
     if reflection is None:
         return base
     return f"{base} Reflection used: {reflection.summary}"

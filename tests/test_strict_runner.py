@@ -9,7 +9,7 @@ import pytest
 import yaml
 
 from repair_agent.logging import read_jsonl
-from repair_agent.run import main
+from repair_agent.run import main, safe_filename
 
 
 def _fake_official_row(instance_id: str) -> dict[str, object]:
@@ -207,3 +207,10 @@ def test_non_strict_mode_still_uses_config_instances(tmp_path: Path):
 
     state = cast(dict[str, object], json.loads((run_dir / "run_state.json").read_text(encoding="utf-8")))
     assert "metadata" not in state
+
+
+def test_safe_filename_never_returns_dot_path_segments():
+    assert safe_filename("") == "instance"
+    assert safe_filename(".") == "instance"
+    assert safe_filename("..") == "instance"
+    assert safe_filename("django/django") == "django_django"
