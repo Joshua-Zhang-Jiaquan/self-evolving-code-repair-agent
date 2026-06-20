@@ -206,6 +206,8 @@ The manifest records exact stage commands, task IDs, seeds, statuses, required a
 
 `outputs/summary.json` currently reports 14 local/fallback runs and 249 submitted local rows. Aggregate local fixture/fallback values are `mean_pass_at_1 = 0.077`, `resolved_rate = 0.004`, and `total_resolved = 1`. These numbers are not official SWE-bench metrics. Official harness is blocked (Docker/swebench unavailable), `official_resolved_rate = null`.
 
+A non-Docker Defects4J fallback evaluator has been added and validated. The gold-patch smoke test on `Lang_1` resolved 1/1, proving the local checkout→apply→compile→test loop works without Docker. Because the current agent generates Python patches, this is an evaluator validation, not agent performance on Java bugs. See the **Defects4J fallback results** section below for details.
+
 Main rows to inspect (strict official 40-ID results, all empty patches):
 
 | Run | Type | Local pass@1 | Local resolved | Empty patch rate | Run dir |
