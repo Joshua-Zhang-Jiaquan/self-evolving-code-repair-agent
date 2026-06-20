@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Virtual environments and caches
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Local/runtime artifacts
+logs/*
+!logs/.gitkeep
+*.log
+swebench_workdirs/
+.eval_*
+/testbed/
+
+# Models and large downloaded artifacts
+models/
+*.safetensors
+*.gguf
+*.bin
+
+# Archives/submission bundles
+*.tar
+*.zip
+homework*/
+submissions*/
+libpod/
+
+# Editor/OS
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Planning/private workspace
+.omo/

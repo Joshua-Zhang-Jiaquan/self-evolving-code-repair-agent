@@ -1,0 +1,17 @@
+weights:
+  pass: 25.0
+  visible_test_pass: 3.0
+  visible_test_failure: -2.0
+  hidden_regression_ready: 8.0
+  partial_progress: 1.25
+  relevant_file: 0.75
+  tool_calls: -0.05
+  test_runs: -0.5
+  unsafe_edit: -20.0
+  test_deletion: -30.0
+  timeout: -12.0
+
+termination:
+  max_steps: 64
+  max_test_runs: 8
+  timeout_seconds: 1800

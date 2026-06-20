@@ -1,0 +1,38 @@
+models:
+  qwable:
+    adapter: qwable
+    id: lordx64/Qwable-v1
+    license: AGPL-3.0
+    local_only: true
+    commercial_api: false
+    tool_protocol: xml_tool_use_json
+    device_strategy: device_map_auto
+    memory_estimate: "2.9B-class autoregressive model; dry-run gate does not allocate weights"
+    constraints:
+      - no_commercial_api
+      - no_network_download_required_by_gate
+      - parse_xml_tool_use_before_agent_execution
+      - normalize_tool_names_to_registry
+    gate_policy:
+      dry_run_status: pass_if_parser_and_resource_plan_ok
+      heavy_loading: disabled_in_unit_tests
+
+  diffrwkv:
+    adapter: diffrwkv
+    id: local/DiffRWKV-RELAY-traj32x16-2.9B-s2-rwkv7-v3-ddpm
+    checkpoint_path: /inspire/hdd/project/multimodal-diffusion-language-model/zhangjiaquan-253108540222/DiffRWKV-RELAY/releases/traj32x16-2.9B-s2-rwkv7-v3-ddpm
+    local_only: true
+    commercial_api: false
+    device_strategy: per_worker_cuda_visible_devices
+    expected_artifacts:
+      - README.md
+      - config.yaml
+      - manifest.json
+      - model.safetensors
+    constraints:
+      - inspect_metadata_only_in_dry_run
+      - do_not_claim_code_repair_baseline_without_prompt_to_patch_smoke
+      - block_or_skip_when_instruction_following_is_unsupported
+    gate_policy:
+      dry_run_status: blocked_if_ddpm_trajectory_not_instruction_model
+      heavy_loading: disabled_in_unit_tests
