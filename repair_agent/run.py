@@ -24,6 +24,9 @@ from repair_agent.config import (
     require_mapping,
     require_string,
 )
+from repair_agent.env import defects4j_loader
+from repair_agent.env.defects4j_harness import checkout_bug, find_defects4j_home, parse_instance_id
+from repair_agent.env.defects4j_loader import DEFECTS4J_CHECKOUT_VERSION, DEFECTS4J_INSTANCE_SOURCE
 from repair_agent.env.swebench_loader import load_task_instances, load_task_manifest
 from repair_agent.logging import (
     append_jsonl,
@@ -54,6 +57,11 @@ class CliArgs:
     manifest: str | None = None
     instance_split: str | None = None
     strict_official: bool = False
+    defects4j: bool = False
+    defects4j_home: str | None = None
+    defects4j_ids: str | None = None
+    defects4j_projects: str | None = None
+    defects4j_manifest: str | None = None
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -65,8 +73,13 @@ def build_parser() -> argparse.ArgumentParser:
     _ = parser.add_argument("--run-id", required=True, help="Output run identifier under outputs/runs")
     _ = parser.add_argument("--force", action="store_true", help="Reset existing run artifacts before running")
     _ = parser.add_argument("--manifest", help="Path to SWE-bench Lite task manifest YAML (required with --strict-official)")
-    _ = parser.add_argument("--instance-split", choices=list(INSTANCE_SPLIT_CHOICES), help="Official manifest split to evaluate in strict mode")
+    _ = parser.add_argument("--instance-split", choices=list(INSTANCE_SPLIT_CHOICES), help="Manifest split to evaluate (strict SWE-bench or Defects4J manifest mode)")
     _ = parser.add_argument("--strict-official", action="store_true", help="Load official SWE-bench Lite instances and ignore config fixtures")
+    _ = parser.add_argument("--defects4j", action="store_true", help="Load Defects4J bugs instead of SWE-bench Lite fixtures")
+    _ = parser.add_argument("--defects4j-home", help="Path to a Defects4J installation (defaults to DEFECTS4J_HOME or autodetection)")
+    _ = parser.add_argument("--defects4j-ids", help="Comma/space separated Defects4J ids to run (e.g. 'Lang_1,Math_5')")
+    _ = parser.add_argument("--defects4j-projects", help="Comma/space separated Defects4J projects whose active bugs should all be loaded")
+    _ = parser.add_argument("--defects4j-manifest", help="Path to a Defects4J manifest YAML (smoke_ids/main_ids)")
     return parser
 
 
@@ -91,6 +104,20 @@ def run_from_args(args: CliArgs) -> int:
 
     if args.strict_official:
         instances, metadata = _strict_official_instances(args)
+        _run_agent(
+            config=config,
+            run_id=args.run_id,
+            run_dir=run_dir,
+            paths=paths,
+            limit=None,
+            force=args.force,
+            instances_override=instances,
+            metadata=metadata,
+        )
+        return 0
+
+    if args.defects4j:
+        instances, metadata = _defects4j_instances(args)
         _run_agent(
             config=config,
             run_id=args.run_id,
@@ -151,6 +178,55 @@ def _official_instance_record(instance_id: str, row: ConfigMap) -> ConfigMap:
         "workspace_setup": row.get("workspace_setup", {}),
         "source": OFFICIAL_INSTANCE_SOURCE,
     }
+
+
+def _defects4j_instances(args: CliArgs) -> tuple[list[ConfigMap], ConfigMap]:
+    """Resolve Defects4J instances from CLI flags.
+
+    Defects4J ids are validated by the loader via ``parse_instance_id`` and must
+    not pass through ``_assert_strict_official_id`` (which is SWE-bench specific
+    and would reject ``Project_BugId`` ids).
+    """
+    home = _resolve_defects4j_home(args.defects4j_home)
+    if home is not None:
+        os.environ["DEFECTS4J_HOME"] = str(home)
+    ids = defects4j_loader.parse_id_argument(args.defects4j_ids)
+    projects = defects4j_loader.parse_id_argument(args.defects4j_projects)
+    split = args.instance_split or "main"
+    instances = defects4j_loader.collect_instances(
+        defects4j_home=home,
+        ids=ids,
+        projects=projects,
+        manifest_path=args.defects4j_manifest,
+        split=split,
+        limit=args.limit,
+    )
+    if not instances:
+        raise ConfigError("defects4j_no_instances_selected")
+    if ids:
+        selection_mode = "ids"
+    elif args.defects4j_manifest:
+        selection_mode = f"manifest:{split}"
+    else:
+        selection_mode = "projects"
+    metadata: ConfigMap = {
+        "official_instance_source": defects4j_loader.DEFECTS4J_INSTANCE_SOURCE,
+        "defects4j": True,
+        "defects4j_home": str(home) if home is not None else None,
+        "selection_mode": selection_mode,
+        "instance_split": split,
+        "instance_count": len(instances),
+    }
+    return instances, metadata
+
+
+def _resolve_defects4j_home(explicit: str | None) -> Path | None:
+    if explicit:
+        path = Path(explicit)
+        if not (path / "framework" / "bin" / "defects4j").is_file():
+            raise ConfigError(f"defects4j_home_invalid: {path} is not a Defects4J installation")
+        return path
+    return find_defects4j_home()
 
 
 def _apply_limit(instances: list[ConfigMap], limit: int | None) -> list[ConfigMap]:
@@ -331,9 +407,16 @@ def _agent_task_from_config(instance: ConfigMap, agent_section: ConfigMap, check
     visible_tests = cast(list[object], visible_tests_raw)
     failure_map = cast(dict[object, object], visible_failures)
     official = instance.get("source") == OFFICIAL_INSTANCE_SOURCE
-    # Zero test budget for official empty checkouts: a bare pytest under the project
-    # root would discover the project's own testpaths and run the whole suite.
+    language = _instance_language(instance)
+    # Only SWE-bench official empty checkouts force a zero test budget (a bare pytest
+    # would run the project's whole suite); Defects4J keeps the configured budget.
     max_test_runs = 0 if official else _bounded_int(agent_section.get("max_test_runs"), default=1, minimum=0)
+    meta: ConfigMap = {"repo": instance.get("repo", "local/baseline"), "language": language}
+    if language == "java":
+        d4j_home = instance.get("defects4j_home")
+        if not isinstance(d4j_home, str) or not d4j_home.strip():
+            d4j_home = os.environ.get("DEFECTS4J_HOME", "/tmp/opencode/defects4j")
+        meta["defects4j_home"] = d4j_home
     return AgentTask(
         instance_id=require_string(instance.get("instance_id"), "Baseline instance_id must be a string"),
         repo=str(instance.get("repo", "local/baseline")),
@@ -342,12 +425,22 @@ def _agent_task_from_config(instance: ConfigMap, agent_section: ConfigMap, check
         visible_tests=tuple(str(item) for item in visible_tests),
         visible_failures={str(key): str(value) for key, value in failure_map.items()},
         model_name_or_path=model_name,
+        language=language,
         max_steps=_bounded_int(agent_section.get("max_steps"), default=12, minimum=1),
         max_test_runs=max_test_runs,
         test_timeout_seconds=_bounded_float(agent_section.get("test_timeout_seconds"), default=10.0, minimum=0.1),
         max_output_chars=_bounded_int(agent_section.get("max_output_chars"), default=4000, minimum=128),
-        metadata={"repo": instance.get("repo", "local/baseline")},
+        metadata=meta,
     )
+
+
+def _instance_language(instance: ConfigMap) -> str:
+    if instance.get("source") == DEFECTS4J_INSTANCE_SOURCE:
+        return "java"
+    candidate = instance.get("language")
+    if isinstance(candidate, str) and candidate.strip():
+        return candidate.strip().lower()
+    return "python"
 
 
 def _prepare_task_checkout(run_dir: Path, instance_id: str, instance: ConfigMap, *, force: bool) -> Path:
@@ -355,9 +448,13 @@ def _prepare_task_checkout(run_dir: Path, instance_id: str, instance: ConfigMap,
     checkouts.mkdir(parents=True, exist_ok=True)
     checkout = checkouts / _safe_filename(instance_id)
     official = instance.get("source") == OFFICIAL_INSTANCE_SOURCE
-    if checkout.exists() and (force or official or bool(instance.get("fixture"))):
+    is_defects4j = instance.get("source") == DEFECTS4J_INSTANCE_SOURCE
+    if checkout.exists() and (force or official or is_defects4j or bool(instance.get("fixture"))):
         shutil.rmtree(checkout)
     checkout.mkdir(parents=True, exist_ok=True)
+    if is_defects4j:
+        _prepare_defects4j_checkout(checkout, instance_id)
+        return checkout
     if official:
         _prepare_official_source_checkout(checkout, instance)
         return checkout
@@ -375,6 +472,13 @@ def _prepare_task_checkout(run_dir: Path, instance_id: str, instance: ConfigMap,
         target.parent.mkdir(parents=True, exist_ok=True)
         _ = target.write_text(str(content), encoding="utf-8")
     return checkout
+
+
+def _prepare_defects4j_checkout(checkout: Path, instance_id: str) -> None:
+    parsed = parse_instance_id(instance_id)
+    if parsed is None:
+        raise ConfigError(f"defects4j_instance_id_invalid: {instance_id!r}")
+    checkout_bug(parsed, checkout, version=DEFECTS4J_CHECKOUT_VERSION)
 
 
 def _prepare_official_source_checkout(checkout: Path, instance: ConfigMap) -> None:
@@ -589,6 +693,13 @@ def _typed_args(namespace: argparse.Namespace) -> CliArgs:
     strict_value = cast(object, getattr(namespace, "strict_official"))
     if not isinstance(strict_value, bool):
         raise ConfigError("--strict-official must be a boolean")
+    defects4j_value = cast(object, getattr(namespace, "defects4j"))
+    if not isinstance(defects4j_value, bool):
+        raise ConfigError("--defects4j must be a boolean")
+    defects4j_home = _optional_str_arg(namespace, "defects4j_home", "--defects4j-home")
+    defects4j_ids = _optional_str_arg(namespace, "defects4j_ids", "--defects4j-ids")
+    defects4j_projects = _optional_str_arg(namespace, "defects4j_projects", "--defects4j-projects")
+    defects4j_manifest = _optional_str_arg(namespace, "defects4j_manifest", "--defects4j-manifest")
     return CliArgs(
         config=config,
         resources=resources,
@@ -599,7 +710,19 @@ def _typed_args(namespace: argparse.Namespace) -> CliArgs:
         manifest=manifest,
         instance_split=instance_split,
         strict_official=strict_value,
+        defects4j=defects4j_value,
+        defects4j_home=defects4j_home,
+        defects4j_ids=defects4j_ids,
+        defects4j_projects=defects4j_projects,
+        defects4j_manifest=defects4j_manifest,
     )
+
+
+def _optional_str_arg(namespace: argparse.Namespace, attr: str, flag: str) -> str | None:
+    value = cast(object, getattr(namespace, attr))
+    if value is not None and not isinstance(value, str):
+        raise ConfigError(f"{flag} must be a string")
+    return value if isinstance(value, str) else None
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ from typing import cast
 import pytest
 
 from repair_agent.env import defects4j_harness, harness as harness_module
+from repair_agent.env import defects4j_cache
 from repair_agent.env.harness import main as harness_main
 
 
@@ -499,3 +500,304 @@ def test_defects4j_id_passes_instance_validation(tmp_path: Path, monkeypatch: py
     assert result == 0  # non-strict mode returns 0 when blocked
     assert status["status"] == "blocked"
     assert status["total"] == 1
+
+
+# --------------------------------------------------------------------------- #
+# Cache module
+# --------------------------------------------------------------------------- #
+def test_cache_path_returns_stable_location():
+    workdir_root = Path("/tmp/work")
+    instance = defects4j_harness.parse_instance_id("Lang_1")
+    assert instance is not None
+    path = defects4j_cache.cache_path(workdir_root, instance, "b")
+    assert path == workdir_root / ".d4j_cache" / "Lang_1b"
+
+
+def test_ensure_cached_skips_when_sentinel_exists(tmp_path: Path):
+    instance = defects4j_harness.parse_instance_id("Lang_1")
+    assert instance is not None
+    cached = defects4j_cache.cache_path(tmp_path, instance, "b")
+    cached.mkdir(parents=True)
+    (cached / ".defects4j.config").touch()
+
+    call_log: list[list[str]] = []
+
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 300,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        call_log.append(args)
+        return subprocess.CompletedProcess(args, 1, "", "should not be called")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+
+    result = defects4j_cache.ensure_cached(
+        instance, "b", workdir_root=tmp_path
+    )
+    assert result == cached
+    assert len(call_log) == 0
+
+
+def test_ensure_cached_runs_checkout_when_cache_missing(tmp_path: Path):
+    instance = defects4j_harness.parse_instance_id("Lang_1")
+    assert instance is not None
+    cached = defects4j_cache.cache_path(tmp_path, instance, "b")
+
+    call_log: list[list[str]] = []
+
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 300,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        call_log.append(args)
+        return subprocess.CompletedProcess(args, 0, "checked out", "")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+
+    result = defects4j_cache.ensure_cached(
+        instance, "b", workdir_root=tmp_path
+    )
+    assert result == cached
+    assert len(call_log) == 1
+    assert "checkout" in call_log[0]
+    assert (cached / ".defects4j.config").exists()
+
+
+def test_ensure_cached_raises_on_checkout_failure(tmp_path: Path):
+    instance = defects4j_harness.parse_instance_id("Lang_1")
+    assert instance is not None
+
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 300,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        return subprocess.CompletedProcess(args, 1, "", "checkout error")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+
+    with pytest.raises(RuntimeError, match="checkout.*failed"):
+        defects4j_cache.ensure_cached(instance, "b", workdir_root=tmp_path)
+
+
+def test_materialize_workdir_copies_directory(tmp_path: Path):
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+    (cache_dir / "README").write_text("hello", encoding="utf-8")
+    (cache_dir / "src").mkdir()
+    (cache_dir / "src" / "Foo.java").write_text("class Foo {}", encoding="utf-8")
+
+    workdir = tmp_path / "work"
+    result = defects4j_cache.materialize_workdir(cache_dir, workdir)
+    assert result == workdir
+    assert workdir.is_dir()
+    assert (workdir / "README").read_text(encoding="utf-8") == "hello"
+    assert (workdir / "src" / "Foo.java").read_text(encoding="utf-8") == "class Foo {}"
+
+
+def test_materialize_workdir_overwrites_existing(tmp_path: Path):
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+    (cache_dir / "file.txt").write_text("cached", encoding="utf-8")
+
+    workdir = tmp_path / "work"
+    workdir.mkdir()
+    (workdir / "file.txt").write_text("stale", encoding="utf-8")
+
+    defects4j_cache.materialize_workdir(cache_dir, workdir)
+    assert (workdir / "file.txt").read_text(encoding="utf-8") == "cached"
+
+
+def test_materialize_workdir_falls_back_to_copytree(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    """When cp and git clone both fail, copytree should handle it."""
+    cache_dir = tmp_path / "cache"
+    cache_dir.mkdir()
+    (cache_dir / "data.txt").write_text("fallback", encoding="utf-8")
+
+    def fake_subprocess_run(args, **kwargs):
+        _ = kwargs
+        raise FileNotFoundError("command not found")
+
+    monkeypatch.setattr(subprocess, "run", fake_subprocess_run)
+
+    workdir = tmp_path / "work"
+    result = defects4j_cache.materialize_workdir(cache_dir, workdir)
+    assert result == workdir
+    assert (workdir / "data.txt").read_text(encoding="utf-8") == "fallback"
+
+
+def test_reset_workdir_runs_git_commands(tmp_path: Path):
+    call_log: list[list[str]] = []
+
+    def fake_run(
+        args: list[str],
+        **kwargs: object,
+    ) -> subprocess.CompletedProcess[str]:
+        call_log.append(args)
+        return subprocess.CompletedProcess(args, 0, "", "")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    workdir = tmp_path / "work"
+    workdir.mkdir()
+    assert defects4j_cache.reset_workdir(workdir) is True
+    assert call_log[0] == ["git", "checkout", "--", "."]
+    assert call_log[1] == ["git", "clean", "-fdq"]
+
+
+def test_reset_workdir_returns_false_on_failure(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+    def fake_run(
+        args: list[str],
+        **kwargs: object,
+    ) -> subprocess.CompletedProcess[str]:
+        raise FileNotFoundError("git not found")
+
+    monkeypatch.setattr(subprocess, "run", fake_run)
+
+    assert defects4j_cache.reset_workdir(tmp_path / "work") is False
+
+
+def test_prewarm_deduplicates_instances(tmp_path: Path):
+    instance_a = defects4j_harness.parse_instance_id("Lang_1")
+    instance_b = defects4j_harness.parse_instance_id("Math_5")
+    assert instance_a is not None and instance_b is not None
+
+    call_log: list[list[str]] = []
+
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 300,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        call_log.append(args)
+        return subprocess.CompletedProcess(args, 0, "checked out", "")
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+
+    # Lang_1 appears twice, Math_5 once → 2 unique checkouts.
+    result = defects4j_cache.prewarm(
+        [instance_a, instance_b, instance_a], workdir_root=tmp_path
+    )
+    assert len(result) == 2
+    assert "Lang_1b" in result
+    assert "Math_5b" in result
+    assert len(call_log) == 2
+
+
+def test_prewarm_creates_sentinels(tmp_path: Path):
+    instance = defects4j_harness.parse_instance_id("Lang_1")
+    assert instance is not None
+
+    monkeypatch = pytest.MonkeyPatch()
+    monkeypatch.setattr(
+        defects4j_harness,
+        "run_defects4j_command",
+        lambda args, **kw: subprocess.CompletedProcess(args, 0, "ok", ""),
+    )
+
+    _ = defects4j_cache.prewarm([instance], workdir_root=tmp_path)
+    cached = defects4j_cache.cache_path(tmp_path, instance, "b")
+    assert (cached / ".defects4j.config").exists()
+
+
+# --------------------------------------------------------------------------- #
+# run_trigger_tests
+# --------------------------------------------------------------------------- #
+def test_run_trigger_tests_parses_passing_output():
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 600,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        assert "-t" in args
+        assert "org.foo.Bar::testOne" in args
+        return subprocess.CompletedProcess(args, 0, "Failing tests: 0", "")
+
+    monkeypatch = pytest.MonkeyPatch()
+    with monkeypatch.context() as m:
+        m.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+        count, failing = defects4j_harness.run_trigger_tests(
+            Path("/tmp/dummy"), ["org.foo.Bar::testOne"]
+        )
+    assert count == 0
+    assert failing == []
+
+
+def test_run_trigger_tests_parses_failing_output():
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 600,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        stdout = "Failing tests: 2\n  - org.foo.Bar::testOne\n  - org.foo.Baz::testTwo"
+        return subprocess.CompletedProcess(args, 0, stdout, "")
+
+    monkeypatch = pytest.MonkeyPatch()
+    with monkeypatch.context() as m:
+        m.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+        count, failing = defects4j_harness.run_trigger_tests(
+            Path("/tmp/dummy"), ["org.foo.Bar::testOne", "org.foo.Baz::testTwo"]
+        )
+    assert count == 2
+    assert failing == ["org.foo.Bar::testOne", "org.foo.Baz::testTwo"]
+
+
+def test_run_trigger_tests_reports_error_on_nonzero_return():
+    def fake_run(
+        args: list[str],
+        *,
+        capture_output: bool = True,
+        text: bool = True,
+        timeout: int = 600,
+        check: bool = False,
+        env: dict[str, str] | None = None,
+    ) -> subprocess.CompletedProcess[str]:
+        _ = (capture_output, text, timeout, check, env)
+        return subprocess.CompletedProcess(args, 1, "", "trigger test error")
+
+    monkeypatch = pytest.MonkeyPatch()
+    with monkeypatch.context() as m:
+        m.setattr(defects4j_harness, "run_defects4j_command", fake_run)
+        count, failing = defects4j_harness.run_trigger_tests(
+            Path("/tmp/dummy"), ["org.foo.Bar::testFail"]
+        )
+    assert count == 0
+    assert len(failing) == 1
+    assert "test_execution_error" in failing[0]

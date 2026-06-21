@@ -50,38 +50,31 @@ qz offload 信息：`qz_offload.available: true`，dry-run 已通过（`outputs/
 
 Gold smoke harness 的完整 command（记录在 `outputs/harness_status.json` 顶层）使用 `python -m swebench.harness.run_evaluation` 配合完整 SWE-bench 参数集。然而由于 swebench 和 Docker 均不可用，该命令从未在本地执行。`harness_status.json` 的 `total` 字段为 2（对应 2 个 prediction row），`resolved` 和 `resolved_rate` 均为 0（blocked 路径默认值）。
 
-## 4. 官方 Harness 结果表 (Official Harness Result Table)
+## 4. 官方 Harness 与 Defects4J 回退状态
 
-`report/tables/results_table.md` 记录每个阶段的 harness 状态。完整 14 阶段表如下：
+官方 SWE-bench harness 在本地 **从未成功执行**，原因是 Docker 镜像构建被 `unshare: operation not permitted` 阻断、`swebench` 包未导入。因此不存在官方 SWE-bench Lite resolved rate，也不应引用任何 SWE-bench 结果表。此前 `report/tables/results_table.md` 中记录的 14 阶段 `blocked` 表格仅说明 harness 未运行，不代表 agent 性能。
 
-| Run ID | Type | Predictions | Resolved | Pass@1 | Empty Patch Rate | Official Harness Status |
-|---|---:|---:|---:|---:|---:|---|
-| ablation_no_feedback_features | feedback | 40 | 0 | 0.000 | 1.000 | blocked |
-| ablation_no_process_reward | learning | 40 | 0 | 0.000 | 1.000 | blocked |
-| ablation_reduced_test_budget | learning | 40 | 0 | 0.000 | 1.000 | blocked |
-| baseline_main | baseline | 40 | 0 | 0.000 | 1.000 | blocked |
-| feedback_main | feedback | 40 | 0 | 0.000 | 1.000 | blocked |
-| learning_main | learning | 40 | 0 | 0.000 | 1.000 | blocked |
-| baseline_smoke | baseline | 1 | 1 | 1.000 | 0.000 | blocked |
-| feedback_smoke | feedback | 1 | 0 | 0.000 | 0.000 | blocked |
-| gold_patch_smoke | gold_smoke | 2 | 0 | 0.000 | 0.000 | blocked |
-| learning_smoke | learning | 1 | 0 | 0.000 | 1.000 | blocked |
+作为替代，项目扩展了 agent 以支持 Java/Defects4J 任务，并实现了 Defects4J 非 Docker 回退评估器。当前实际执行的 benchmark 评估结果如下：
 
-`outputs/harness_status.json` 的 `agent_runs` 部分包含 6 个 main/ablation 阶段的单独 harness status。所有阶段 `official_harness_executed: false`，`status: blocked`，`execution_backend: qz_pending_approval`。每个阶段有 40 prediction rows（smoke 阶段为 1-2 行），`resolved: 0`。Blockers 统一为 `["swebench_package_unavailable", "docker_cli_unavailable"]`。
+| Run | 实例 | Patch 来源 | Resolved | Report |
+|---|---|---:|---:|---|
+| d4j_gold_smoke | Lang_1 | Buggy→fixed source diff | 1/1 | `logs/run_evaluation/d4j_gold_smoke/report.json` |
+| d4j_baseline_smoke | Lang_1, Math_5 | Rule-based Java agent | 0/2 | `logs/run_evaluation/d4j_baseline_smoke_eval/report.json` |
+| d4j_empty_langmath_eval | Lang_1,3-6; Math_1-5 | Empty-patch 吞吐/缓存测试 | 0/10 | `logs/run_evaluation/d4j_empty_langmath_eval/report.json` |
 
-## 5. 本地 vs 官方指标区分 (Local vs Official Metric Distinction)
+`d4j_gold_smoke` 是评估器 gold-patch 烟雾测试，验证非 Docker 评估链路；`d4j_baseline_smoke` 与 `d4j_empty_langmath_eval` 说明当前 rule-based agent 尚不能生成有效 Java 补丁。评估使用 `outputs/.d4j_cache` 缓存与 ThreadPool 并行加速（10 个 Lang/Math bug 空补丁评估约 60 秒，4 workers）。
 
-本报告明确区分两类指标：
+## 5. 指标声明边界
 
-**本地 fixture/fallback 指标**：来自 `outputs/summary.json` 和 `report/figures/results.json`。这些指标基于 agent 运行产生的本地 predictions（通过可见测试或 fixture 规则判定）。`baseline_smoke` 在本地 fixture 上 achieved pass@1=1.0，但这一结果来自确定性 `add_numbers` fixture，不能推广到真实 SWE-bench Lite 任务。Aggregate 本地汇总：`run_count: 14`，`total_denominator: 249`，`total_resolved: 1`，`mean_pass_at_1: 0.077`，`resolved_rate: 0.004`。所有 40-ID main/ablation 阶段的 `empty_patch_rate` 为 1.0，`resolved` 为 0。
+由于官方 SWE-bench harness 从未在本地执行，本文不区分“本地 vs 官方 SWE-bench 指标”，也不声称任何 SWE-bench resolved rate。
 
-**官方 SWE-bench 指标**：来自 `outputs/harness_status.json`。官方 harness 从未执行（`official_harness_executed: false`），官方 resolved rate 为 `null`。官方评估仅在 qz 集群审批通过并提交 job 后才能获得。`outputs/qz/official_harness_job.json` 包含完整的 harness 执行方案，但 `submitted: false`。
-
-严禁将本地 fixture/fallback 指标包装为官方 SWE-bench resolved rate。`outputs/summary.json` 中每个 run 的 `official_resolved_rate` 均为 `null`。
+- `outputs/summary.json` 中的 14 个 local/fallback run 是基于本地 fixture 规则或空 checkout 运行的结果，其中 `baseline_smoke` 的 pass@1=1.0 仅来自确定性 `add_numbers` fixture，不能推广到真实 benchmark。
+- 实际执行的 benchmark 评估是 Defects4J 回退：`Lang_1` gold-patch 烟雾测试 resolved 1/1（验证评估链路），rule-based Java agent 在 Lang_1/Math_5 上 resolved 0/2，10-bug Lang/Math 空补丁吞吐测试 resolved 0/10。这些数字不代表 agent 已具备 Java bug 修复能力。
+- 所有已被删除或不再引用的 SWE-bench 结果表格/数字均因 harness 未实际运行而作废。
 
 ## 6. 问题定义与相关工作
 
-代码修复任务输入包括 issue 描述、仓库元数据、可见测试线索和安全工作区。输出是一个 prediction JSONL row，其中 `model_patch` 是待评估补丁。SWE-bench Lite 提供真实项目 bug，但隐藏测试和 gold patch 不能暴露给 agent。项目中的 loader 会移除 `patch` 和 `test_patch` 字段，gold-patch smoke 仅用于 harness 格式验证，不能作为 agent 输出。
+代码修复任务输入包括 issue 描述、仓库元数据、可见测试线索和安全工作区。输出是一个 prediction JSONL row，其中 `model_patch` 是待评估补丁。本项目最初以 SWE-bench Lite（Python）为目标，后因 Docker 阻塞转向 Defects4J（Java）作为可执行评估后端；隐藏测试和 gold patch 不能暴露给 agent，项目中的 loader 会移除 `patch` 和 `test_patch` 字段，gold-patch smoke 仅用于 harness 格式验证，不能作为 agent 输出。
 
 相关工作可以分成三类。第一类是 SWE-bench 风格的 repository-level program repair，重点在真实仓库上下文、依赖安装和隐藏测试评估。SWE-bench Lite 是 SWE-bench 的 300 实例子集（split test），覆盖 12 个 Python 仓库。第二类是 tool-using LLM agent，通过 search、read、edit、test 等工具完成长程任务，代表作如 SWE-Agent、OpenDevin。第三类是 Agentic RL，把工具选择、测试选择和停止决策当作策略学习问题，将 REPAIR 任务转化为 MDP 以学习工具使用策略。本项目把三类思想合在一个本地安全框架中，但不追求官方排名，而是强调可复现记录、失败披露和 long-horizon credit assignment 诊断。
 
@@ -236,7 +229,9 @@ learning_curve.json 和 credit_assignment.json 均为来自 `repair_agent.evalua
 
 Ablation 阶段表现一致：`ablation_no_process_reward` 和 `ablation_no_feedback_features` 各产生 480 trajectory rows（40 × 12），`ablation_reduced_test_budget` 产生 240 trajectory rows（40 × 6，预算减半效果），全部 empty patch rate 1.0。说明移除 process reward、禁用 feedback features 或减少 step budget 均未改变空 checkout 下的根本困境。
 
-**官方 harness 失败与 Defects4J 回退**：Docker 不可用 + swebench 不可导入导致官方 SWE-bench harness `status: blocked`。所有 14 个 run 的 `official_resolved_rate` 均为 `null`。为此项目增加了 Defects4J 非 Docker 回退评估器：`repair_agent.env.harness` 在官方 harness 被阻断或返回失败时，若预测文件包含 Defects4J 格式 ID 且本地已安装 Defects4J，则调用 `repair_agent/env/defects4j_harness.py` 执行本地 checkout→apply→compile→test。该回退在 `Lang_1` 开发者修复补丁上验证通过（`outputs/harness_status_d4j_lang1_fix_smoke.json`：`resolved: 1`、`total: 1`、`defects4j_harness_executed: true`）。由于当前 agent 生成 Python 补丁，不能生成 Defects4J 所需的 Java 补丁，该 1/1 仅为评估器 gold-patch 烟雾测试，不代表 agent 在 Defects4J 上的真实修复能力。
+**官方 harness 失败与 Defects4J 回退**：Docker 不可用 + swebench 不可导入导致官方 SWE-bench harness `status: blocked`。所有 14 个 run 的 `official_resolved_rate` 均为 `null`。为此项目扩展了 agent 的 Java 支持并增加了 Defects4J 非 Docker 回退评估器：`repair_agent.env.harness` 在官方 harness 被阻断或返回失败时，若预测文件包含 Defects4J 格式 ID 且本地已安装 Defects4J，则调用 `repair_agent/env/defects4j_harness.py` 执行本地 checkout→apply→compile→test。该回退使用 `outputs/.d4j_cache` 缓存与 ThreadPool 并行加速。
+
+实际执行的 Defects4J 结果：gold-patch smoke `Lang_1` resolved 1/1（`outputs/harness_status_d4j_gold_smoke.json`），验证评估器链路；rule-based Java agent 在 `Lang_1`/`Math_5` 上 resolved 0/2（`outputs/harness_status_d4j_baseline_smoke.json`）；10-bug Lang/Math 空补丁吞吐测试 resolved 0/10（`outputs/harness_status_d4j_empty_langmath.json`）。这些结果表明当前 agent 尚不能生成有效 Java 补丁，但评估链路已通。完整 Defects4J benchmark 已准备 qz 4×H200 job spec（`outputs/qz/defects4j_infer_job.json`、`outputs/qz/defects4j_eval_job.json`），待集群 Defects4J 项目仓库初始化后提交。
 
 **弱奖励信号**：Learning 训练在空 checkout 场景下，所有奖励测试组件（pass、visible_test_pass 等）nonzero count 为 0。Policy checkpoint 无有意义的策略梯度信号。
 

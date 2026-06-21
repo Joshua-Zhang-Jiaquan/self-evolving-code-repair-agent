@@ -45,6 +45,9 @@ class BaselineAgent:
             max_output_chars=task.max_output_chars,
             test_timeout_seconds=task.test_timeout_seconds,
             max_test_runs=task.max_test_runs,
+            language=task.language,
+            defects4j_home=str(task.metadata.get("defects4j_home")) if task.language == "java" else None,
+            defects4j_instance=task.instance_id if task.language == "java" else None,
         )
         counters = _Counters()
         steps: list[TrajectoryStepRecord] = []

@@ -1,0 +1,33 @@
+# Java / Defects4J baseline run config.
+#
+# Instances are NOT taken from this file: they are supplied on the command line
+# via --defects4j with --defects4j-ids / --defects4j-manifest / --defects4j-projects.
+# This config provides the run name, the agent budgets, and a minimal dry_run
+# section (required by repair_agent.config.load_run_config).
+#
+# Example:
+#   python -m repair_agent.run --config configs/defects4j.yaml \
+#       --defects4j --defects4j-home /tmp/opencode/defects4j \
+#       --defects4j-manifest configs/defects4j_manifest.yaml --instance-split smoke \
+#       --run-id defects4j_smoke --force
+run:
+  name: defects4j_baseline
+  output_dir: outputs/runs
+
+agent:
+  type: baseline
+  model_name_or_path: rule_based_local
+  language: java
+  max_steps: 12
+  # Java compile+test loops are allowed for Defects4J (unlike SWE-bench official
+  # empty checkouts, which force max_test_runs=0).
+  max_test_runs: 2
+  test_timeout_seconds: 600.0
+  max_output_chars: 4000
+
+dry_run:
+  instances:
+    - instance_id: defects4j-dry-0001
+      repo: defects4j/Lang
+      problem_statement: Placeholder dry-run row; real Defects4J instances come from --defects4j-ids/--defects4j-manifest.
+      expected_behavior: Exercises logging/resume plumbing without a Java checkout.

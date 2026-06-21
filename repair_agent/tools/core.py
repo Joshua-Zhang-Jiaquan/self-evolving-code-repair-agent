@@ -106,6 +106,9 @@ class TaskWorkspace:
     max_edit_chars: int = 100_000
     edit_history: list[EditRecord] = field(default_factory=list)
     test_run_count: int = 0
+    language: str = "python"
+    defects4j_home: str | Path | None = None
+    defects4j_instance: str | None = None
 
     def __post_init__(self) -> None:
         root = Path(self.checkout_root).expanduser().resolve()
@@ -122,6 +125,8 @@ class TaskWorkspace:
             raise ValueError("max_test_runs must be non-negative")
         if self.max_edit_chars < 1:
             raise ValueError("max_edit_chars must be positive")
+        if self.language not in {"python", "java"}:
+            raise ValueError("language must be 'python' or 'java'")
 
     @property
     def root(self) -> Path:
@@ -321,7 +326,11 @@ def edit_file(workspace: TaskWorkspace, args: Args) -> ToolResult:
 def run_tests(workspace: TaskWorkspace, args: Args) -> ToolResult:
     if workspace.test_run_count >= workspace.max_test_runs:
         return ToolResult("run_tests", BUDGET_EXCEEDED, error="test run budget exhausted", metadata={"test_run_count": workspace.test_run_count, "max_test_runs": workspace.max_test_runs})
-    command_result = _build_pytest_command(workspace, args.get("target", ""))
+    target = args.get("target", "")
+    if workspace.language == "java":
+        command_result = _build_defects4j_test_command(workspace, target)
+    else:
+        command_result = _build_pytest_command(workspace, target)
     if isinstance(command_result, ToolResult):
         return command_result
     timeout_seconds = min(
@@ -335,6 +344,8 @@ def run_tests(workspace: TaskWorkspace, args: Args) -> ToolResult:
         partial = _process_text(exc.stdout) + _process_text(exc.stderr)
         output, truncated = _truncate(partial, workspace.max_output_chars)
         return ToolResult("run_tests", TIMEOUT, output=output, error=f"test command timed out after {timeout_seconds:g}s", truncated=truncated, cost={"test_runs": 1.0}, metadata={"command": command_result, "timeout_seconds": timeout_seconds})
+    if workspace.language == "java":
+        return _parse_defects4j_test_result(completed, command_result, workspace.max_output_chars)
     combined = completed.stdout + completed.stderr
     output, truncated = _truncate(combined, workspace.max_output_chars)
     status = OK if completed.returncode == 0 else ERROR
@@ -539,6 +550,73 @@ def _build_pytest_command(workspace: TaskWorkspace, target: object) -> list[str]
         if workspace.visible_tests and not workspace.is_visible_test_path(token):
             return ToolResult("run_tests", DENIED, error=f"test target is not visible/allowed: {token}")
     return command
+
+
+def _build_defects4j_test_command(workspace: TaskWorkspace, target: object) -> list[str] | ToolResult:
+    d4j_bin = "defects4j"
+    if workspace.defects4j_home is not None:
+        home_path = Path(str(workspace.defects4j_home))
+        candidate = home_path / "framework" / "bin" / "defects4j"
+        if candidate.is_file():
+            d4j_bin = str(candidate)
+    command: list[str] = [d4j_bin, "test", "-w", str(workspace.root)]
+    if isinstance(target, str) and target.strip():
+        safe = target.strip()
+        if any(ch in safe for ch in ";\u0026|$`\\\n\r"):
+            return ToolResult("run_tests", DENIED, error="defects4j target contains disallowed characters")
+        allowed = set("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.:$#-")
+        if not all(ch in allowed for ch in safe):
+            return ToolResult("run_tests", DENIED, error="defects4j target must be a test class/method identifier")
+        command.extend(["-t", safe])
+    return command
+
+
+def _parse_defects4j_test_result(completed: subprocess.CompletedProcess[str], command: list[str], max_chars: int) -> ToolResult:
+    combined = completed.stdout + completed.stderr
+    output, truncated = _truncate(combined, max_chars)
+    failing_count = 0
+    failing_tests: list[str] = []
+    for raw_line in combined.splitlines():
+        line = raw_line.strip()
+        if line.lower().startswith("failing tests:"):
+            count_text = line.split(":", 1)[1].strip()
+            try:
+                failing_count = int(count_text)
+            except ValueError:
+                failing_count = 0
+        elif line.startswith("-") and "::" in line:
+            test_name = line.lstrip("- ").split()[0]
+            failing_tests.append(test_name)
+    if failing_count == 0:
+        failing_count = len(failing_tests)
+    if failing_count > 0:
+        return ToolResult(
+            "run_tests",
+            ERROR,
+            output=output,
+            error=f"{failing_count} failing Defects4J test(s)",
+            truncated=truncated,
+            cost={"test_runs": 1.0},
+            metadata={"command": command, "returncode": completed.returncode, "failing_tests": failing_tests, "failing_count": failing_count},
+        )
+    if completed.returncode != 0:
+        return ToolResult(
+            "run_tests",
+            ERROR,
+            output=output,
+            error=f"defects4j test exited with {completed.returncode}",
+            truncated=truncated,
+            cost={"test_runs": 1.0},
+            metadata={"command": command, "returncode": completed.returncode},
+        )
+    return ToolResult(
+        "run_tests",
+        OK,
+        output=output,
+        truncated=truncated,
+        cost={"test_runs": 1.0},
+        metadata={"command": command, "returncode": completed.returncode},
+    )
 
 
 def _process_text(value: str | bytes | None) -> str:

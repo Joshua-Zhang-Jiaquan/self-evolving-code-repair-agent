@@ -204,40 +204,79 @@ The manifest records exact stage commands, task IDs, seeds, statuses, required a
 
 ## Evaluation summary
 
-`outputs/summary.json` currently reports 14 local/fallback runs and 249 submitted local rows. Aggregate local fixture/fallback values are `mean_pass_at_1 = 0.077`, `resolved_rate = 0.004`, and `total_resolved = 1`. These numbers are not official SWE-bench metrics. Official harness is blocked (Docker/swebench unavailable), `official_resolved_rate = null`.
+**Official SWE-bench was never tested.** The Docker-based SWE-bench harness was blocked in this workspace (`unshare: operation not permitted`, `swebench` unavailable), so no official SWE-bench Lite resolved rate exists. Any previous SWE-bench score table should be treated as invalid.
 
-A non-Docker Defects4J fallback evaluator has been added and validated. The gold-patch smoke test on `Lang_1` resolved 1/1, proving the local checkout→apply→compile→test loop works without Docker. Because the current agent generates Python patches, this is an evaluator validation, not agent performance on Java bugs. See the **Defects4J fallback results** section below for details.
+The numbers still present in `outputs/summary.json` under `aggregate` come from local fixture smoke tests, not from a benchmark:
+- `run_count: 14`, `total_denominator: 249`, `total_resolved: 1`
+- `mean_pass_at_1 = 0.077`, `resolved_rate = 0.004`
 
-Main rows to inspect (strict official 40-ID results, all empty patches):
+`baseline_smoke` achieved pass@1=1.0 only on the deterministic `add_numbers` fixture. The 40-ID strict official runs produced empty patches and were never evaluated by the official harness.
 
-| Run | Type | Local pass@1 | Local resolved | Empty patch rate | Run dir |
-|---|---|---:|---:|---:|---|
-| Baseline main | baseline | 0.000 | 0/40 | 1.000 | `outputs/runs/baseline_main` |
-| Feedback main | feedback | 0.000 | 0/40 | 1.000 | `outputs/runs/feedback_main` |
-| Learning main | learning | 0.000 | 0/40 | 1.000 | `outputs/runs/learning_main` |
-| A1 no process reward | learning | 0.000 | 0/40 | 1.000 | `outputs/runs/ablation_no_process_reward` |
-| A2 no feedback features | feedback | 0.000 | 0/40 | 1.000 | `outputs/runs/ablation_no_feedback_features` |
-| A3 reduced test budget | learning | 0.000 | 0/40 | 1.000 | `outputs/runs/ablation_reduced_test_budget` |
-| Baseline smoke | baseline | 1.000 | 1/1 | 0.000 | `outputs/runs/baseline_smoke` |
+The **only** benchmark-grade evaluations that actually executed are the Defects4J non-Docker fallback runs below:
+
+| Run | Instances | Patch source | Resolved | Report |
+|---|---|---:|---:|---|
+| d4j_gold_smoke | Lang_1 | Buggy→fixed source diff | 1/1 | `logs/run_evaluation/d4j_gold_smoke/report.json` |
+| d4j_baseline_smoke | Lang_1, Math_5 | Rule-based Java agent | 0/2 | `logs/run_evaluation/d4j_baseline_smoke_eval/report.json` |
+| d4j_empty_langmath_eval | Lang_1,3-6; Math_1-5 | Empty-patch throughput test | 0/10 | `logs/run_evaluation/d4j_empty_langmath_eval/report.json` |
+
+The gold-patch smoke validates the evaluator plumbing. The baseline and empty-patch runs show that the current rule-based agent does not yet generate valid Java repairs, but the checkout→compile→test loop is exercised and accelerated.
+
+## Java / Defects4J repair
+
+The agent now supports Java/Defects4J tasks via `--defects4j`:
+
+```bash
+# prereq: Defects4J installed and project repos initialized
+python -m repair_agent.run --config configs/defects4j.yaml --defects4j --defects4j-home /tmp/opencode/defects4j --defects4j-manifest configs/defects4j_manifest.yaml --instance-split smoke --run-id d4j_baseline_smoke --resources configs/resources.yaml --force
+```
+
+```bash
+# prereq: predictions file exists; long-running (compile+test)
+python -m repair_agent.env.harness --predictions outputs/runs/d4j_baseline_smoke/predictions.jsonl --run-id d4j_baseline_smoke_eval --max-workers 4 --strict-official --defects4j-home /tmp/opencode/defects4j --status-out outputs/harness_status_d4j_baseline_smoke.json
+```
+
+Defects4J checkout, compile, and test are cached under `outputs/.d4j_cache` and reused across evaluations. `max-workers` controls parallel evaluation. The current manifest pins a small locally-testable subset; the full benchmark is queued for qz (see below).
 
 ## Defects4J fallback results
 
 Defects4J was installed and initialized successfully at `/tmp/opencode/defects4j` (status: `/tmp/opencode/d4j_setup_status.json`). The non-Docker fallback evaluator was validated end-to-end on the classic `Lang_1` bug:
 
-| Run | Instance | Patch source | Resolved | Report |
+| Run | Instances | Patch source | Resolved | Report |
 |---|---|---:|---:|---|
-| d4j_lang1_fix_smoke | Lang_1 | Buggy→fixed source diff | 1/1 | `logs/run_evaluation/d4j_lang1_fix_smoke/report.json` |
+| d4j_gold_smoke | Lang_1 | Buggy→fixed source diff | 1/1 | `logs/run_evaluation/d4j_gold_smoke/report.json` |
+| d4j_baseline_smoke | Lang_1, Math_5 | Rule-based Java agent | 0/2 | `logs/run_evaluation/d4j_baseline_smoke_eval/report.json` |
+| d4j_empty_langmath_eval | Lang_1,3-6; Math_1-5 | Empty-patch throughput/caching test | 0/10 | `logs/run_evaluation/d4j_empty_langmath_eval/report.json` |
 
-Status JSON: `outputs/harness_status_d4j_lang1_fix_smoke.json`
+Status JSONs:
+- `outputs/harness_status_d4j_gold_smoke.json`
+- `outputs/harness_status_d4j_baseline_smoke.json`
+- `outputs/harness_status_d4j_empty_langmath.json`
 
 Key fields:
 
 - `official_harness_executed: false` — the Docker-based SWE-bench harness was not used.
 - `defects4j_harness_executed: true` — the fallback evaluator ran locally.
-- `resolved: 1`, `total: 1`, `resolved_rate: 1.0` — the fix patch compiled and passed the relevant tests.
-- `fallback_reason: official_harness_failed:official_harness_returned_1` — records why the original harness was bypassed.
+- `resolved: 1`, `total: 1`, `resolved_rate: 1.0` for the gold patch; the other runs produced no valid patches.
+- Evaluations use a checkout cache (`outputs/.d4j_cache`) and a ThreadPool to accelerate repeated compile/test cycles.
 
-Note: the current Python repair agent still targets SWE-bench Lite Python tasks. Defects4J provides a non-Docker evaluation backend; generating Java repair patches would require extending the agent to Java projects.
+Note: the rule-based baseline does not yet generate real Java fixes; the 0/2 and 0/10 results are honest baseline scores, not evaluator errors.
+
+## qz 4×H200 job specs
+
+GPU inference and CPU evaluation job specs for the full Defects4J benchmark are generated under `outputs/qz/`:
+
+```bash
+# safe: generate qz job specs (does not submit)
+python scripts/make_defects4j_qz_jobs.py
+```
+
+This emits:
+- `outputs/qz/defects4j_infer_job.json` + `defects4j_infer_dry_run.yaml` — agent prediction generation on 4×H200.
+- `outputs/qz/defects4j_eval_job.json` + `defects4j_eval_dry_run.yaml` — CPU-bound Defects4J evaluation.
+- `configs/resources.h200.yaml` — H200 resource profile.
+
+Before submitting, resolve the `RESOLVE_BEFORE_SUBMISSION` placeholders (`workspace_id`, `logic_compute_group_id`, `spec_id`, image) and ensure Defects4J project repos are initialized on the cluster (run `./init.sh` or mount a pre-initialized `DEFECTS4J_HOME`). No job has been submitted yet.
 
 ## Report generation and checks
 

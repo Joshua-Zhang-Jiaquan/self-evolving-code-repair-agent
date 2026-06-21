@@ -34,6 +34,7 @@ class AgentTask:
     max_test_runs: int = 1
     test_timeout_seconds: float = 10.0
     max_output_chars: int = 4000
+    language: str = "python"
     metadata: Mapping[str, object] = field(default_factory=_empty_object_map)
 
     def __post_init__(self) -> None:
