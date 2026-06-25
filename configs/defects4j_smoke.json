@@ -1,0 +1,30 @@
+{
+  "dataset": "Defects4J",
+  "cases": [
+    {
+      "project": "Lang",
+      "bug_id": 1,
+      "version": "b",
+      "workdir": "artifacts/defects4j/Lang-1b"
+    }
+  ],
+  "runtime": {
+    "attempt_limits": {
+      "baseline": 1,
+      "feedback": 3,
+      "self_evolved": 5
+    },
+    "memory_attempt_bonus": 2,
+    "max_attempt_cap": 8,
+    "memory_guidance_limit": 5,
+    "memory_path": "artifacts/memory/benchmark_memory.json"
+  },
+  "requires": [
+    "Java 11",
+    "git",
+    "svn",
+    "perl",
+    "cpanm",
+    "defects4j on PATH"
+  ]
+}

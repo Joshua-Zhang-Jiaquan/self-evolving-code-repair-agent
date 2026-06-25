@@ -1,0 +1,14 @@
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -600,7 +600,10 @@
+         try {
+                 final Double d = createDouble(str);
+                 if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !allZeros))) {
+-                    return d;
++                    // Check for precision loss
++                    if (new BigDecimal(str).compareTo(BigDecimal.valueOf(d.doubleValue())) == 0) {
++                        return d;
++                    }
+                 }
+         } catch (final NumberFormatException nfe) { // NOPMD
+             // ignore the bad number

@@ -1,0 +1,10 @@
+--- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -151,6 +151,7 @@
+     /** {@inheritDoc} */
+     public void clearEventHandlers() {
+         eventsStates.clear();
++        statesInitialized = false;
+     }
+ 
+     /** {@inheritDoc} */

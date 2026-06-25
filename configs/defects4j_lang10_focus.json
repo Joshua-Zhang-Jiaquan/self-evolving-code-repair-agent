@@ -1,0 +1,19 @@
+{
+  "dataset": "Defects4J",
+  "cases": [
+    {"project": "Lang", "bug_id": 10}
+  ],
+  "runtime": {
+    "attempt_limits": {
+      "baseline": 1,
+      "feedback": 3,
+      "self_evolved": 10
+    },
+    "memory_attempt_bonus": 3,
+    "max_attempt_cap": 13,
+    "memory_guidance_limit": 10,
+    "max_non_patch_rounds": 12,
+    "memory_path": "artifacts/memory/benchmark_memory.json"
+  },
+  "notes": "Single-case framework regression config for Lang-10 regex-whitespace grounding debugging. Not a replacement for failed8 or full30 reporting."
+}

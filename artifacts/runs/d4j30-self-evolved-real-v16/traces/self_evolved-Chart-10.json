@@ -1,0 +1,1960 @@
+{
+  "system": "self_evolved",
+  "case": {
+    "project": "Chart",
+    "bug_id": 10,
+    "case_id": "Chart-10"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "patch_attempt": 1,
+      "prompt": [
+        {
+          "role": "system",
+          "content": "You are a code repair agent for Defects4J Java bugs. Return only JSON. Do not edit tests, build files, generated files, secrets, or paths outside the checkout. Snippets marked [read-only-test] are visible tests for diagnosis only and must not be patched. Use exact old/new text replacements for source files only. The old field must be copied verbatim from source_snippets without inventing missing context. Prefer a short unique old block over a long uncertain block; do not use line 1 as a placeholder anchor. Prefer the smallest semantic source change that fixes the root cause. Do not delete existing validation, parsing, serialization, or boundary logic unless the failing evidence specifically shows it is wrong. If current_diff is empty, previous failed patches are not present in the workspace; never use failed patch text as old. Prioritize failing_summary and visible test assertions over long stack traces. Do not return empty patch_hunks; if you request files_to_read, still provide the best grounded patch from current snippets. Output the final JSON object immediately; do not spend tokens on hidden reasoning."
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"project\": \"Chart\",\n  \"bug_id\": 10,\n  \"attempt\": 1,\n  \"metadata\": {\n    \"dir.src.classes\": \"source\",\n    \"dir.src.tests\": \"tests\",\n    \"tests.trigger\": \"org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\",\n    \"tests.relevant\": \"org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests\",\n    \"classes.modified\": \"org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator\"\n  },\n  \"failing_summary\": \"--- org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\\njunit.framework.ComparisonFailure: expected:< title=\\\"Series [&quot;A&quot;], 100.0\\\" alt=\\\"\\\"> but was:< title=\\\"Series [\\\"A\\\"], 100.0\\\" alt=\\\"\\\">\",\n  \"failing_output\": \"Running ant (compile.tests)................................................ OK\\nRunning ant (run.dev.tests)................................................ OK\\nFailing tests: 1\\n  - org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\\n\\n\\n[failing_tests]\\n--- org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\\njunit.framework.ComparisonFailure: expected:< title=\\\"Series [&quot;A&quot;], 100.0\\\" alt=\\\"\\\"> but was:< title=\\\"Series [\\\"A\\\"], 100.0\\\" alt=\\\"\\\">\\n\\tat junit.framework.Assert.assertEquals(Assert.java:100)\\n\\tat junit.framework.Assert.assertEquals(Assert.java:107)\\n\\tat junit.framework.TestCase.assertEquals(TestCase.java:269)\\n\\tat org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests.testGenerateURLFragment(StandardToolTipTagFragmentGeneratorTests.java:80)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat junit.framework.TestCase.runTest(TestCase.java:176)\\n\\tat junit.framework.TestCase.runBare(TestCase.java:141)\\n\\tat junit.framework.TestResult$1.protect(TestResult.java:122)\\n\\tat junit.framework.TestResult.runProtected(TestResult.java:142)\\n\\tat junit.framework.TestResult.run(TestResult.java:125)\\n\\tat junit.framework.TestCase.run(TestCase.java:129)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\\n\\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\\n\\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\\n\\tat org.apache.tools.ant.Task.perform(Task.java:348)\\n\\tat org.apache.tools.ant.Target.execute(Target.java:392)\\n\\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\\n\\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\\n\\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\\n\\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\\n\\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\\n\\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\\n\\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\\n\\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\\n\\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\\n\",\n  \"visible_test_assertions\": [\n    \"testGenerateURLFragment() { | StandardToolTipTagFragmentGenerator g | = new StandardToolTipTagFragmentGenerator(); | assertEquals(\\\" title=\\\\\\\"abc\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\",\n    \"= new StandardToolTipTagFragmentGenerator(); | assertEquals(\\\" title=\\\\\\\"abc\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\", | g.generateToolTipFragment(\\\"abc\\\")); | assertEquals(\\\" title=\\\\\\\"Series &quot;A&quot;, 100.0\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\"\n  ],\n  \"derived_repair_constraints\": [],\n  \"source_snippets\": {\n    \"source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it \\n * under the terms of the GNU Lesser General Public License as published by \\n * the Free Software Foundation; either version 2.1 of the License, or \\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but \\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n * USA.  \\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n * in the United States and other countries.]\\n *\\n * ----------------------------------------\\n * StandardToolTipTagFragmentGenerator.java\\n * ----------------------------------------\\n * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n *\\n * Original Author:  Richard Atkinson;\\n * Contributors:     David Gilbert (for Object Refinery Limited);\\n *\\n * Changes\\n * -------\\n * 12-Aug-2003 : Version 1 (RA);\\n * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n * \\n */\\n \\npackage org.jfree.chart.imagemap;\\n\\n/**\\n * Generates tooltips using the HTML title attribute for image map area tags.\\n */\\npublic class StandardToolTipTagFragmentGenerator \\n        implements ToolTipTagFragmentGenerator {\\n\\n    /**\\n     * Creates a new instance.\\n     */\\n    public StandardToolTipTagFragmentGenerator() {\\n        super();\\n    }\\n\\t\\n    /**\\n     * Generates a tooltip string to go in an HTML image map.\\n     *\\n     * @param toolTipText  the tooltip.\\n     * \\n     * @return The formatted HTML area tag attribute(s).\\n     */\\n    public String generateToolTipFragment(String toolTipText) {\\n        return \\\" title=\\\\\\\"\\\" + toolTipText\\n            + \\\"\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\";\\n    }\\n\\n}\\n\",\n    \"source/org/jfree/chart/imagemap/DynamicDriveToolTipTagFragmentGenerator.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it\\n * under the terms of the GNU Lesser General Public License as published by\\n * the Free Software Foundation; either version 2.1 of the License, or\\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but\\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n * USA.\\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n * in the United States and other countries.]\\n *\\n * --------------------------------------------\\n * DynamicDriveToolTipTagFragmentGenerator.java\\n * --------------------------------------------\\n * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n *\\n * Original Author:  Richard Atkinson;\\n * Contributors:     David Gilbert (for Object Refinery Limited);\\n *\\n * Changes\\n * -------\\n * 12-Aug-2003 : Version 1 (RA);\\n * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n *\\n */\\n\\npackage org.jfree.chart.imagemap;\\n\\n/**\\n * Generates tooltips using the Dynamic Drive DHTML Tip Message\\n * library (http://www.dynamicdrive.com).\\n */\\npublic class DynamicDriveToolTipTagFragmentGenerator\\n        implements ToolTipTagFragmentGenerator {\\n\\n    /** The title, empty string not to display */\\n    protected String title = \\\"\\\";\\n\\n    /** The style number */\\n    protected int style = 1;\\n\\n    /**\\n     * Blank constructor.\\n     */\\n    public DynamicDriveToolTipTagFragmentGenerator() {\\n        super();\\n    }\\n\\n    /**\\n     * Creates a new generator with specific title and style settings.\\n     *\\n     * @param title  title for use in all tooltips, use empty String not to\\n     *               display a title.\\n     * @param style  style number, see http://www.dynamicdrive.com for more\\n     *               information.\\n     */\\n    public DynamicDriveToolTipTagFragmentGenerator(String title, int style) {\\n        this.title = title;\\n        this.style = style;\\n    }\\n\\n    /**\\n     * Generates a tooltip string to go in an HTML image map.\\n     *\\n     * @param toolTipText  the tooltip.\\n     *\\n     * @return The formatted HTML area tag attribute(s).\\n     */\\n    public String generateToolTipFragment(String toolTipText) {\\n        return \\\" onMouseOver=\\\\\\\"return stm(['\\\"\\n            + ImageMapUtilities.htmlEscape(this.title) + \\\"','\\\"\\n            + ImageMapUtilities.htmlEscape(toolTipText) + \\\"'],Style[\\\"\\n            + this.style + \\\"]);\\\\\\\"\\\" + \\\" onMouseOut=\\\\\\\"return htm();\\\\\\\"\\\";\\n    }\\n\\n}\\n\",\n    \"source/org/jfree/chart/imagemap/OverLIBToolTipTagFragmentGenerator.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it \\n * under the terms of the GNU Lesser General Public License as published by \\n * the Free Software Foundation; either version 2.1 of the License, or \\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but \\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n * USA.  \\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n * in the United States and other countries.]\\n *\\n * ---------------------------------------\\n * OverLibToolTipTagFragmentGenerator.java\\n * ---------------------------------------\\n * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n *\\n * Original Author:  Richard Atkinson;\\n * Contributors:     David Gilbert (for Object Refinery Limited);\\n *\\n * Changes\\n * -------\\n * 12-Aug-2003 : Version 1 (RA);\\n * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n * \\n */\\n \\npackage org.jfree.chart.imagemap;\\n\\n/**\\n * Generates tooltips using the OverLIB library \\n * (http://www.bosrup.com/web/overlib/).\\n */\\npublic class OverLIBToolTipTagFragmentGenerator \\n        implements ToolTipTagFragmentGenerator {\\n\\n    /**\\n     * Creates a new instance.\\n     */\\n    public OverLIBToolTipTagFragmentGenerator() {\\n        super();\\n    }\\n\\t\\n    /**\\n     * Generates a tooltip string to go in an HTML image map.\\n     *\\n     * @param toolTipText  the tooltip text.\\n     * \\n     * @return The formatted HTML area tag attribute(s).\\n     */\\n    public String generateToolTipFragment(String toolTipText) {\\n        return \\\" onMouseOver=\\\\\\\"return overlib('\\\" \\n                + ImageMapUtilities.htmlEscape(toolTipText) \\n                + \\\"');\\\\\\\" onMouseOut=\\\\\\\"return nd();\\\\\\\"\\\";\\n    }\\n\\n}\\n\",\n    \"source/org/jfree/chart/imagemap/StandardURLTagFragmentGenerator.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it \\n * under the terms of the GNU Lesser General Public License as published by \\n * the Free Software Foundation; either version 2.1 of the License, or \\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but \\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n * USA.  \\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n * in the United States and other countries.]\\n *\\n * ------------------------------------\\n * StandardURLTagFragmentGenerator.java\\n * ------------------------------------\\n * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n *\\n * Original Author:  Richard Atkinson;\\n *\\n * Changes\\n * -------\\n * 12-Aug-2003 : Version 1 (RA);\\n * \\n */\\n \\npackage org.jfree.chart.imagemap;\\n\\n/**\\n * Generates URLs using the HTML href attribute for image map area tags.\\n */\\npublic class StandardURLTagFragmentGenerator \\n        implements URLTagFragmentGenerator {\\n\\n    /**\\n     * Creates a new instance.\\n     */\\n    public StandardURLTagFragmentGenerator() {\\n        super();\\n    }\\n\\t\\n    /**\\n     * Generates a URL string to go in an HTML image map.\\n     *\\n     * @param urlText  the URL text (fully escaped).\\n     * \\n     * @return The formatted text\\n     */\\n    public String generateURLFragment(String urlText) {\\n        // the URL text should already have been escaped by the URL generator\\n        return \\\" href=\\\\\\\"\\\" + urlText + \\\"\\\\\\\"\\\";\\n    }\\n\\n}\\n\",\n    \"tests/org/jfree/chart/imagemap/junit/StandardToolTipTagFragmentGeneratorTests.java [read-only-test]\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it\\n * under the terms of the GNU Lesser General Public License as published by\\n * the Free Software Foundation; either version 2.1 of the License, or\\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but\\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n * USA.\\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n * in the United States and other countries.]\\n *\\n * ---------------------------------------------\\n * StandardToolTipTagFragmentGeneratorTests.java\\n * ---------------------------------------------\\n * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.\\n *\\n * Original Author:  David Gilbert (for Object Refinery Limited);\\n * Contributor(s):   -;\\n *\\n * Changes\\n * -------\\n * 05-Dec-2007 : Version 1 (DG);\\n *\\n */\\n\\npackage org.jfree.chart.imagemap.junit;\\n\\nimport junit.framework.Test;\\nimport junit.framework.TestCase;\\nimport junit.framework.TestSuite;\\n\\nimport org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;\\n\\n/**\\n * Tests for the {@link StandardToolTipTagFragmentGeneratorTests} class.\\n */\\npublic class StandardToolTipTagFragmentGeneratorTests extends TestCase {\\n\\n    /**\\n     * Returns the tests as a test suite.\\n     *\\n     * @return The test suite.\\n     */\\n    public static Test suite() {\\n        return new TestSuite(StandardToolTipTagFragmentGeneratorTests.class);\\n    }\\n\\n    /**\\n     * Constructs a new set of tests.\\n     *\\n     * @param name  the name of the tests.\\n     */\\n    public StandardToolTipTagFragmentGeneratorTests(String name) {\\n        super(name);\\n    }\\n\\n    /**\\n     * Some checks for the generateURLFragment() method.\\n     */\\n    public void testGenerateURLFragment() {\\n        StandardToolTipTagFragmentGenerator g\\n                = new StandardToolTipTagFragmentGenerator();\\n        assertEquals(\\\" title=\\\\\\\"abc\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\\n                g.generateToolTipFragment(\\\"abc\\\"));\\n        assertEquals(\\\" title=\\\\\\\"Series &quot;A&quot;, 100.0\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\\n                g.generateToolTipFragment(\\\"Series \\\\\\\"A\\\\\\\", 100.0\\\"));\\n    }\\n\\n}\\n\"\n  },\n  \"source_snippet_line_numbers\": {\n    \"source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it \\n10:  * under the terms of the GNU Lesser General Public License as published by \\n11:  * the Free Software Foundation; either version 2.1 of the License, or \\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but \\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n22:  * USA.  \\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * ----------------------------------------\\n28:  * StandardToolTipTagFragmentGenerator.java\\n29:  * ----------------------------------------\\n30:  * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n31:  *\\n32:  * Original Author:  Richard Atkinson;\\n33:  * Contributors:     David Gilbert (for Object Refinery Limited);\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 12-Aug-2003 : Version 1 (RA);\\n38:  * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n39:  * \\n40:  */\\n41:  \\n42: package org.jfree.chart.imagemap;\\n43: \\n44: /**\\n45:  * Generates tooltips using the HTML title attribute for image map area tags.\\n46:  */\\n47: public class StandardToolTipTagFragmentGenerator \\n48:         implements ToolTipTagFragmentGenerator {\\n49: \\n50:     /**\\n51:      * Creates a new instance.\\n52:      */\\n53:     public StandardToolTipTagFragmentGenerator() {\\n54:         super();\\n55:     }\\n56: \\t\\n57:     /**\\n58:      * Generates a tooltip string to go in an HTML image map.\\n59:      *\\n60:      * @param toolTipText  the tooltip.\\n61:      * \\n62:      * @return The formatted HTML area tag attribute(s).\\n63:      */\\n64:     public String generateToolTipFragment(String toolTipText) {\\n65:         return \\\" title=\\\\\\\"\\\" + toolTipText\\n66:             + \\\"\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\";\\n67:     }\\n68: \\n69: }\",\n    \"source/org/jfree/chart/imagemap/DynamicDriveToolTipTagFragmentGenerator.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it\\n10:  * under the terms of the GNU Lesser General Public License as published by\\n11:  * the Free Software Foundation; either version 2.1 of the License, or\\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but\\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n22:  * USA.\\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * --------------------------------------------\\n28:  * DynamicDriveToolTipTagFragmentGenerator.java\\n29:  * --------------------------------------------\\n30:  * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n31:  *\\n32:  * Original Author:  Richard Atkinson;\\n33:  * Contributors:     David Gilbert (for Object Refinery Limited);\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 12-Aug-2003 : Version 1 (RA);\\n38:  * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n39:  *\\n40:  */\\n41: \\n42: package org.jfree.chart.imagemap;\\n43: \\n44: /**\\n45:  * Generates tooltips using the Dynamic Drive DHTML Tip Message\\n46:  * library (http://www.dynamicdrive.com).\\n47:  */\\n48: public class DynamicDriveToolTipTagFragmentGenerator\\n49:         implements ToolTipTagFragmentGenerator {\\n50: \\n51:     /** The title, empty string not to display */\\n52:     protected String title = \\\"\\\";\\n53: \\n54:     /** The style number */\\n55:     protected int style = 1;\\n56: \\n57:     /**\\n58:      * Blank constructor.\\n59:      */\\n60:     public DynamicDriveToolTipTagFragmentGenerator() {\\n61:         super();\\n62:     }\\n63: \\n64:     /**\\n65:      * Creates a new generator with specific title and style settings.\\n66:      *\\n67:      * @param title  title for use in all tooltips, use empty String not to\\n68:      *               display a title.\\n69:      * @param style  style number, see http://www.dynamicdrive.com for more\\n70:      *               information.\\n71:      */\\n72:     public DynamicDriveToolTipTagFragmentGenerator(String title, int style) {\\n73:         this.title = title;\\n74:         this.style = style;\\n75:     }\\n76: \\n77:     /**\\n78:      * Generates a tooltip string to go in an HTML image map.\\n79:      *\\n80:      * @param toolTipText  the tooltip.\\n81:      *\\n82:      * @return The formatted HTML area tag attribute(s).\\n83:      */\\n84:     public String generateToolTipFragment(String toolTipText) {\\n85:         return \\\" onMouseOver=\\\\\\\"return stm(['\\\"\\n86:             + ImageMapUtilities.htmlEscape(this.title) + \\\"','\\\"\\n87:             + ImageMapUtilities.htmlEscape(toolTipText) + \\\"'],Style[\\\"\\n88:             + this.style + \\\"]);\\\\\\\"\\\" + \\\" onMouseOut=\\\\\\\"return htm();\\\\\\\"\\\";\\n89:     }\\n90: \\n91: }\",\n    \"source/org/jfree/chart/imagemap/OverLIBToolTipTagFragmentGenerator.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it \\n10:  * under the terms of the GNU Lesser General Public License as published by \\n11:  * the Free Software Foundation; either version 2.1 of the License, or \\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but \\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n22:  * USA.  \\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * ---------------------------------------\\n28:  * OverLibToolTipTagFragmentGenerator.java\\n29:  * ---------------------------------------\\n30:  * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n31:  *\\n32:  * Original Author:  Richard Atkinson;\\n33:  * Contributors:     David Gilbert (for Object Refinery Limited);\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 12-Aug-2003 : Version 1 (RA);\\n38:  * 04-Dec-2007 : Escape tool tip text to fix bug 1400917 (DG);\\n39:  * \\n40:  */\\n41:  \\n42: package org.jfree.chart.imagemap;\\n43: \\n44: /**\\n45:  * Generates tooltips using the OverLIB library \\n46:  * (http://www.bosrup.com/web/overlib/).\\n47:  */\\n48: public class OverLIBToolTipTagFragmentGenerator \\n49:         implements ToolTipTagFragmentGenerator {\\n50: \\n51:     /**\\n52:      * Creates a new instance.\\n53:      */\\n54:     public OverLIBToolTipTagFragmentGenerator() {\\n55:         super();\\n56:     }\\n57: \\t\\n58:     /**\\n59:      * Generates a tooltip string to go in an HTML image map.\\n60:      *\\n61:      * @param toolTipText  the tooltip text.\\n62:      * \\n63:      * @return The formatted HTML area tag attribute(s).\\n64:      */\\n65:     public String generateToolTipFragment(String toolTipText) {\\n66:         return \\\" onMouseOver=\\\\\\\"return overlib('\\\" \\n67:                 + ImageMapUtilities.htmlEscape(toolTipText) \\n68:                 + \\\"');\\\\\\\" onMouseOut=\\\\\\\"return nd();\\\\\\\"\\\";\\n69:     }\\n70: \\n71: }\",\n    \"source/org/jfree/chart/imagemap/StandardURLTagFragmentGenerator.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it \\n10:  * under the terms of the GNU Lesser General Public License as published by \\n11:  * the Free Software Foundation; either version 2.1 of the License, or \\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but \\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n22:  * USA.  \\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * ------------------------------------\\n28:  * StandardURLTagFragmentGenerator.java\\n29:  * ------------------------------------\\n30:  * (C) Copyright 2003-2008, by Richard Atkinson and Contributors.\\n31:  *\\n32:  * Original Author:  Richard Atkinson;\\n33:  *\\n34:  * Changes\\n35:  * -------\\n36:  * 12-Aug-2003 : Version 1 (RA);\\n37:  * \\n38:  */\\n39:  \\n40: package org.jfree.chart.imagemap;\\n41: \\n42: /**\\n43:  * Generates URLs using the HTML href attribute for image map area tags.\\n44:  */\\n45: public class StandardURLTagFragmentGenerator \\n46:         implements URLTagFragmentGenerator {\\n47: \\n48:     /**\\n49:      * Creates a new instance.\\n50:      */\\n51:     public StandardURLTagFragmentGenerator() {\\n52:         super();\\n53:     }\\n54: \\t\\n55:     /**\\n56:      * Generates a URL string to go in an HTML image map.\\n57:      *\\n58:      * @param urlText  the URL text (fully escaped).\\n59:      * \\n60:      * @return The formatted text\\n61:      */\\n62:     public String generateURLFragment(String urlText) {\\n63:         // the URL text should already have been escaped by the URL generator\\n64:         return \\\" href=\\\\\\\"\\\" + urlText + \\\"\\\\\\\"\\\";\\n65:     }\\n66: \\n67: }\",\n    \"tests/org/jfree/chart/imagemap/junit/StandardToolTipTagFragmentGeneratorTests.java [read-only-test]\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it\\n10:  * under the terms of the GNU Lesser General Public License as published by\\n11:  * the Free Software Foundation; either version 2.1 of the License, or\\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but\\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n22:  * USA.\\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * ---------------------------------------------\\n28:  * StandardToolTipTagFragmentGeneratorTests.java\\n29:  * ---------------------------------------------\\n30:  * (C) Copyright 2007, 2008, by Object Refinery Limited and Contributors.\\n31:  *\\n32:  * Original Author:  David Gilbert (for Object Refinery Limited);\\n33:  * Contributor(s):   -;\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 05-Dec-2007 : Version 1 (DG);\\n38:  *\\n39:  */\\n40: \\n41: package org.jfree.chart.imagemap.junit;\\n42: \\n43: import junit.framework.Test;\\n44: import junit.framework.TestCase;\\n45: import junit.framework.TestSuite;\\n46: \\n47: import org.jfree.chart.imagemap.StandardToolTipTagFragmentGenerator;\\n48: \\n49: /**\\n50:  * Tests for the {@link StandardToolTipTagFragmentGeneratorTests} class.\\n51:  */\\n52: public class StandardToolTipTagFragmentGeneratorTests extends TestCase {\\n53: \\n54:     /**\\n55:      * Returns the tests as a test suite.\\n56:      *\\n57:      * @return The test suite.\\n58:      */\\n59:     public static Test suite() {\\n60:         return new TestSuite(StandardToolTipTagFragmentGeneratorTests.class);\\n61:     }\\n62: \\n63:     /**\\n64:      * Constructs a new set of tests.\\n65:      *\\n66:      * @param name  the name of the tests.\\n67:      */\\n68:     public StandardToolTipTagFragmentGeneratorTests(String name) {\\n69:         super(name);\\n70:     }\\n71: \\n72:     /**\\n73:      * Some checks for the generateURLFragment() method.\\n74:      */\\n75:     public void testGenerateURLFragment() {\\n76:         StandardToolTipTagFragmentGenerator g\\n77:                 = new StandardToolTipTagFragmentGenerator();\\n78:         assertEquals(\\\" title=\\\\\\\"abc\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\\n79:                 g.generateToolTipFragment(\\\"abc\\\"));\\n80:         assertEquals(\\\" title=\\\\\\\"Series &quot;A&quot;, 100.0\\\\\\\" alt=\\\\\\\"\\\\\\\"\\\",\\n81:                 g.generateToolTipFragment(\\\"Series \\\\\\\"A\\\\\\\", 100.0\\\"));\\n82:     }\\n83: \\n84: }\"\n  },\n  \"patch_grounding_instructions\": \"Use raw source_snippets for old/new text. If line-number comments are present, use them only to fill optional line_start/line_end; never include line-number prefixes in old/new. If a previous attempt says old text was not found, choose a smaller exact block from the current snippet and update line_start/line_end only when the numbered snippet shows those exact lines. Previous failed hunk text is diagnostic only; do not use it as old text unless current_diff or source_snippets contain it.\",\n  \"current_diff\": \"\",\n  \"memory_preferred_patch_styles\": [\n    \"boundary\",\n    \"API-contract\",\n    \"null-check\"\n  ],\n  \"memory_preferred_repair_skills\": [\n    \"single-hunk:API-contract\",\n    \"single-hunk:boundary\",\n    \"multi-hunk:boundary\",\n    \"single-hunk:null-check\"\n  ],\n  \"memory_preferred_test_skills\": [\n    \"regression-relevant-passed\"\n  ],\n  \"memory_regression_warnings\": [],\n  \"memory_successful_strategies\": [\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression\"\n  ],\n  \"previous_attempt_failures\": [],\n  \"relevant_failure_reflections\": [\n    \"visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged\",\n    \"llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request\",\n    \"visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged\",\n    \"llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request\",\n    \"compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)\"\n  ],\n  \"required_json_schema\": {\n    \"diagnosis\": \"short root-cause hypothesis\",\n    \"files_to_read\": [\n      \"optional additional source files\"\n    ],\n    \"patch_hunks\": [\n      {\n        \"file\": \"relative/source/File.java\",\n        \"old\": \"exact text without line-number prefixes\",\n        \"new\": \"replacement text without line-number prefixes\",\n        \"line_start\": \"optional 1-based source line for the old text\",\n        \"line_end\": \"optional inclusive 1-based source line for the old text\"\n      }\n    ],\n    \"tests_to_run_next\": [\n      \"Defects4J test names or scopes\"\n    ],\n    \"confidence\": 0.0,\n    \"final_explanation\": \"short patch explanation\",\n    \"patch_style\": \"one label such as guard, boundary, null-check, arithmetic, API-contract\"\n  }\n}"
+        }
+      ],
+      "memory_preferences": [
+        "boundary",
+        "API-contract",
+        "null-check"
+      ],
+      "repair_skills": [
+        "single-hunk:API-contract",
+        "single-hunk:boundary",
+        "multi-hunk:boundary",
+        "single-hunk:null-check"
+      ],
+      "test_skills": [
+        "regression-relevant-passed"
+      ],
+      "regression_warnings": [],
+      "success_strategies": [
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+      ],
+      "reflections": [
+        "visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged",
+        "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request",
+        "visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged",
+        "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request",
+        "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      ],
+      "response": {
+        "diagnosis": "StandardToolTipTagFragmentGenerator.generateToolTipFragment does not HTML-escape the tooltip text, so double-quote characters are not converted to &quot; entities, causing test failure.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+            "old": "    public String generateToolTipFragment(String toolTipText) {\n        return \" title=\\\"\" + toolTipText\n            + \"\\\" alt=\\\"\\\"\";\n    }",
+            "new": "    public String generateToolTipFragment(String toolTipText) {\n        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText)\n            + \"\\\" alt=\\\"\\\"\";\n    }",
+            "line_start": 64,
+            "line_end": 67
+          }
+        ],
+        "tests_to_run_next": [
+          "org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.",
+        "patch_style": "API-contract"
+      },
+      "repair_plan": {
+        "diagnosis": "StandardToolTipTagFragmentGenerator.generateToolTipFragment does not HTML-escape the tooltip text, so double-quote characters are not converted to &quot; entities, causing test failure.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java",
+            "old": "    public String generateToolTipFragment(String toolTipText) {\n        return \" title=\\\"\" + toolTipText\n            + \"\\\" alt=\\\"\\\"\";\n    }",
+            "new": "    public String generateToolTipFragment(String toolTipText) {\n        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText)\n            + \"\\\" alt=\\\"\\\"\";\n    }",
+            "line_start": 64,
+            "line_end": 67
+          }
+        ],
+        "tests_to_run_next": [
+          "org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.",
+        "patch_style": "API-contract"
+      },
+      "requested_files_for_next_attempt": [
+        "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java"
+      ],
+      "patch_apply": {
+        "ok": true,
+        "unsafe": false,
+        "changed_files": [
+          "source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java"
+        ],
+        "diff": "--- a/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n+++ b/source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java\n@@ -62,7 +62,7 @@\n      * @return The formatted HTML area tag attribute(s).\n      */\n     public String generateToolTipFragment(String toolTipText) {\n-        return \" title=\\\"\" + toolTipText\n+        return \" title=\\\"\" + ImageMapUtilities.htmlEscape(toolTipText)\n             + \"\\\" alt=\\\"\\\"\";\n     }\n ",
+        "errors": [],
+        "patch_size": 2
+      },
+      "patch_path": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/patches/self_evolved-Chart-10-attempt1.diff",
+      "compile": {
+        "command": [
+          "defects4j",
+          "compile"
+        ],
+        "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+        "returncode": 0,
+        "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+        "elapsed_seconds": 0.665,
+        "ok": true
+      },
+      "visible_tests": {
+        "scope": "trigger",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-t",
+              "org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.5564,
+            "ok": true
+          }
+        ]
+      },
+      "regression_tests": {
+        "scope": "relevant",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-r"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.5623,
+            "ok": true
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 4.4088,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 1\n  - org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\n\n\n[failing_tests]\n--- org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment\njunit.framework.ComparisonFailure: expected:< title=\"Series [&quot;A&quot;], 100.0\" alt=\"\"> but was:< title=\"Series [\"A\"], 100.0\" alt=\"\">\n\tat junit.framework.Assert.assertEquals(Assert.java:100)\n\tat junit.framework.Assert.assertEquals(Assert.java:107)\n\tat junit.framework.TestCase.assertEquals(TestCase.java:269)\n\tat org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests.testGenerateURLFragment(StandardToolTipTagFragmentGeneratorTests.java:80)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat junit.framework.TestCase.runTest(TestCase.java:176)\n\tat junit.framework.TestCase.runBare(TestCase.java:141)\n\tat junit.framework.TestResult$1.protect(TestResult.java:122)\n\tat junit.framework.TestResult.runProtected(TestResult.java:142)\n\tat junit.framework.TestResult.run(TestResult.java:125)\n\tat junit.framework.TestCase.run(TestCase.java:129)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\n\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\n\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\n\tat org.apache.tools.ant.Task.perform(Task.java:348)\n\tat org.apache.tools.ant.Target.execute(Target.java:392)\n\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\n\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\n\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\n\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\n\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\n\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\n\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\n\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\n\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\n",
+      "elapsed_seconds": 0.6185,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 0.665,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.imagemap.junit.StandardToolTipTagFragmentGeneratorTests::testGenerateURLFragment"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.5564,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-r"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-10",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.5623,
+      "ok": true
+    }
+  ],
+  "memory_before": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "class:numberutils": {
+        "fallback": 1.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "exception:error": {
+        "API-contract": 7.5,
+        "llm-error": -0.25,
+        "null-check": 1.5,
+        "boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 1.5
+      },
+      "project:Chart": {
+        "API-contract": 7.75,
+        "boundary": 7.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testlang747": {
+        "fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "boundary": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "boundary": 1.5
+      },
+      "class:timeperiodvalues": {
+        "boundary": 1.5
+      },
+      "trigger:weektests": {
+        "API-contract": 1.5
+      },
+      "trigger:testconstructor": {
+        "API-contract": 1.5
+      },
+      "class:week": {
+        "API-contract": 1.5
+      },
+      "trigger:testbug1864222": {
+        "boundary": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "boundary": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "API-contract": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "API-contract": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "API-contract": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 1.5
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "exception:error": {
+        "not-run": -0.25,
+        "relevant": 10.5
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 1.5
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 19.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:numberutilstest": {
+        "relevant": 1.5
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testlang747": {
+        "relevant": 1.5
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:timeseriestests": {
+        "relevant": 3.0
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 3.0
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "relevant": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "relevant": 1.5
+      },
+      "class:timeperiodvalues": {
+        "relevant": 1.5
+      },
+      "trigger:weektests": {
+        "relevant": 1.5
+      },
+      "trigger:testconstructor": {
+        "relevant": 1.5
+      },
+      "class:week": {
+        "relevant": 1.5
+      },
+      "trigger:testbug1864222": {
+        "relevant": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "relevant": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "relevant": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "relevant": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 1.5
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 7.5,
+        "single-hunk:null-check": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 1.5
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:null-check": 3.0,
+        "single-hunk:boundary": 4.5
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "single-hunk:boundary": 1.5
+      },
+      "class:timeperiodvalues": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:weektests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testconstructor": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:week": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testbug1864222": {
+        "single-hunk:boundary": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "single-hunk:API-contract": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "exception:error": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 10.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "project:Chart": {
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 19.5,
+        "trigger-first": -0.5,
+        "compile-before-tests": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeperiodvalues": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:weektests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testconstructor": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:week": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1864222": {
+        "regression-relevant-passed": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:timeperiodvaluestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:timeperiodvalues": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:weektests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testconstructor": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:week": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testbug1864222": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:illegalargumentexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "style:API-contract|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "failure_reason": "compile_failure",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:weektests,trigger:testconstructor,exception:error,class:week",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testbug1864222,exception:illegalargumentexception,class:timeseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:standardtooltiptagfragmentgeneratortests,trigger:testgenerateurlfragment,class:standardtooltiptagfragmentgenerator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java; approach=The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  },
+  "checkout_outputs": [
+    "Checking out 1065 to /workspace/artifacts/runs/d4j30-self-evolved-real-v16/ OK\nInit local repository...................................................... OK\nTag post-fix revision...................................................... OK\nApply patch................................................................ OK\nRun post-checkout hook..................................................... OK\nExcluding broken/flaky tests............................................... OK\nExcluding broken/flaky tests............................................... OK\nInitialize fixed program version........................................... OK\nApply patch................................................................ OK\nInitialize buggy program version........................................... OK\nDiff 1065:1064............................................................. OK\nApply patch................................................................ OK\nTag pre-fix revision....................................................... OK\nCheck out program version: Chart-10b....................................... OK\n"
+  ],
+  "metrics": {
+    "system": "self_evolved",
+    "case_id": "Chart-10",
+    "project": "Chart",
+    "bug_id": 10,
+    "status": "solved",
+    "pass_at_1": true,
+    "pass_at_3": true,
+    "visible_pass": true,
+    "regression_pass": true,
+    "compile_success": true,
+    "tool_calls": 2,
+    "test_runs": 3,
+    "patch_size": 2,
+    "unsafe_edit": false,
+    "wall_time_seconds": 34.0927,
+    "deepseek_calls": 1,
+    "prompt_tokens": 11095,
+    "completion_tokens": 1333,
+    "estimated_cost_usd": 0.0,
+    "infrastructure_failure": false,
+    "agent_failure": false
+  },
+  "memory_after": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "class:numberutils": {
+        "fallback": 1.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "exception:error": {
+        "API-contract": 7.5,
+        "llm-error": -0.25,
+        "null-check": 1.5,
+        "boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 1.5
+      },
+      "project:Chart": {
+        "API-contract": 7.75,
+        "boundary": 7.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testlang747": {
+        "fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "boundary": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "boundary": 1.5
+      },
+      "class:timeperiodvalues": {
+        "boundary": 1.5
+      },
+      "trigger:weektests": {
+        "API-contract": 1.5
+      },
+      "trigger:testconstructor": {
+        "API-contract": 1.5
+      },
+      "class:week": {
+        "API-contract": 1.5
+      },
+      "trigger:testbug1864222": {
+        "boundary": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "boundary": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "API-contract": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "API-contract": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "API-contract": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 1.5
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "exception:error": {
+        "not-run": -0.25,
+        "relevant": 10.5
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 1.5
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 19.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:numberutilstest": {
+        "relevant": 1.5
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testlang747": {
+        "relevant": 1.5
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:timeseriestests": {
+        "relevant": 3.0
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 3.0
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "relevant": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "relevant": 1.5
+      },
+      "class:timeperiodvalues": {
+        "relevant": 1.5
+      },
+      "trigger:weektests": {
+        "relevant": 1.5
+      },
+      "trigger:testconstructor": {
+        "relevant": 1.5
+      },
+      "class:week": {
+        "relevant": 1.5
+      },
+      "trigger:testbug1864222": {
+        "relevant": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "relevant": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "relevant": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "relevant": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 1.5
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 7.5,
+        "single-hunk:null-check": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 1.5
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:null-check": 3.0,
+        "single-hunk:boundary": 4.5
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "single-hunk:boundary": 1.5
+      },
+      "class:timeperiodvalues": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:weektests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testconstructor": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:week": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testbug1864222": {
+        "single-hunk:boundary": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "single-hunk:API-contract": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "exception:error": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 10.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "project:Chart": {
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 19.5,
+        "trigger-first": -0.5,
+        "compile-before-tests": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeperiodvalues": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:weektests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testconstructor": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:week": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1864222": {
+        "regression-relevant-passed": 1.5
+      },
+      "exception:illegalargumentexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgenerateurlfragment": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:timeperiodvaluestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:timeperiodvalues": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:weektests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testconstructor": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:week": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testbug1864222": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:illegalargumentexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "style:API-contract|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "failure_reason": "compile_failure",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:weektests,trigger:testconstructor,exception:error,class:week",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testbug1864222,exception:illegalargumentexception,class:timeseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:standardtooltiptagfragmentgeneratortests,trigger:testgenerateurlfragment,class:standardtooltiptagfragmentgenerator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java; approach=The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  }
+}

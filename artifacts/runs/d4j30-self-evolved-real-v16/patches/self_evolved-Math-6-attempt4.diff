@@ -1,0 +1,13 @@
+--- a/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
+@@ -47,8 +47,8 @@
+     protected BaseOptimizer(ConvergenceChecker<PAIR> checker) {
+         this.checker = checker;
+ 
+-        evaluations = new Incrementor(0, new MaxEvalCallback());
+-        iterations = new Incrementor(0, new MaxIterCallback());
++        evaluations = new Incrementor(Integer.MAX_VALUE, new MaxEvalCallback());
++        iterations = new Incrementor(Integer.MAX_VALUE, new MaxIterCallback());
+     }
+ 
+     /**

@@ -1,0 +1,13 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -145,6 +145,10 @@
+             collector.add(currentStrategy);
+         }
+         currentFormatField= null;
++        String remaining = pattern.substring(patternMatcher.regionStart(), patternMatcher.regionEnd());
++        if (remaining.length() > 0) {
++            escapeRegex(regex, remaining, true);
++        }
+         strategies= collector.toArray(new Strategy[collector.size()]);
+         parsePattern= Pattern.compile(regex.toString());
+     }

@@ -1,0 +1,19 @@
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -494,7 +494,15 @@
+                 dec = str.substring(decPos + 1);
+             }
+             mant = str.substring(0, decPos);
+-            numDecimals = dec.length(); // gets number of digits past the decimal to ensure no loss of precision for floating point numbers.
++            numDecimals = dec.length();
++            if (expPos > -1) {
++                try {
++                    int expVal = Integer.parseInt(str.substring(expPos + 1));
++                    numDecimals = Math.max(0, numDecimals - expVal);
++                } catch (NumberFormatException nfe) { // NOPMD
++                    // nothing to do
++                }
++            } // gets number of digits past the decimal to ensure no loss of precision for floating point numbers.
+         } else {
+             if (expPos > -1) {
+                 if (expPos > str.length()) { // prevents double exponent causing IOOBE

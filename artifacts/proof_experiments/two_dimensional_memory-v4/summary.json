@@ -1,0 +1,46 @@
+{
+  "feedback_only": {
+    "cases": 4,
+    "solved": 0,
+    "pass_rate": 0.0,
+    "check_correct_rate": 0.25,
+    "repair_correct_rate": 0.0,
+    "duplicate_risk_count": 4,
+    "regression_overfit_risk_count": 3,
+    "avg_tool_calls": 4.5,
+    "avg_test_runs": 1.0
+  },
+  "check_memory_only": {
+    "cases": 4,
+    "solved": 0,
+    "pass_rate": 0.0,
+    "check_correct_rate": 1.0,
+    "repair_correct_rate": 0.0,
+    "duplicate_risk_count": 4,
+    "regression_overfit_risk_count": 0,
+    "avg_tool_calls": 3.0,
+    "avg_test_runs": 1.75
+  },
+  "repair_memory_only": {
+    "cases": 4,
+    "solved": 1,
+    "pass_rate": 0.25,
+    "check_correct_rate": 0.25,
+    "repair_correct_rate": 1.0,
+    "duplicate_risk_count": 0,
+    "regression_overfit_risk_count": 3,
+    "avg_tool_calls": 4.5,
+    "avg_test_runs": 1.0
+  },
+  "two_dimensional_memory": {
+    "cases": 4,
+    "solved": 4,
+    "pass_rate": 1.0,
+    "check_correct_rate": 1.0,
+    "repair_correct_rate": 1.0,
+    "duplicate_risk_count": 0,
+    "regression_overfit_risk_count": 0,
+    "avg_tool_calls": 3.0,
+    "avg_test_runs": 1.75
+  }
+}

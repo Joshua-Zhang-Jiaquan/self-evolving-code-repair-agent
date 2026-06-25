@@ -1,0 +1,11 @@
+--- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -126,7 +126,7 @@
+                                 final int maxIterationCount) {
+         addEventHandler(handler, maxCheckInterval, convergence,
+                         maxIterationCount,
+-                        new BracketingNthOrderBrentSolver(convergence, 5));
++                        new BracketingNthOrderBrentSolver(Double.NaN, FastMath.abs(convergence), 5));
+     }
+ 
+     /** {@inheritDoc} */

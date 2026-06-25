@@ -1,0 +1,1621 @@
+{
+  "system": "self_evolved",
+  "case": {
+    "project": "Chart",
+    "bug_id": 6,
+    "case_id": "Chart-6"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "patch_attempt": 1,
+      "prompt": [
+        {
+          "role": "system",
+          "content": "You are a code repair agent for Defects4J Java bugs. Return only JSON. Do not edit tests, build files, generated files, secrets, or paths outside the checkout. Snippets marked [read-only-test] are visible tests for diagnosis only and must not be patched. Use exact old/new text replacements for source files only. The old field must be copied verbatim from source_snippets without inventing missing context. Prefer a short unique old block over a long uncertain block; do not use line 1 as a placeholder anchor. Prefer the smallest semantic source change that fixes the root cause. Do not delete existing validation, parsing, serialization, or boundary logic unless the failing evidence specifically shows it is wrong. If current_diff is empty, previous failed patches are not present in the workspace; never use failed patch text as old. Prioritize failing_summary and visible test assertions over long stack traces. Do not return empty patch_hunks; if you request files_to_read, still provide the best grounded patch from current snippets. Output the final JSON object immediately; do not spend tokens on hidden reasoning."
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"project\": \"Chart\",\n  \"bug_id\": 6,\n  \"attempt\": 1,\n  \"metadata\": {\n    \"dir.src.classes\": \"source\",\n    \"dir.src.tests\": \"tests\",\n    \"tests.trigger\": \"org.jfree.chart.util.junit.ShapeListTests::testSerialization\\norg.jfree.chart.util.junit.ShapeListTests::testEquals\",\n    \"tests.relevant\": \"org.jfree.chart.annotations.junit.XYBoxAnnotationTests\\norg.jfree.chart.axis.junit.LogAxisTests\\norg.jfree.chart.axis.junit.NumberAxisTests\\norg.jfree.chart.axis.junit.ValueAxisTests\\norg.jfree.chart.junit.AreaChartTests\\norg.jfree.chart.junit.BarChart3DTests\\norg.jfree.chart.junit.BarChartTests\\norg.jfree.chart.junit.GanttChartTests\\norg.jfree.chart.junit.JFreeChartTests\\norg.jfree.chart.junit.LineChart3DTests\\norg.jfree.chart.junit.LineChartTests\\norg.jfree.chart.junit.ScatterPlotTests\\norg.jfree.chart.junit.StackedAreaChartTests\\norg.jfree.chart.junit.StackedBarChart3DTests\\norg.jfree.chart.junit.StackedBarChartTests\\norg.jfree.chart.junit.TimeSeriesChartTests\\norg.jfree.chart.junit.WaterfallChartTests\\norg.jfree.chart.junit.XYAreaChartTests\\norg.jfree.chart.junit.XYBarChartTests\\norg.jfree.chart.junit.XYLineChartTests\\norg.jfree.chart.junit.XYStepAreaChartTests\\norg.jfree.chart.junit.XYStepChartTests\\norg.jfree.chart.plot.junit.CategoryPlotTests\\norg.jfree.chart.plot.junit.CombinedDomainCategoryPlotTests\\norg.jfree.chart.plot.junit.CombinedDomainXYPlotTests\\norg.jfree.chart.plot.junit.CombinedRangeCategoryPlotTests\\norg.jfree.chart.plot.junit.CombinedRangeXYPlotTests\\norg.jfree.chart.plot.junit.PolarPlotTests\\norg.jfree.chart.plot.junit.XYPlotTests\\norg.jfree.chart.renderer.category.junit.AbstractCategoryItemRendererTests\\norg.jfree.chart.renderer.category.junit.AreaRendererTests\\norg.jfree.chart.renderer.category.junit.BarRenderer3DTests\\norg.jfree.chart.renderer.category.junit.BarRendererTests\\norg.jfree.chart.renderer.category.junit.BoxAndWhiskerRendererTests\\norg.jfree.chart.renderer.category.junit.CategoryStepRendererTests\\norg.jfree.chart.renderer.category.junit.DefaultCategoryItemRendererTests\\norg.jfree.chart.renderer.category.junit.GanttRendererTests\\norg.jfree.chart.renderer.category.junit.GroupedStackedBarRendererTests\\norg.jfree.chart.renderer.category.junit.IntervalBarRendererTests\\norg.jfree.chart.renderer.category.junit.LayeredBarRendererTests\\norg.jfree.chart.renderer.category.junit.LevelRendererTests\\norg.jfree.chart.renderer.category.junit.LineAndShapeRendererTests\\norg.jfree.chart.renderer.category.junit.LineRenderer3DTests\\norg.jfree.chart.renderer.category.junit.MinMaxCategoryRendererTests\\norg.jfree.chart.renderer.category.junit.ScatterRendererTests\\norg.jfree.chart.renderer.category.junit.StackedAreaRendererTests\\norg.jfree.chart.renderer.category.junit.StackedBarRenderer3DTests\\norg.jfree.chart.renderer.category.junit.StackedBarRendererTests\\norg.jfree.chart.renderer.category.junit.StatisticalBarRendererTests\\norg.jfree.chart.renderer.category.junit.StatisticalLineAndShapeRendererTests\\norg.jfree.chart.renderer.category.junit.WaterfallBarRendererTests\\norg.jfree.chart.renderer.junit.AbstractRendererTests\\norg.jfree.chart.renderer.junit.DefaultPolarItemRendererTests\\norg.jfree.chart.renderer.xy.junit.AbstractXYItemRendererTests\\norg.jfree.chart.renderer.xy.junit.CandlestickRendererTests\\norg.jfree.chart.renderer.xy.junit.ClusteredXYBarRendererTests\\norg.jfree.chart.renderer.xy.junit.DeviationRendererTests\\norg.jfree.chart.renderer.xy.junit.HighLowRendererTests\\norg.jfree.chart.renderer.xy.junit.StackedXYAreaRenderer2Tests\\norg.jfree.chart.renderer.xy.junit.StackedXYAreaRendererTests\\norg.jfree.chart.renderer.xy.junit.StackedXYBarRendererTests\\norg.jfree.chart.renderer.xy.junit.StandardXYItemRendererTests\\norg.jfree.chart.renderer.xy.junit.VectorRendererTests\\norg.jfree.chart.renderer.xy.junit.WindItemRendererTests\\norg.jfree.chart.renderer.xy.junit.XYAreaRenderer2Tests\\norg.jfree.chart.renderer.xy.junit.XYAreaRendererTests\\norg.jfree.chart.renderer.xy.junit.XYBarRendererTests\\norg.jfree.chart.renderer.xy.junit.XYBlockRendererTests\\norg.jfree.chart.renderer.xy.junit.XYBoxAndWhiskerRendererTests\\norg.jfree.chart.renderer.xy.junit.XYBubbleRendererTests\\norg.jfree.chart.renderer.xy.junit.XYDifferenceRendererTests\\norg.jfree.chart.renderer.xy.junit.XYDotRendererTests\\norg.jfree.chart.renderer.xy.junit.XYErrorRendererTests\\norg.jfree.chart.renderer.xy.junit.XYLine3DRendererTests\\norg.jfree.chart.renderer.xy.junit.XYLineAndShapeRendererTests\\norg.jfree.chart.renderer.xy.junit.XYSplineRendererTests\\norg.jfree.chart.renderer.xy.junit.XYStepAreaRendererTests\\norg.jfree.chart.renderer.xy.junit.XYStepRendererTests\\norg.jfree.chart.renderer.xy.junit.YIntervalRendererTests\\norg.jfree.chart.util.junit.ShapeListTests\",\n    \"classes.modified\": \"org.jfree.chart.util.ShapeList\"\n  },\n  \"failing_summary\": \"--- org.jfree.chart.util.junit.ShapeListTests::testSerialization\\njunit.framework.AssertionFailedError: expected:<org.jfree.chart.util.ShapeList@f21ac92f> but was:<org.jfree.chart.util.ShapeList@d544e5a1>\\n--- org.jfree.chart.util.junit.ShapeListTests::testEquals\\njunit.framework.AssertionFailedError\",\n  \"failing_output\": \"chart.util.junit.ShapeListTests::testSerialization\\n\\n\\n[failing_tests]\\n--- org.jfree.chart.util.junit.ShapeListTests::testSerialization\\njunit.framework.AssertionFailedError: expected:<org.jfree.chart.util.ShapeList@f21ac92f> but was:<org.jfree.chart.util.ShapeList@d544e5a1>\\n\\tat junit.framework.Assert.fail(Assert.java:57)\\n\\tat junit.framework.Assert.failNotEquals(Assert.java:329)\\n\\tat junit.framework.Assert.assertEquals(Assert.java:78)\\n\\tat junit.framework.Assert.assertEquals(Assert.java:86)\\n\\tat junit.framework.TestCase.assertEquals(TestCase.java:253)\\n\\tat org.jfree.chart.util.junit.ShapeListTests.testSerialization(ShapeListTests.java:151)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat junit.framework.TestCase.runTest(TestCase.java:176)\\n\\tat junit.framework.TestCase.runBare(TestCase.java:141)\\n\\tat junit.framework.TestResult$1.protect(TestResult.java:122)\\n\\tat junit.framework.TestResult.runProtected(TestResult.java:142)\\n\\tat junit.framework.TestResult.run(TestResult.java:125)\\n\\tat junit.framework.TestCase.run(TestCase.java:129)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\\n\\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\\n\\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\\n\\tat org.apache.tools.ant.Task.perform(Task.java:348)\\n\\tat org.apache.tools.ant.Target.execute(Target.java:392)\\n\\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\\n\\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\\n\\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\\n\\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\\n\\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\\n\\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\\n\\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\\n\\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\\n\\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\\n\\nRunning ant (compile.tests)................................................ OK\\nRunning ant (run.dev.tests)................................................ OK\\nFailing tests: 1\\n  - org.jfree.chart.util.junit.ShapeListTests::testEquals\\n\\n\\n[failing_tests]\\n--- org.jfree.chart.util.junit.ShapeListTests::testEquals\\njunit.framework.AssertionFailedError\\n\\tat junit.framework.Assert.fail(Assert.java:55)\\n\\tat junit.framework.Assert.assertTrue(Assert.java:22)\\n\\tat junit.framework.Assert.assertTrue(Assert.java:31)\\n\\tat junit.framework.TestCase.assertTrue(TestCase.java:201)\\n\\tat org.jfree.chart.util.junit.ShapeListTests.testEquals(ShapeListTests.java:95)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat junit.framework.TestCase.runTest(TestCase.java:176)\\n\\tat junit.framework.TestCase.runBare(TestCase.java:141)\\n\\tat junit.framework.TestResult$1.protect(TestResult.java:122)\\n\\tat junit.framework.TestResult.runProtected(TestResult.java:142)\\n\\tat junit.framework.TestResult.run(TestResult.java:125)\\n\\tat junit.framework.TestCase.run(TestCase.java:129)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\\n\\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\\n\\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\\n\\tat org.apache.tools.ant.Task.perform(Task.java:348)\\n\\tat org.apache.tools.ant.Target.execute(Target.java:392)\\n\\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\\n\\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\\n\\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\\n\\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\\n\\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\\n\\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\\n\\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\\n\\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\\n\\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\\n\",\n  \"visible_test_assertions\": [\n    \"catch (Exception e) { | e.printStackTrace(); | } | assertEquals(l1, l2);\",\n    \"l2.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0)); | l2.setShape(2, null); | assertTrue(l1.equals(l2));\",\n    \"l2.setShape(2, null); | assertTrue(l1.equals(l2)); | assertTrue(l2.equals(l2));\"\n  ],\n  \"derived_repair_constraints\": [],\n  \"source_snippets\": {\n    \"source/org/jfree/chart/util/ShapeList.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it\\n * under the terms of the GNU Lesser General Public License as published by\\n * the Free Software Foundation; either version 2.1 of the License, or\\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but\\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n * USA.\\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n * in the United States and other countries.]\\n *\\n * --------------\\n * ShapeList.java\\n * --------------\\n * (C) Copyright 2003-2008, by Object Refinery Limited.\\n *\\n * Original Author:  David Gilbert (for Object Refinery Limited);\\n * Contributor(s):   -;\\n *\\n * Changes\\n * -------\\n * 13-Aug-2003 : Version 1 (DG);\\n * 21-Jun-2007 : Copied from JCommon (DG);\\n * 17-Jun-2008 : Fixed bug in equals() (DG);\\n *\\n */\\n\\npackage org.jfree.chart.util;\\n\\nimport java.awt.Shape;\\nimport java.io.IOException;\\nimport java.io.ObjectInputStream;\\nimport java.io.ObjectOutputStream;\\n\\n/**\\n * A table of {@link Shape} objects.\\n */\\npublic class ShapeList extends AbstractObjectList {\\n\\n    /**\\n     * Creates a new list.\\n     */\\n    public ShapeList() {\\n        super();\\n    }\\n\\n    /**\\n     * Returns a {@link Shape} object from the list.\\n     *\\n     * @param index the index (zero-based).\\n     *\\n     * @return The object.\\n     */\\n    public Shape getShape(int index) {\\n        return (Shape) get(index);\\n    }\\n\\n    /**\\n     * Sets the {@link Shape} for an item in the list.  The list is expanded \\n\\t * if necessary.\\n     *\\n     * @param index  the index (zero-based).\\n     * @param shape  the {@link Shape}.\\n     */\\n    public void setShape(int index, Shape shape) {\\n        set(index, shape);\\n    }\\n\\n    /**\\n     * Returns an independent copy of the list.\\n     *\\n     * @return A clone.\\n     *\\n     * @throws CloneNotSupportedException if an item in the list does not\\n     *         support cloning.\\n     */\\n    public Object clone() throws CloneNotSupportedException {\\n        return super.clone();\\n    }\\n\\n    /**\\n     * Tests the list for equality with another object (typically also a list).\\n     *\\n     * @param obj  the other object (<code>null</code> permitted).\\n     *\\n     * @return A boolean.\\n     */\\n    public boolean equals(Object obj) {\\n\\n        if (obj == this) {\\n            return true;\\n        }\\n        if (!(obj instanceof ShapeList)) {\\n            return false;\\n        }\\n        return super.equals(obj);\\n\\n    }\\n\\n    /**\\n     * Returns a hash code value for the object.\\n     *\\n     * @return the hashcode\\n     */\\n    public int hashCode() {\\n        return super.hashCode();\\n    }\\n\\n    /**\\n     * Provides serialization support.\\n     *\\n     * @param stream  the output stream.\\n     *\\n     * @throws IOException  if there is an I/O error.\\n     */\\n    private void writeObject(ObjectOutputStream stream) throws IOException {\\n\\n        stream.defaultWriteObject();\\n        int count = size();\\n        stream.writeInt(count);\\n        for (int i = 0; i < count; i++) {\\n            Shape shape = getShape(i);\\n            if (shape != null) {\\n                stream.writeInt(i);\\n                SerialUtilities.writeShape(shape, stream);\\n            }\\n            else {\\n                stream.writeInt(-1);\\n            }\\n        }\\n\\n    }\\n\\n    /**\\n     * Provides serialization support.\\n     *\\n     * @param stream  the input stream.\\n     *\\n     * @throws IOException  if there is an I/O error.\\n     * @throws ClassNotFoundException  if there is a classpath problem.\\n     */\\n    private void readObject(ObjectInputStream stream) throws IOException,\\n            ClassNotFoundException {\\n\\n        stream.defaultReadObject();\\n        int count = stream.readInt();\\n        for (int i = 0; i < count; i++) {\\n            int index = stream.readInt();\\n            if (index != -1) {\\n                setShape(index, SerialUtilities.readShape(stream));\\n            }\\n        }\\n\\n    }\\n\\n}\\n\\n\",\n    \"source/org/jfree/chart/util/AbstractObjectList.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it \\n * under the terms of the GNU Lesser General Public License as published by \\n * the Free Software Foundation; either version 2.1 of the License, or \\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but \\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n * USA.  \\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n * in the United States and other countries.]\\n * \\n * -----------------------\\n * AbstractObjectList.java\\n * -----------------------\\n * (C)opyright 2003-2007, by Object Refinery Limited and Contributors.\\n *\\n * Original Author:  David Gilbert (for Object Refinery Limited);\\n * Contributor(s):   Bill Kelemen; \\n *                   Nicolas Brodu;\\n *\\n * Changes\\n * -------\\n * 13-Aug-2003 : Version 1, based on ObjectList (DG);\\n * 24-Aug-2003 : Fixed size (BK);\\n * 15-Sep-2003 : Fix serialization for subclasses (ShapeList, PaintList) (NB);\\n * 20-Dec-2007 : Implement default hashCode() (DG);\\n *\\n */\\n\\npackage org.jfree.chart.util;\\n\\nimport java.io.IOException;\\nimport java.io.ObjectInputStream;\\nimport java.io.ObjectOutputStream;\\nimport java.io.Serializable;\\nimport java.util.Arrays;\\n\\n/**\\n * A list of objects that can grow as required.\\n */\\npublic class AbstractObjectList implements Cloneable, Serializable {\\n\\n    /** For serialization. */\\n    private static final long serialVersionUID = 7789833772597351595L;\\n    \\n    /** The default initial capacity of the list. */\\n    public static final int DEFAULT_INITIAL_CAPACITY = 8;\\n\\n    /** Storage for the objects. */\\n    private transient Object[] objects;\\n\\n    /** The current list size. */\\n    private int size = 0;\\n\\n    /** The default increment. */\\n    private int increment = DEFAULT_INITIAL_CAPACITY;\\n\\n    /**\\n     * Creates a new list with the default initial capacity.\\n     */\\n    protected AbstractObjectList() {\\n        this(DEFAULT_INITIAL_CAPACITY);\\n    }\\n\\n    /**\\n     * Creates a new list.\\n     *\\n     * @param initialCapacity  the initial capacity.\\n     */\\n    protected AbstractObjectList(int initialCapacity) {\\n        this (initialCapacity, initialCapacity);\\n    }\\n\\n    /**\\n     * Creates a new list.\\n     * \\n     * @param initialCapacity  the initial capacity.\\n     * @param increment  the increment.\\n     */\\n    protected AbstractObjectList(int initialCapacity, int increment) {\\n        this.objects = new Object[initialCapacity];\\n        this.increment = increment;\\n    }\\n\\n    /**\\n     * Returns the object at the specified index, if there is one, or \\n     * <code>null</code>.\\n     *\\n     * @param index  the object index.\\n     *\\n     * @return The object or <code>null</code>.\\n     */\\n    protected Object get(int index) {\\n        Object result = null;\\n        if (index >= 0 && index < this.size) {\\n            result = this.objects[index];\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * Sets an object reference (overwriting any existing object).\\n     *\\n     * @param index  the object index.\\n     * @param object  the object (<code>null</code> permitted).\\n     */\\n    protected void set(int index, Object object) {\\n        if (index < 0) {\\n            throw new IllegalArgumentException(\\\"Requires index >= 0.\\\");\\n        }\\n        if (index >= this.objects.length) {\\n            Object[] enlarged = new Object[index + this.increment];\\n            System.arraycopy(this.objects, 0, enlarged, 0, this.objects.length);\\n            this.objects = enlarged;\\n        }\\n        this.objects[index] = object;\\n        this.size = Math.max(this.size, index + 1);\\n    }\\n\\n    /**\\n     * Clears the list.\\n     */\\n    public void clear() {\\n        Arrays.fill(this.objects, null);\\n        this.size = 0;\\n    }\\n\\n    /**\\n     * Returns the size of the list.\\n     *\\n     * @return The size of the list.\\n     */\\n    public int size() {\\n        return this.size;\\n    }\\n\\n    /**\\n     * Returns the index of the specified object, or -1 if the object is not in\\n     * the list.\\n     *\\n     * @param object  the object.\\n     *\\n     * @return The index or -1.\\n     */\\n    protected int indexOf(Object object) {\\n        for (int index = 0; index < this.size; index++) {\\n            if (this.objects[index] == object) {\\n                return (index);\\n            }\\n        }\\n        return -1;\\n    }\\n\\n    /**\\n     * Tests this list for equality with another object.\\n     *\\n     * @param obj  the object to test.\\n     * \\n     * @return A boolean.\\n     */\\n    public boolean equals(Object obj) {\\n\\n        if (obj == null) {\\n            return false;\\n        }\\n\\n        if (obj == this) {\\n            return true;\\n        }\\n\\n        if (!(obj instanceof AbstractObjectList)) {\\n            return false;\\n        }\\n\\n        AbstractObjectList other = (AbstractObjectList) obj;\\n        int listSize = size();\\n        for (int i = 0; i < listSize; i++) {\\n           if (!ObjectUtilities.equal(get(i), other.get(i))) {\\n               return false;\\n           }\\n        }\\n        return true;\\n    }\\n\\n    /**\\n     * Returns a hash code value for the object.\\n     *\\n     * @return The hashcode.\\n     */\\n    public int hashCode() {\\n    \\tint result = 127;\\n    \\tint size = size();\\n    \\tresult = HashUtilities.hashCode(result, size());\\n        // for efficiency, we just use the first, last and middle items to\\n        // compute a hashCode...\\n        if (size > 0) {\\n            result = HashUtilities.hashCode(result, this.objects[0]);\\n            if (size > 1) {\\n                result = HashUtilities.hashCode(result, this.objects[size - 1]);\\n                if (size > 2) {\\n                    result = HashUtilities.hashCode(result, \\n                    \\t\\tthis.objects[size / 2]);\\n                }\\n            }\\n        }\\n        return result;\\n    }\\n\\n    /**\\n     * Clones the list of objects.  The objects in the list are not cloned, so \\n     * this is method makes a 'shallow' copy of the list.\\n     *\\n     * @return A clone.\\n     * \\n     * @throws CloneNotSupportedException if an item in the list does not \\n     *         support cloning.\\n     */\\n    public Object clone() throws CloneNotSupportedException {\\n\\n        AbstractObjectList clone = (AbstractObjectList) super.clone();\\n        if (this.objects != null) {\\n            clone.objects = new Object[this.objects.length];\\n            System.arraycopy(this.objects, 0, clone.objects, 0, \\n                    this.objects.length);\\n        }\\n        return clone;\\n\\n    }\\n\\n    /**\\n     * Provides serialization support.\\n     *\\n     * @param stream  the output stream.\\n     *\\n     * @throws IOException  if there is an I/O error.\\n     */\\n    private void writeObject(ObjectOutputStream stream) \\n            throws IOException {\\n\\n        stream.defaultWriteObject();\\n        int count = size();\\n        stream.writeInt(count);\\n        for (int i = 0; i < count; i++) {\\n            final Object object = get(i);\\n            if (object != null && object instanceof Serializable) {\\n                stream.writeInt(i);\\n                stream.writeObject(object);\\n            }\\n            else {\\n                stream.writeInt(-1);\\n            }\\n        }\\n\\n    }\\n    \\n    /**\\n     * Provides serialization support.\\n     *\\n     * @param stream  the input stream.\\n     *\\n     * @throws IOException  if there is an I/O error.\\n     * @throws ClassNotFoundException  if there is a classpath problem.\\n     */\\n    private void readObject(ObjectInputStream stream) \\n            throws IOException, ClassNotFoundException {\\n\\n        stream.defaultReadObject();\\n        this.objects = new Object[this.size];\\n        int count = stream.readInt();\\n        for (int i = 0; i < count; i++) {\\n            int index = stream.readInt();\\n            if (index != -1) {\\n                set(index, stream.readObject());\\n            }\\n        }\\n        \\n    }\\n  \\n}\\n\",\n    \"source/org/jfree/chart/util/ShapeUtilities.java\": \"// snippet window 11783:16783\\nnX - anchorPoint.getX(), locationY - anchorPoint.getY());\\n        return transform.createTransformedShape(shape);\\n    }\\n\\n    /**\\n     * Rotates a shape about the specified coordinates.\\n     *\\n     * @param base  the shape (<code>null</code> permitted, returns\\n     *              <code>null</code>).\\n     * @param angle  the angle (in radians).\\n     * @param x  the x coordinate for the rotation point (in Java2D space).\\n     * @param y  the y coordinate for the rotation point (in Java2D space).\\n     *\\n     * @return the rotated shape.\\n     */\\n    public static Shape rotateShape(Shape base, double angle,\\n                                    float x, float y) {\\n        if (base == null) {\\n            return null;\\n        }\\n        AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);\\n        Shape result = rotate.createTransformedShape(base);\\n        return result;\\n    }\\n\\n    /**\\n     * Draws a shape with the specified rotation about <code>(x, y)</code>.\\n     *\\n     * @param g2  the graphics device (<code>null</code> not permitted).\\n     * @param shape  the shape (<code>null</code> not permitted).\\n     * @param angle  the angle (in radians).\\n     * @param x  the x coordinate for the rotation point.\\n     * @param y  the y coordinate for the rotation point.\\n     */\\n    public static void drawRotatedShape(Graphics2D g2, Shape shape,\\n                                        double angle, float x, float y) {\\n\\n        AffineTransform saved = g2.getTransform();\\n        AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);\\n        g2.transform(rotate);\\n        g2.draw(shape);\\n        g2.setTransform(saved);\\n\\n    }\\n\\n    /** A useful constant used internally. */\\n    private static final float SQRT2 = (float) Math.pow(2.0, 0.5);\\n\\n    /**\\n     * Creates a diagonal cross shape.\\n     *\\n     * @param l  the length of each 'arm'.\\n     * @param t  the thickness.\\n     *\\n     * @return A diagonal cross shape.\\n     */\\n    public static Shape createDiagonalCross(float l, float t) {\\n        GeneralPath p0 = new GeneralPath();\\n        p0.moveTo(-l - t, -l + t);\\n        p0.lineTo(-l + t, -l - t);\\n        p0.lineTo(0.0f, -t * SQRT2);\\n        p0.lineTo(l - t, -l - t);\\n        p0.lineTo(l + t, -l + t);\\n        p0.lineTo(t * SQRT2, 0.0f);\\n        p0.lineTo(l + t, l - t);\\n        p0.lineTo(l - t, l + t);\\n        p0.lineTo(0.0f, t * SQRT2);\\n        p0.lineTo(-l + t, l + t);\\n        p0.lineTo(-l - t, l - t);\\n        p0.lineTo(-t * SQRT2, 0.0f);\\n        p0.closePath();\\n        return p0;\\n    }\\n\\n    /**\\n     * Creates a diagonal cross shape.\\n     *\\n     * @param l  the length of each 'arm'.\\n     * @param t  the thickness.\\n     *\\n     * @return A diagonal cross shape.\\n     */\\n    public static Shape createRegularCross(float l, float t) {\\n        GeneralPath p0 = new GeneralPath();\\n        p0.moveTo(-l, t);\\n        p0.lineTo(-t, t);\\n        p0.lineTo(-t, l);\\n        p0.lineTo(t, l);\\n        p0.lineTo(t, t);\\n        p0.lineTo(l, t);\\n        p0.lineTo(l, -t);\\n        p0.lineTo(t, -t);\\n        p0.lineTo(t, -l);\\n        p0.lineTo(-t, -l);\\n        p0.lineTo(-t, -t);\\n        p0.lineTo(-l, -t);\\n        p0.closePath();\\n        return p0;\\n    }\\n\\n    /**\\n     * Creates a diamond shape.\\n     *\\n     * @param s  the size factor (equal to half the height of the diamond).\\n     *\\n     * @return A diamond shape.\\n     */\\n    public static Shape createDiamond(float s) {\\n        GeneralPath p0 = new GeneralPath();\\n        p0.moveTo(0.0f, -s);\\n        p0.lineTo(s, 0.0f);\\n        p0.lineTo(0.0f, s);\\n        p0.lineTo(-s, 0.0f);\\n        p0.closePath();\\n        return p0;\\n    }\\n\\n    /**\\n     * Creates a triangle shape that points upwards.\\n     *\\n     * @param s  the size factor (equal to half the height of the triangle).\\n     *\\n     * @return A triangle shape.\\n     */\\n    public static Shape createUpTriangle(float s) {\\n        GeneralPath p0 = new GeneralPath();\\n        p0.moveTo(0.0f, -s);\\n        p0.lineTo(s, s);\\n        p0.lineTo(-s, s);\\n        p0.closePath();\\n        return p0;\\n    }\\n\\n    /**\\n     * Creates a triangle shape that points downwards.\\n     *\\n     * @param s  the size factor (equal to half the height of the triangle).\\n     *\\n     * @return A triangle shape.\\n     */\\n    public static Shape createDownTriangle(float s) {\\n        GeneralPath p0 = new GeneralPath();\\n        p0.moveTo(0.0f, s);\\n        p0.lineTo(s, -s);\\n        p0.lineTo(-s, -s);\\n        p0.closePath();\\n        return p0;\\n    }\\n\\n    /**\\n     * Creates a region surrounding a line segment by 'widening' the line\\n     * segment.  A typical use for this method is the creation of a\\n     * 'clickable' region for a line that is displayed on-screen.\\n     *\\n     * @param line  the line (<code>null</code> not permitted).\\n     * @param width  the width of the region.\\n     *\\n     * @return A region that surrounds the line.\\n     */\\n    public static Shape createLineRegion(Line2D line, float width) {\\n        GeneralPath result = new GeneralPath();\\n        float x1 = (float\\n\\n// snippet window 16783:17435\\n) line.getX1();\\n        float x2 = (float) line.getX2();\\n        float y1 = (float) line.getY1();\\n        float y2 = (float) line.getY2();\\n        if ((x2 - x1) != 0.0) {\\n            double theta = Math.atan((y2 - y1) / (x2 - x1));\\n            float dx = (float) Math.sin(theta) * width;\\n            float dy = (float) Math.cos(theta) * width;\\n            result.moveTo(x1 - dx, y1 + dy);\\n            result.lineTo(x1 + dx, y1 - dy);\\n            result.lineTo(x2 + dx, y2 - dy);\\n            result.lineTo(x2 - dx, y2 + dy);\\n            result.closePath();\\n        }\\n        else {\\n            // special case, vertical line\\n            result.moveTo(x1\\n\\n// snippet window 1540:4888\\neryUtilities.java to here (DG);\\n * 13-May-2004 : Added new shape creation methods (DG);\\n * 30-Sep-2004 : Added createLineRegion() method (DG);\\n *               Moved drawRotatedShape() method from RefineryUtilities class\\n *               to this class (DG);\\n * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);\\n * 26-Oct-2004 : Added a method to test the equality of two Line2D\\n *               instances (DG);\\n * 10-Nov-2004 : Added new translateShape() and equal(Ellipse2D, Ellipse2D)\\n *               methods (DG);\\n * 11-Nov-2004 : Renamed translateShape() --> createTranslatedShape() (DG);\\n * 07-Jan-2005 : Minor Javadoc fix (DG);\\n * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);\\n * 21-Jan-2005 : Modified return type of RectangleAnchor.coordinates()\\n *               method (DG);\\n * 22-Feb-2005 : Added equality tests for Arc2D and GeneralPath (DG);\\n * 16-Mar-2005 : Fixed bug where equal(Shape, Shape) fails for two Polygon\\n *               instances (DG);\\n * 20-Jun-2007 : Copied from JCommon (DG);\\n * 02-Jun-2008 : Fixed bug in equal(GeneralPath, GeneralPath) (DG);\\n *\\n */\\n\\npackage org.jfree.chart.util;\\n\\nimport java.awt.Graphics2D;\\nimport java.awt.Polygon;\\nimport java.awt.Shape;\\nimport java.awt.geom.AffineTransform;\\nimport java.awt.geom.Arc2D;\\nimport java.awt.geom.Ellipse2D;\\nimport java.awt.geom.GeneralPath;\\nimport java.awt.geom.Line2D;\\nimport java.awt.geom.PathIterator;\\nimport java.awt.geom.Point2D;\\nimport java.awt.geom.Rectangle2D;\\nimport java.util.Arrays;\\n\\n/**\\n * Utility methods for {@link Shape} objects.\\n */\\npublic class ShapeUtilities {\\n\\n    /**\\n     * Prevents instantiation.\\n     */\\n    private ShapeUtilities() {\\n    }\\n\\n    /**\\n     * Returns a clone of the specified shape, or <code>null</code>.  At the\\n     * current time, this method supports cloning for instances of\\n     * <code>Line2D</code>, <code>RectangularShape</code>, <code>Area</code>\\n     * and <code>GeneralPath</code>.\\n     * <p>\\n     * <code>RectangularShape</code> includes <code>Arc2D</code>,\\n     * <code>Ellipse2D</code>, <code>Rectangle2D</code>,\\n     * <code>RoundRectangle2D</code>.\\n     *\\n     * @param shape  the shape to clone (<code>null</code> permitted,\\n     *               returns <code>null</code>).\\n     *\\n     * @return A clone or <code>null</code>.\\n     */\\n    public static Shape clone(Shape shape) {\\n        if (shape instanceof Cloneable) {\\n            try {\\n                return (Shape) ObjectUtilities.clone(shape);\\n            }\\n            catch (CloneNotSupportedException cnse) {\\n            }\\n        }\\n        Shape result = null;\\n        return result;\\n    }\\n\\n    /**\\n     * Tests two shapes for equality.  If both shapes are <code>null</code>,\\n     * this method will return <code>true</code>.\\n     * <p>\\n     * In the current implementation, the following shapes are supported:\\n     * <code>Ellipse2D</code>, <code>Line2D</code> and <code>Rectangle2D</code>\\n     * (implicit).\\n     *\\n     * @param s1  the first shape (<code>null</code> permitted).\\n     * @param s2  the second shape (<code>null</code> permitted).\\n     *\\n     * @return A boolean.\\n     */\\n    public static boolean equal(Shape s1, Shape s2) {\\n        if (s1 instanceof Line2D && s2 instanceof Line2D) {\\n            return equal((Line2D) s1, (Line2D) s2);\\n        }\\n        else if (s1 instanceof Ellipse2D && s2 in\",\n    \"source/org/jfree/chart/util/ObjectList.java\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it \\n * under the terms of the GNU Lesser General Public License as published by \\n * the Free Software Foundation; either version 2.1 of the License, or \\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but \\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n * USA.  \\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n * in the United States and other countries.]\\n * \\n * ---------------\\n * ObjectList.java\\n * ---------------\\n * (C)opyright 2003-2007, by Object Refinery Limited and Contributors.\\n *\\n * Original Author:  David Gilbert (for Object Refinery Limited);\\n * Contributor(s):   -;\\n *\\n * Changes\\n * -------\\n * 17-Jul-2003 : Version 1 (DG);\\n * 13-Aug-2003 : Refactored to extend AbstractObjectList (DG);\\n * 21-Oct-2004 : removed duplicate interface declarations and empty methods.\\n * 22-Oct-2004 : Restored removed methods - see note in code (DG);\\n * 21-Jun-2007 : Copied from JCommon (DG);\\n * \\n */\\n \\npackage org.jfree.chart.util;\\n\\n\\n/**\\n * A list of objects that can grow as required.\\n * <p>\\n * When cloning, the objects in the list are NOT cloned, only the references. \\n */\\npublic class ObjectList extends AbstractObjectList {\\n    \\n    /**\\n     * Default constructor.\\n     */\\n    public ObjectList() {\\n    }\\n    \\n    /**\\n     * Creates a new list.\\n     * \\n     * @param initialCapacity  the initial capacity.\\n     */\\n    public ObjectList(int initialCapacity) {\\n        super(initialCapacity);\\n    }\\n    \\n    // NOTE:  the methods below look redundant, but their purpose is to provide\\n    // public access to the the get(), set() and indexOf() methods defined in \\n    // the AbstractObjectList class, for this class only.  For other classes \\n    // (e.g. PaintList, ShapeList etc) we don't want the Object versions of \\n    // these methods to be visible in the public API.\\n    \\n    /**          \\n     * Returns the object at the specified index, if there is one, or \\n     * <code>null</code>.         \\n     *   \\n     * @param index  the object index.   \\n     *   \\n     * @return The object or <code>null</code>.          \\n     */          \\n    public Object get(int index) {         \\n        return super.get(index);         \\n    }    \\n         \\n    /**          \\n     * Sets an object reference (overwriting any existing object).       \\n     *   \\n     * @param index  the object index.   \\n     * @param object  the object (<code>null</code> permitted).          \\n     */          \\n    public void set(int index, Object object) {      \\n        super.set(index, object);        \\n    }    \\n         \\n    /**          \\n     * Returns the index of the specified object, or -1 if the object is not \\n     * in the list.        \\n     *   \\n     * @param object  the object.        \\n     *   \\n     * @return The index or -1.          \\n     */          \\n    public int indexOf(Object object) {    \\n        return super.indexOf(object);    \\n    }    \\n         \\n}\\n\",\n    \"tests/org/jfree/chart/util/junit/ShapeListTests.java [read-only-test]\": \"/* ===========================================================\\n * JFreeChart : a free chart library for the Java(tm) platform\\n * ===========================================================\\n *\\n * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n *\\n * Project Info:  http://www.jfree.org/jfreechart/index.html\\n *\\n * This library is free software; you can redistribute it and/or modify it\\n * under the terms of the GNU Lesser General Public License as published by\\n * the Free Software Foundation; either version 2.1 of the License, or\\n * (at your option) any later version.\\n *\\n * This library is distributed in the hope that it will be useful, but\\n * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n * License for more details.\\n *\\n * You should have received a copy of the GNU Lesser General Public\\n * License along with this library; if not, write to the Free Software\\n * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n * USA.\\n *\\n * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n * in the United States and other countries.]\\n *\\n * -------------------\\n * ShapeListTests.java\\n * -------------------\\n * (C) Copyright 2008, by Object Refinery Limited and Contributors.\\n *\\n * Original Author:  David Gilbert (for Object Refinery Limited);\\n * Contributor(s):   -;\\n *\\n * Changes\\n * -------\\n * 17-Jun-2008 : Version 1, copied over from JCommon (DG);\\n *\\n */\\n\\npackage org.jfree.chart.util.junit;\\n\\nimport java.awt.Rectangle;\\nimport java.awt.geom.Line2D;\\nimport java.io.ByteArrayInputStream;\\nimport java.io.ByteArrayOutputStream;\\nimport java.io.ObjectInput;\\nimport java.io.ObjectInputStream;\\nimport java.io.ObjectOutput;\\nimport java.io.ObjectOutputStream;\\n\\nimport junit.framework.Test;\\nimport junit.framework.TestCase;\\nimport junit.framework.TestSuite;\\n\\nimport org.jfree.chart.util.ShapeList;\\n\\n/**\\n * Some tests for the {@link ShapeList} class.\\n */\\npublic class ShapeListTests extends TestCase {\\n\\n    /**\\n     * Returns the tests as a test suite.\\n     *\\n     * @return The test suite.\\n     */\\n    public static Test suite() {\\n        return new TestSuite(ShapeListTests.class);\\n    }\\n\\n    /**\\n     * Constructs a new set of tests.\\n     *\\n     * @param name  the name of the tests.\\n     */\\n    public ShapeListTests(final String name) {\\n        super(name);\\n    }\\n\\n    /**\\n     * Tests the equals() method.\\n     */\\n    public void testEquals() {\\n        ShapeList l1 = new ShapeList();\\n        l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n        l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n        l1.setShape(2, null);\\n\\n        ShapeList l2 = new ShapeList();\\n        l2.setShape(0, new Rectangle(1, 2, 3, 4));\\n        l2.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n        l2.setShape(2, null);\\n\\n        assertTrue(l1.equals(l2));\\n        assertTrue(l2.equals(l2));\\n    }\\n\\n    /**\\n     * Confirm that cloning works.\\n     */\\n    public void testCloning() {\\n\\n        ShapeList l1 = new ShapeList();\\n        l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n        l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n        l1.setShape(2, null);\\n\\n        ShapeList l2 = null;\\n        try {\\n            l2 = (ShapeList) l1.clone();\\n        }\\n        catch (CloneNotSupportedException e) {\\n            e.printStackTrace();\\n        }\\n        assertTrue(l1 != l2);\\n        assertTrue(l1.getClass() == l2.getClass());\\n        assertTrue(l1.equals(l2));\\n\\n        l2.setShape(0, new Rectangle(5, 6, 7, 8));\\n        assertFalse(l1.equals(l2));\\n\\n    }\\n\\n    /**\\n     * Serialize an instance, restore it, and check for equality.\\n     */\\n    public void testSerialization() {\\n\\n        ShapeList l1 = new ShapeList();\\n        l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n        l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n        l1.setShape(2, null);\\n\\n        ShapeList l2 = null;\\n\\n        try {\\n            ByteArrayOutputStream buffer = new ByteArrayOutputStream();\\n            ObjectOutput out = new ObjectOutputStream(buffer);\\n            out.writeObject(l1);\\n            out.close();\\n\\n            ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(\\n            \\t\\tbuffer.toByteArray()));\\n            l2 = (ShapeList) in.readObject();\\n            in.close();\\n        }\\n        catch (Exception e) {\\n            e.printStackTrace();\\n        }\\n        assertEquals(l1, l2);\\n\\n    }\\n\\n}\\n\"\n  },\n  \"source_snippet_line_numbers\": {\n    \"source/org/jfree/chart/util/ShapeList.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it\\n10:  * under the terms of the GNU Lesser General Public License as published by\\n11:  * the Free Software Foundation; either version 2.1 of the License, or\\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but\\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n22:  * USA.\\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * --------------\\n28:  * ShapeList.java\\n29:  * --------------\\n30:  * (C) Copyright 2003-2008, by Object Refinery Limited.\\n31:  *\\n32:  * Original Author:  David Gilbert (for Object Refinery Limited);\\n33:  * Contributor(s):   -;\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 13-Aug-2003 : Version 1 (DG);\\n38:  * 21-Jun-2007 : Copied from JCommon (DG);\\n39:  * 17-Jun-2008 : Fixed bug in equals() (DG);\\n40:  *\\n41:  */\\n42: \\n43: package org.jfree.chart.util;\\n44: \\n45: import java.awt.Shape;\\n46: import java.io.IOException;\\n47: import java.io.ObjectInputStream;\\n48: import java.io.ObjectOutputStream;\\n49: \\n50: /**\\n51:  * A table of {@link Shape} objects.\\n52:  */\\n53: public class ShapeList extends AbstractObjectList {\\n54: \\n55:     /**\\n56:      * Creates a new list.\\n57:      */\\n58:     public ShapeList() {\\n59:         super();\\n60:     }\\n61: \\n62:     /**\\n63:      * Returns a {@link Shape} object from the list.\\n64:      *\\n65:      * @param index the index (zero-based).\\n66:      *\\n67:      * @return The object.\\n68:      */\\n69:     public Shape getShape(int index) {\\n70:         return (Shape) get(index);\\n71:     }\\n72: \\n73:     /**\\n74:      * Sets the {@link Shape} for an item in the list.  The list is expanded \\n75: \\t * if necessary.\\n76:      *\\n77:      * @param index  the index (zero-based).\\n78:      * @param shape  the {@link Shape}.\\n79:      */\\n80:     public void setShape(int index, Shape shape) {\\n81:         set(index, shape);\\n82:     }\\n83: \\n84:     /**\\n85:      * Returns an independent copy of the list.\\n86:      *\\n87:      * @return A clone.\\n88:      *\\n89:      * @throws CloneNotSupportedException if an item in the list does not\\n90:      *         support cloning.\\n91:      */\\n92:     public Object clone() throws CloneNotSupportedException {\\n93:         return super.clone();\\n94:     }\\n95: \\n96:     /**\\n97:      * Tests the list for equality with another object (typically also a list).\\n98:      *\\n99:      * @param obj  the other object (<code>null</code> permitted).\\n100:      *\\n101:      * @return A boolean.\\n102:      */\\n103:     public boolean equals(Object obj) {\\n104: \\n105:         if (obj == this) {\\n106:             return true;\\n107:         }\\n108:         if (!(obj instanceof ShapeList)) {\\n109:             return false;\\n110:         }\\n111:         return super.equals(obj);\\n112: \\n113:     }\\n114: \\n115:     /**\\n116:      * Returns a hash code value for the object.\\n117:      *\\n118:      * @return the hashcode\\n119:      */\\n120:     public int hashCode() {\\n121:         return super.hashCode();\\n122:     }\\n123: \\n124:     /**\\n125:      * Provides serialization support.\\n126:      *\\n127:      * @param stream  the output stream.\\n128:      *\\n129:      * @throws IOException  if there is an I/O error.\\n130:      */\\n131:     private void writeObject(ObjectOutputStream stream) throws IOException {\\n132: \\n133:         stream.defaultWriteObject();\\n134:         int count = size();\\n135:         stream.writeInt(count);\\n136:         for (int i = 0; i < count; i++) {\\n137:             Shape shape = getShape(i);\\n138:             if (shape != null) {\\n139:                 stream.writeInt(i);\\n140:                 SerialUtilities.writeShape(shape, stream);\\n141:             }\\n142:             else {\\n143:                 stream.writeInt(-1);\\n144:             }\\n145:         }\\n146: \\n147:     }\\n148: \\n149:     /**\\n150:      * Provides serialization support.\\n151:      *\\n152:      * @param stream  the input stream.\\n153:      *\\n154:      * @throws IOException  if there is an I/O error.\\n155:      * @throws ClassNotFoundException  if there is a classpath problem.\\n156:      */\\n157:     private void readObject(ObjectInputStream stream) throws IOException,\\n158:             ClassNotFoundException {\\n159: \\n160:         stream.defaultReadObject();\\n161:         int count = stream.readInt();\\n162:         for (int i = 0; i < count; i++) {\\n163:             int index = stream.readInt();\\n164:             if (index != -1) {\\n165:                 setShape(index, SerialUtilities.readShape(stream));\\n166:             }\\n167:         }\\n168: \\n169:     }\\n170: \\n171: }\\n172:\",\n    \"source/org/jfree/chart/util/AbstractObjectList.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it \\n10:  * under the terms of the GNU Lesser General Public License as published by \\n11:  * the Free Software Foundation; either version 2.1 of the License, or \\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but \\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n22:  * USA.  \\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n25:  * in the United States and other countries.]\\n26:  * \\n27:  * -----------------------\\n28:  * AbstractObjectList.java\\n29:  * -----------------------\\n30:  * (C)opyright 2003-2007, by Object Refinery Limited and Contributors.\\n31:  *\\n32:  * Original Author:  David Gilbert (for Object Refinery Limited);\\n33:  * Contributor(s):   Bill Kelemen; \\n34:  *                   Nicolas Brodu;\\n35:  *\\n36:  * Changes\\n37:  * -------\\n38:  * 13-Aug-2003 : Version 1, based on ObjectList (DG);\\n39:  * 24-Aug-2003 : Fixed size (BK);\\n40:  * 15-Sep-2003 : Fix serialization for subclasses (ShapeList, PaintList) (NB);\\n41:  * 20-Dec-2007 : Implement default hashCode() (DG);\\n42:  *\\n43:  */\\n44: \\n45: package org.jfree.chart.util;\\n46: \\n47: import java.io.IOException;\\n48: import java.io.ObjectInputStream;\\n49: import java.io.ObjectOutputStream;\\n50: import java.io.Serializable;\\n51: import java.util.Arrays;\\n52: \\n53: /**\\n54:  * A list of objects that can grow as required.\\n55:  */\\n56: public class AbstractObjectList implements Cloneable, Serializable {\\n57: \\n58:     /** For serialization. */\\n59:     private static final long serialVersionUID = 7789833772597351595L;\\n60:     \\n61:     /** The default initial capacity of the list. */\\n62:     public static final int DEFAULT_INITIAL_CAPACITY = 8;\\n63: \\n64:     /** Storage for the objects. */\\n65:     private transient Object[] objects;\\n66: \\n67:     /** The current list size. */\\n68:     private int size = 0;\\n69: \\n70:     /** The default increment. */\\n71:     private int increment = DEFAULT_INITIAL_CAPACITY;\\n72: \\n73:     /**\\n74:      * Creates a new list with the default initial capacity.\\n75:      */\\n76:     protected AbstractObjectList() {\\n77:         this(DEFAULT_INITIAL_CAPACITY);\\n78:     }\\n79: \\n80:     /**\\n81:      * Creates a new list.\\n82:      *\\n83:      * @param initialCapacity  the initial capacity.\\n84:      */\\n85:     protected AbstractObjectList(int initialCapacity) {\\n86:         this (initialCapacity, initialCapacity);\\n87:     }\\n88: \\n89:     /**\\n90:      * Creates a new list.\\n91:      * \\n92:      * @param initialCapacity  the initial capacity.\\n93:      * @param increment  the increment.\\n94:      */\\n95:     protected AbstractObjectList(int initialCapacity, int increment) {\\n96:         this.objects = new Object[initialCapacity];\\n97:         this.increment = increment;\\n98:     }\\n99: \\n100:     /**\\n101:      * Returns the object at the specified index, if there is one, or \\n102:      * <code>null</code>.\\n103:      *\\n104:      * @param index  the object index.\\n105:      *\\n106:      * @return The object or <code>null</code>.\\n107:      */\\n108:     protected Object get(int index) {\\n109:         Object result = null;\\n110:         if (index >= 0 && index < this.size) {\\n111:             result = this.objects[index];\\n112:         }\\n113:         return result;\\n114:     }\\n115: \\n116:     /**\\n117:      * Sets an object reference (overwriting any existing object).\\n118:      *\\n119:      * @param index  the object index.\\n120:      * @param object  the object (<code>null</code> permitted).\\n121:      */\\n122:     protected void set(int index, Object object) {\\n123:         if (index < 0) {\\n124:             throw new IllegalArgumentException(\\\"Requires index >= 0.\\\");\\n125:         }\\n126:         if (index >= this.objects.length) {\\n127:             Object[] enlarged = new Object[index + this.increment];\\n128:             System.arraycopy(this.objects, 0, enlarged, 0, this.objects.length);\\n129:             this.objects = enlarged;\\n130:         }\\n131:         this.objects[index] = object;\\n132:         this.size = Math.max(this.size, index + 1);\\n133:     }\\n134: \\n135:     /**\\n136:      * Clears the list.\\n137:      */\\n138:     public void clear() {\\n139:         Arrays.fill(this.objects, null);\\n140:         this.size = 0;\\n141:     }\\n142: \\n143:     /**\\n144:      * Returns the size of the list.\\n145:      *\\n146:      * @return The size of the list.\\n147:      */\\n148:     public int size() {\\n149:         return this.size;\\n150:     }\\n151: \\n152:     /**\\n153:      * Returns the index of the specified object, or -1 if the object is not in\\n154:      * the list.\\n155:      *\\n156:      * @param object  the object.\\n157:      *\\n158:      * @return The index or -1.\\n159:      */\\n160:     protected int indexOf(Object object) {\\n161:         for (int index = 0; index < this.size; index++) {\\n162:             if (this.objects[index] == object) {\\n163:                 return (index);\\n164:             }\\n165:         }\\n166:         return -1;\\n167:     }\\n168: \\n169:     /**\\n170:      * Tests this list for equality with another object.\\n171:      *\\n172:      * @param obj  the object to test.\\n173:      * \\n174:      * @return A boolean.\\n175:      */\\n176:     public boolean equals(Object obj) {\\n177: \\n178:         if (obj == null) {\\n179:             return false;\\n180:         }\\n181: \\n182:         if (obj == this) {\\n183:             return true;\\n184:         }\\n185: \\n186:         if (!(obj instanceof AbstractObjectList)) {\\n187:             return false;\\n188:         }\\n189: \\n190:         AbstractObjectList other = (AbstractObjectList) obj;\\n191:         int listSize = size();\\n192:         for (int i = 0; i < listSize; i++) {\\n193:            if (!ObjectUtilities.equal(get(i), other.get(i))) {\\n194:                return false;\\n195:            }\\n196:         }\\n197:         return true;\\n198:     }\\n199: \\n200:     /**\\n201:      * Returns a hash code value for the object.\\n202:      *\\n203:      * @return The hashcode.\\n204:      */\\n205:     public int hashCode() {\\n206:     \\tint result = 127;\\n207:     \\tint size = size();\\n208:     \\tresult = HashUtilities.hashCode(result, size());\\n209:         // for efficiency, we just use the first, last and middle items to\\n210:         // compute a hashCode...\\n211:         if (size > 0) {\\n212:             result = HashUtilities.hashCode(result, this.objects[0]);\\n213:             if (size > 1) {\\n214:                 result = HashUtilities.hashCode(result, this.objects[size - 1]);\\n215:                 if (size > 2) {\\n216:                     result = HashUtilities.hashCode(result, \\n217:                     \\t\\tthis.objects[size / 2]);\\n218:                 }\\n219:             }\\n220:         }\\n221:         return result;\\n222:     }\\n223: \\n224:     /**\\n225:      * Clones the list of objects.  The objects in the list are not cloned, so \\n226:      * this is method makes a 'shallow' copy of the list.\\n227:      *\\n228:      * @return A clone.\\n229:      * \\n230:      * @throws CloneNotSupportedException if an item in the list does not \\n231:      *         support cloning.\\n232:      */\\n233:     public Object clone() throws CloneNotSupportedException {\\n234: \\n235:         AbstractObjectList clone = (AbstractObjectList) super.clone();\\n236:         if (this.objects != null) {\\n237:             clone.objects = new Object[this.objects.length];\\n238:             System.arraycopy(this.objects, 0, clone.objects, 0, \\n239:                     this.objects.length);\\n240:         }\\n241:         return clone;\\n242: \\n243:     }\\n244: \\n245:     /**\\n246:      * Provides serialization support.\\n247:      *\\n248:      * @param stream  the output stream.\\n249:      *\\n250:      * @throws IOException  if there is an I/O error.\\n251:      */\\n252:     private void writeObject(ObjectOutputStream stream) \\n253:             throws IOException {\\n254: \\n255:         stream.defaultWriteObject();\\n256:         int count = size();\\n257:         stream.writeInt(count);\\n258:         for (int i = 0; i < count; i++) {\\n259:             final Object object = get(i);\\n260:             if (object != null && object instanceof Serializable) {\\n261:                 stream.writeInt(i);\\n262:                 stream.writeObject(object);\\n263:             }\\n264:             else {\",\n    \"source/org/jfree/chart/util/ShapeUtilities.java\": \"343:                 locationX - anchorPoint.getX(), locationY - anchorPoint.getY());\\n344:         return transform.createTransformedShape(shape);\\n345:     }\\n346: \\n347:     /**\\n348:      * Rotates a shape about the specified coordinates.\\n349:      *\\n350:      * @param base  the shape (<code>null</code> permitted, returns\\n351:      *              <code>null</code>).\\n352:      * @param angle  the angle (in radians).\\n353:      * @param x  the x coordinate for the rotation point (in Java2D space).\\n354:      * @param y  the y coordinate for the rotation point (in Java2D space).\\n355:      *\\n356:      * @return the rotated shape.\\n357:      */\\n358:     public static Shape rotateShape(Shape base, double angle,\\n359:                                     float x, float y) {\\n360:         if (base == null) {\\n361:             return null;\\n362:         }\\n363:         AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);\\n364:         Shape result = rotate.createTransformedShape(base);\\n365:         return result;\\n366:     }\\n367: \\n368:     /**\\n369:      * Draws a shape with the specified rotation about <code>(x, y)</code>.\\n370:      *\\n371:      * @param g2  the graphics device (<code>null</code> not permitted).\\n372:      * @param shape  the shape (<code>null</code> not permitted).\\n373:      * @param angle  the angle (in radians).\\n374:      * @param x  the x coordinate for the rotation point.\\n375:      * @param y  the y coordinate for the rotation point.\\n376:      */\\n377:     public static void drawRotatedShape(Graphics2D g2, Shape shape,\\n378:                                         double angle, float x, float y) {\\n379: \\n380:         AffineTransform saved = g2.getTransform();\\n381:         AffineTransform rotate = AffineTransform.getRotateInstance(angle, x, y);\\n382:         g2.transform(rotate);\\n383:         g2.draw(shape);\\n384:         g2.setTransform(saved);\\n385: \\n386:     }\\n387: \\n388:     /** A useful constant used internally. */\\n389:     private static final float SQRT2 = (float) Math.pow(2.0, 0.5);\\n390: \\n391:     /**\\n392:      * Creates a diagonal cross shape.\\n393:      *\\n394:      * @param l  the length of each 'arm'.\\n395:      * @param t  the thickness.\\n396:      *\\n397:      * @return A diagonal cross shape.\\n398:      */\\n399:     public static Shape createDiagonalCross(float l, float t) {\\n400:         GeneralPath p0 = new GeneralPath();\\n401:         p0.moveTo(-l - t, -l + t);\\n402:         p0.lineTo(-l + t, -l - t);\\n403:         p0.lineTo(0.0f, -t * SQRT2);\\n404:         p0.lineTo(l - t, -l - t);\\n405:         p0.lineTo(l + t, -l + t);\\n406:         p0.lineTo(t * SQRT2, 0.0f);\\n407:         p0.lineTo(l + t, l - t);\\n408:         p0.lineTo(l - t, l + t);\\n409:         p0.lineTo(0.0f, t * SQRT2);\\n410:         p0.lineTo(-l + t, l + t);\\n411:         p0.lineTo(-l - t, l - t);\\n412:         p0.lineTo(-t * SQRT2, 0.0f);\\n413:         p0.closePath();\\n414:         return p0;\\n415:     }\\n416: \\n417:     /**\\n418:      * Creates a diagonal cross shape.\\n419:      *\\n420:      * @param l  the length of each 'arm'.\\n421:      * @param t  the thickness.\\n422:      *\\n423:      * @return A diagonal cross shape.\\n424:      */\\n425:     public static Shape createRegularCross(float l, float t) {\\n426:         GeneralPath p0 = new GeneralPath();\\n427:         p0.moveTo(-l, t);\\n428:         p0.lineTo(-t, t);\\n429:         p0.lineTo(-t, l);\\n430:         p0.lineTo(t, l);\\n431:         p0.lineTo(t, t);\\n432:         p0.lineTo(l, t);\\n433:         p0.lineTo(l, -t);\\n434:         p0.lineTo(t, -t);\\n435:         p0.lineTo(t, -l);\\n436:         p0.lineTo(-t, -l);\\n437:         p0.lineTo(-t, -t);\\n438:         p0.lineTo(-l, -t);\\n439:         p0.closePath();\\n440:         return p0;\\n441:     }\\n442: \\n443:     /**\\n444:      * Creates a diamond shape.\\n445:      *\\n446:      * @param s  the size factor (equal to half the height of the diamond).\\n447:      *\\n448:      * @return A diamond shape.\\n449:      */\\n450:     public static Shape createDiamond(float s) {\\n451:         GeneralPath p0 = new GeneralPath();\\n452:         p0.moveTo(0.0f, -s);\\n453:         p0.lineTo(s, 0.0f);\\n454:         p0.lineTo(0.0f, s);\\n455:         p0.lineTo(-s, 0.0f);\\n456:         p0.closePath();\\n457:         return p0;\\n458:     }\\n459: \\n460:     /**\\n461:      * Creates a triangle shape that points upwards.\\n462:      *\\n463:      * @param s  the size factor (equal to half the height of the triangle).\\n464:      *\\n465:      * @return A triangle shape.\\n466:      */\\n467:     public static Shape createUpTriangle(float s) {\\n468:         GeneralPath p0 = new GeneralPath();\\n469:         p0.moveTo(0.0f, -s);\\n470:         p0.lineTo(s, s);\\n471:         p0.lineTo(-s, s);\\n472:         p0.closePath();\\n473:         return p0;\\n474:     }\\n475: \\n476:     /**\\n477:      * Creates a triangle shape that points downwards.\\n478:      *\\n479:      * @param s  the size factor (equal to half the height of the triangle).\\n480:      *\\n481:      * @return A triangle shape.\\n482:      */\\n483:     public static Shape createDownTriangle(float s) {\\n484:         GeneralPath p0 = new GeneralPath();\\n485:         p0.moveTo(0.0f, s);\\n486:         p0.lineTo(s, -s);\\n487:         p0.lineTo(-s, -s);\\n488:         p0.closePath();\\n489:         return p0;\\n490:     }\\n491: \\n492:     /**\\n493:      * Creates a region surrounding a line segment by 'widening' the line\\n494:      * segment.  A typical use for this method is the creation of a\\n495:      * 'clickable' region for a line that is displayed on-screen.\\n496:      *\\n497:      * @param line  the line (<code>null</code> not permitted).\\n498:      * @param width  the width of the region.\\n499:      *\\n500:      * @return A region that surrounds the line.\\n501:      */\\n502:     public static Shape createLineRegion(Line2D line, float width) {\\n503:         GeneralPath result = new GeneralPath();\\n504:         float x1 = (float) line.getX1();\\n...\\n504:         float x1 = (float) line.getX1();\\n505:         float x2 = (float) line.getX2();\\n506:         float y1 = (float) line.getY1();\\n507:         float y2 = (float) line.getY2();\\n508:         if ((x2 - x1) != 0.0) {\\n509:             double theta = Math.atan((y2 - y1) / (x2 - x1));\\n510:             float dx = (float) Math.sin(theta) * width;\\n511:             float dy = (float) Math.cos(theta) * width;\\n512:             result.moveTo(x1 - dx, y1 + dy);\\n513:             result.lineTo(x1 + dx, y1 - dy);\\n514:             result.lineTo(x2 + dx, y2 - dy);\\n515:             result.lineTo(x2 - dx, y2 + dy);\\n516:             result.closePath();\\n517:         }\\n518:         else {\\n519:             // special case, vertical line\\n520:             result.moveTo(x1 - width / 2.0f, y1);\\n...\\n38:  * 16-Mar-2004 : Moved rotateShape() from RefineryUtilities.java to here (DG);\\n39:  * 13-May-2004 : Added new shape creation methods (DG);\\n40:  * 30-Sep-2004 : Added createLineRegion() method (DG);\\n41:  *               Moved drawRotatedShape() method from RefineryUtilities class\\n42:  *               to this class (DG);\\n43:  * 04-Oct-2004 : Renamed ShapeUtils --> ShapeUtilities (DG);\\n44:  * 26-Oct-2004 : Added a method to test the equality of two Line2D\\n45:  *               instances (DG);\\n46:  * 10-Nov-2004 : Added new translateShape() and equal(Ellipse2D, Ellipse2D)\\n47:  *               methods (DG);\\n48:  * 11-Nov-2004 : Renamed translateShape() --> createTranslatedShape() (DG);\\n49:  * 07-Jan-2005 : Minor Javadoc fix (DG);\\n50:  * 11-Jan-2005 : Removed deprecated code in preparation for 1.0.0 release (DG);\\n51:  * 21-Jan-2005 : Modified return type of RectangleAnchor.coordinates()\\n52:  *               method (DG);\\n53:  * 22-Feb-2005 : Added equality tests for Arc2D and GeneralPath (DG);\\n54:  * 16-Mar-2005 : Fixed bug where equal(Shape, Shape) fails for two Polygon\\n55:  *               instances (DG);\\n56:  * 20-Jun-2007 : Copied from JCommon (DG);\\n57:  * 02-Jun-2008 : Fixed bug in equal(GeneralPath, GeneralPath) (DG);\\n58:  *\\n59:  */\\n60: \\n61: package org.jfree.chart.util;\\n62: \\n63: import java.awt.Graphics2D;\\n64: import java.awt.Polygon;\\n65: import java.awt.Shape;\\n66: import java.awt.geom.AffineTransform;\\n67: import java.awt.geom.Arc2D;\\n68: import java.awt.geom.Ellipse2D;\\n69: import java.awt.geom.GeneralPath;\\n70: import java.awt.geom.Line2D;\\n71: import java.awt.geom.PathIterator;\\n72: import java.awt.geom.Point2D;\\n73: import java.awt.geom.Rectangle2D;\\n74: import java.util.Arrays;\\n75: \\n76: /**\\n77:  * Utility methods for {@link Shape} objects.\\n78:  */\\n79: public class ShapeUtilities {\\n80: \\n81:     /**\\n82:      * Prevents instantiation.\\n83:      */\\n84:     private ShapeUtilities() {\\n85:     }\\n86: \\n87:     /**\\n88:      * Returns a clone of the specified shape, or <code>null</code>.  At the\\n89:      * current time, this method supports cloning for instances of\\n90:      * <code>Line2D</code>, <code>RectangularShape</code>, <code>Area</code>\\n91:      * and <code>GeneralPath</code>.\\n92:      * <p>\\n93:      * <code>RectangularShape</code> includes <code>Arc2D</code>,\\n94:      * <code>Ellipse2D</code>, <code>Rectangle2D</code>,\",\n    \"source/org/jfree/chart/util/ObjectList.java\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2007, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it \\n10:  * under the terms of the GNU Lesser General Public License as published by \\n11:  * the Free Software Foundation; either version 2.1 of the License, or \\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but \\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY \\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public \\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, \\n22:  * USA.  \\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc. \\n25:  * in the United States and other countries.]\\n26:  * \\n27:  * ---------------\\n28:  * ObjectList.java\\n29:  * ---------------\\n30:  * (C)opyright 2003-2007, by Object Refinery Limited and Contributors.\\n31:  *\\n32:  * Original Author:  David Gilbert (for Object Refinery Limited);\\n33:  * Contributor(s):   -;\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 17-Jul-2003 : Version 1 (DG);\\n38:  * 13-Aug-2003 : Refactored to extend AbstractObjectList (DG);\\n39:  * 21-Oct-2004 : removed duplicate interface declarations and empty methods.\\n40:  * 22-Oct-2004 : Restored removed methods - see note in code (DG);\\n41:  * 21-Jun-2007 : Copied from JCommon (DG);\\n42:  * \\n43:  */\\n44:  \\n45: package org.jfree.chart.util;\\n46: \\n47: \\n48: /**\\n49:  * A list of objects that can grow as required.\\n50:  * <p>\\n51:  * When cloning, the objects in the list are NOT cloned, only the references. \\n52:  */\\n53: public class ObjectList extends AbstractObjectList {\\n54:     \\n55:     /**\\n56:      * Default constructor.\\n57:      */\\n58:     public ObjectList() {\\n59:     }\\n60:     \\n61:     /**\\n62:      * Creates a new list.\\n63:      * \\n64:      * @param initialCapacity  the initial capacity.\\n65:      */\\n66:     public ObjectList(int initialCapacity) {\\n67:         super(initialCapacity);\\n68:     }\\n69:     \\n70:     // NOTE:  the methods below look redundant, but their purpose is to provide\\n71:     // public access to the the get(), set() and indexOf() methods defined in \\n72:     // the AbstractObjectList class, for this class only.  For other classes \\n73:     // (e.g. PaintList, ShapeList etc) we don't want the Object versions of \\n74:     // these methods to be visible in the public API.\\n75:     \\n76:     /**          \\n77:      * Returns the object at the specified index, if there is one, or \\n78:      * <code>null</code>.         \\n79:      *   \\n80:      * @param index  the object index.   \\n81:      *   \\n82:      * @return The object or <code>null</code>.          \\n83:      */          \\n84:     public Object get(int index) {         \\n85:         return super.get(index);         \\n86:     }    \\n87:          \\n88:     /**          \\n89:      * Sets an object reference (overwriting any existing object).       \\n90:      *   \\n91:      * @param index  the object index.   \\n92:      * @param object  the object (<code>null</code> permitted).          \\n93:      */          \\n94:     public void set(int index, Object object) {      \\n95:         super.set(index, object);        \\n96:     }    \\n97:          \\n98:     /**          \\n99:      * Returns the index of the specified object, or -1 if the object is not \\n100:      * in the list.        \\n101:      *   \\n102:      * @param object  the object.        \\n103:      *   \\n104:      * @return The index or -1.          \\n105:      */          \\n106:     public int indexOf(Object object) {    \\n107:         return super.indexOf(object);    \\n108:     }    \\n109:          \\n110: }\",\n    \"tests/org/jfree/chart/util/junit/ShapeListTests.java [read-only-test]\": \"1: /* ===========================================================\\n2:  * JFreeChart : a free chart library for the Java(tm) platform\\n3:  * ===========================================================\\n4:  *\\n5:  * (C) Copyright 2000-2008, by Object Refinery Limited and Contributors.\\n6:  *\\n7:  * Project Info:  http://www.jfree.org/jfreechart/index.html\\n8:  *\\n9:  * This library is free software; you can redistribute it and/or modify it\\n10:  * under the terms of the GNU Lesser General Public License as published by\\n11:  * the Free Software Foundation; either version 2.1 of the License, or\\n12:  * (at your option) any later version.\\n13:  *\\n14:  * This library is distributed in the hope that it will be useful, but\\n15:  * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY\\n16:  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public\\n17:  * License for more details.\\n18:  *\\n19:  * You should have received a copy of the GNU Lesser General Public\\n20:  * License along with this library; if not, write to the Free Software\\n21:  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301,\\n22:  * USA.\\n23:  *\\n24:  * [Java is a trademark or registered trademark of Sun Microsystems, Inc.\\n25:  * in the United States and other countries.]\\n26:  *\\n27:  * -------------------\\n28:  * ShapeListTests.java\\n29:  * -------------------\\n30:  * (C) Copyright 2008, by Object Refinery Limited and Contributors.\\n31:  *\\n32:  * Original Author:  David Gilbert (for Object Refinery Limited);\\n33:  * Contributor(s):   -;\\n34:  *\\n35:  * Changes\\n36:  * -------\\n37:  * 17-Jun-2008 : Version 1, copied over from JCommon (DG);\\n38:  *\\n39:  */\\n40: \\n41: package org.jfree.chart.util.junit;\\n42: \\n43: import java.awt.Rectangle;\\n44: import java.awt.geom.Line2D;\\n45: import java.io.ByteArrayInputStream;\\n46: import java.io.ByteArrayOutputStream;\\n47: import java.io.ObjectInput;\\n48: import java.io.ObjectInputStream;\\n49: import java.io.ObjectOutput;\\n50: import java.io.ObjectOutputStream;\\n51: \\n52: import junit.framework.Test;\\n53: import junit.framework.TestCase;\\n54: import junit.framework.TestSuite;\\n55: \\n56: import org.jfree.chart.util.ShapeList;\\n57: \\n58: /**\\n59:  * Some tests for the {@link ShapeList} class.\\n60:  */\\n61: public class ShapeListTests extends TestCase {\\n62: \\n63:     /**\\n64:      * Returns the tests as a test suite.\\n65:      *\\n66:      * @return The test suite.\\n67:      */\\n68:     public static Test suite() {\\n69:         return new TestSuite(ShapeListTests.class);\\n70:     }\\n71: \\n72:     /**\\n73:      * Constructs a new set of tests.\\n74:      *\\n75:      * @param name  the name of the tests.\\n76:      */\\n77:     public ShapeListTests(final String name) {\\n78:         super(name);\\n79:     }\\n80: \\n81:     /**\\n82:      * Tests the equals() method.\\n83:      */\\n84:     public void testEquals() {\\n85:         ShapeList l1 = new ShapeList();\\n86:         l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n87:         l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n88:         l1.setShape(2, null);\\n89: \\n90:         ShapeList l2 = new ShapeList();\\n91:         l2.setShape(0, new Rectangle(1, 2, 3, 4));\\n92:         l2.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n93:         l2.setShape(2, null);\\n94: \\n95:         assertTrue(l1.equals(l2));\\n96:         assertTrue(l2.equals(l2));\\n97:     }\\n98: \\n99:     /**\\n100:      * Confirm that cloning works.\\n101:      */\\n102:     public void testCloning() {\\n103: \\n104:         ShapeList l1 = new ShapeList();\\n105:         l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n106:         l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n107:         l1.setShape(2, null);\\n108: \\n109:         ShapeList l2 = null;\\n110:         try {\\n111:             l2 = (ShapeList) l1.clone();\\n112:         }\\n113:         catch (CloneNotSupportedException e) {\\n114:             e.printStackTrace();\\n115:         }\\n116:         assertTrue(l1 != l2);\\n117:         assertTrue(l1.getClass() == l2.getClass());\\n118:         assertTrue(l1.equals(l2));\\n119: \\n120:         l2.setShape(0, new Rectangle(5, 6, 7, 8));\\n121:         assertFalse(l1.equals(l2));\\n122: \\n123:     }\\n124: \\n125:     /**\\n126:      * Serialize an instance, restore it, and check for equality.\\n127:      */\\n128:     public void testSerialization() {\\n129: \\n130:         ShapeList l1 = new ShapeList();\\n131:         l1.setShape(0, new Rectangle(1, 2, 3, 4));\\n132:         l1.setShape(1, new Line2D.Double(1.0, 2.0, 3.0, 4.0));\\n133:         l1.setShape(2, null);\\n134: \\n135:         ShapeList l2 = null;\\n136: \\n137:         try {\\n138:             ByteArrayOutputStream buffer = new ByteArrayOutputStream();\\n139:             ObjectOutput out = new ObjectOutputStream(buffer);\\n140:             out.writeObject(l1);\\n141:             out.close();\\n142: \\n143:             ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(\\n144:             \\t\\tbuffer.toByteArray()));\\n145:             l2 = (ShapeList) in.readObject();\\n146:             in.close();\\n147:         }\\n148:         catch (Exception e) {\\n149:             e.printStackTrace();\\n150:         }\\n151:         assertEquals(l1, l2);\\n152: \\n153:     }\\n154: \\n155: }\"\n  },\n  \"patch_grounding_instructions\": \"Use raw source_snippets for old/new text. If line-number comments are present, use them only to fill optional line_start/line_end; never include line-number prefixes in old/new. If a previous attempt says old text was not found, choose a smaller exact block from the current snippet and update line_start/line_end only when the numbered snippet shows those exact lines. Previous failed hunk text is diagnostic only; do not use it as old text unless current_diff or source_snippets contain it.\",\n  \"current_diff\": \"\",\n  \"memory_preferred_patch_styles\": [\n    \"API-contract\",\n    \"boundary\",\n    \"null-check\"\n  ],\n  \"memory_preferred_repair_skills\": [\n    \"single-hunk:API-contract\",\n    \"single-hunk:null-check\",\n    \"multi-hunk:boundary\",\n    \"single-hunk:boundary\"\n  ],\n  \"memory_preferred_test_skills\": [\n    \"regression-relevant-passed\"\n  ],\n  \"memory_regression_warnings\": [],\n  \"memory_successful_strategies\": [\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression\"\n  ],\n  \"previous_attempt_failures\": [],\n  \"relevant_failure_reflections\": [\n    \"visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged\",\n    \"llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request\",\n    \"visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged\",\n    \"llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request\",\n    \"compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)\"\n  ],\n  \"required_json_schema\": {\n    \"diagnosis\": \"short root-cause hypothesis\",\n    \"files_to_read\": [\n      \"optional additional source files\"\n    ],\n    \"patch_hunks\": [\n      {\n        \"file\": \"relative/source/File.java\",\n        \"old\": \"exact text without line-number prefixes\",\n        \"new\": \"replacement text without line-number prefixes\",\n        \"line_start\": \"optional 1-based source line for the old text\",\n        \"line_end\": \"optional inclusive 1-based source line for the old text\"\n      }\n    ],\n    \"tests_to_run_next\": [\n      \"Defects4J test names or scopes\"\n    ],\n    \"confidence\": 0.0,\n    \"final_explanation\": \"short patch explanation\",\n    \"patch_style\": \"one label such as guard, boundary, null-check, arithmetic, API-contract\"\n  }\n}"
+        }
+      ],
+      "memory_preferences": [
+        "API-contract",
+        "boundary",
+        "null-check"
+      ],
+      "repair_skills": [
+        "single-hunk:API-contract",
+        "single-hunk:null-check",
+        "multi-hunk:boundary",
+        "single-hunk:boundary"
+      ],
+      "test_skills": [
+        "regression-relevant-passed"
+      ],
+      "regression_warnings": [],
+      "success_strategies": [
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      ],
+      "reflections": [
+        "visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged",
+        "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request",
+        "visible_failure: previous patch compiled but did not pass trigger tests; use failing_tests assertion details and avoid repeating the same patch style unchanged",
+        "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request",
+        "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      ],
+      "response": {
+        "diagnosis": "ShapeList.equals delegates to AbstractObjectList.equals which uses ObjectUtilities.equal, but that does not properly compare Shape instances (e.g., Line2D.Double). Fix by overriding equals to compare shapes using ShapeUtilities.equal.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "source/org/jfree/chart/util/ShapeList.java",
+            "old": "    public boolean equals(Object obj) {\n\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n        return super.equals(obj);\n\n    }",
+            "new": "    public boolean equals(Object obj) {\n\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n        ShapeList that = (ShapeList) obj;\n        int listSize = size();\n        if (listSize != that.size()) {\n            return false;\n        }\n        for (int i = 0; i < listSize; i++) {\n            if (!ShapeUtilities.equal(getShape(i), that.getShape(i))) {\n                return false;\n            }\n        }\n        return true;\n\n    }",
+            "line_start": 103,
+            "line_end": 113
+          }
+        ],
+        "tests_to_run_next": [
+          "org.jfree.chart.util.junit.ShapeListTests::testEquals",
+          "org.jfree.chart.util.junit.ShapeListTests::testSerialization"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.",
+        "patch_style": "API-contract"
+      },
+      "repair_plan": {
+        "diagnosis": "ShapeList.equals delegates to AbstractObjectList.equals which uses ObjectUtilities.equal, but that does not properly compare Shape instances (e.g., Line2D.Double). Fix by overriding equals to compare shapes using ShapeUtilities.equal.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "source/org/jfree/chart/util/ShapeList.java",
+            "old": "    public boolean equals(Object obj) {\n\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n        return super.equals(obj);\n\n    }",
+            "new": "    public boolean equals(Object obj) {\n\n        if (obj == this) {\n            return true;\n        }\n        if (!(obj instanceof ShapeList)) {\n            return false;\n        }\n        ShapeList that = (ShapeList) obj;\n        int listSize = size();\n        if (listSize != that.size()) {\n            return false;\n        }\n        for (int i = 0; i < listSize; i++) {\n            if (!ShapeUtilities.equal(getShape(i), that.getShape(i))) {\n                return false;\n            }\n        }\n        return true;\n\n    }",
+            "line_start": 103,
+            "line_end": 113
+          }
+        ],
+        "tests_to_run_next": [
+          "org.jfree.chart.util.junit.ShapeListTests::testEquals",
+          "org.jfree.chart.util.junit.ShapeListTests::testSerialization"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.",
+        "patch_style": "API-contract"
+      },
+      "requested_files_for_next_attempt": [
+        "source/org/jfree/chart/util/ShapeList.java"
+      ],
+      "patch_apply": {
+        "ok": true,
+        "unsafe": false,
+        "changed_files": [
+          "source/org/jfree/chart/util/ShapeList.java"
+        ],
+        "diff": "--- a/source/org/jfree/chart/util/ShapeList.java\n+++ b/source/org/jfree/chart/util/ShapeList.java\n@@ -108,7 +108,17 @@\n         if (!(obj instanceof ShapeList)) {\n             return false;\n         }\n-        return super.equals(obj);\n+        ShapeList that = (ShapeList) obj;\n+        int listSize = size();\n+        if (listSize != that.size()) {\n+            return false;\n+        }\n+        for (int i = 0; i < listSize; i++) {\n+            if (!ShapeUtilities.equal(getShape(i), that.getShape(i))) {\n+                return false;\n+            }\n+        }\n+        return true;\n \n     }\n ",
+        "errors": [],
+        "patch_size": 12
+      },
+      "patch_path": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/patches/self_evolved-Chart-6-attempt1.diff",
+      "compile": {
+        "command": [
+          "defects4j",
+          "compile"
+        ],
+        "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+        "returncode": 0,
+        "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+        "elapsed_seconds": 0.6448,
+        "ok": true
+      },
+      "visible_tests": {
+        "scope": "trigger",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-t",
+              "org.jfree.chart.util.junit.ShapeListTests::testSerialization"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.5512,
+            "ok": true
+          },
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-t",
+              "org.jfree.chart.util.junit.ShapeListTests::testEquals"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.5677,
+            "ok": true
+          }
+        ]
+      },
+      "regression_tests": {
+        "scope": "relevant",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-r"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 2.9249,
+            "ok": true
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 4.5939,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.util.junit.ShapeListTests::testSerialization"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 1\n  - org.jfree.chart.util.junit.ShapeListTests::testSerialization\n\n\n[failing_tests]\n--- org.jfree.chart.util.junit.ShapeListTests::testSerialization\njunit.framework.AssertionFailedError: expected:<org.jfree.chart.util.ShapeList@f21ac92f> but was:<org.jfree.chart.util.ShapeList@d544e5a1>\n\tat junit.framework.Assert.fail(Assert.java:57)\n\tat junit.framework.Assert.failNotEquals(Assert.java:329)\n\tat junit.framework.Assert.assertEquals(Assert.java:78)\n\tat junit.framework.Assert.assertEquals(Assert.java:86)\n\tat junit.framework.TestCase.assertEquals(TestCase.java:253)\n\tat org.jfree.chart.util.junit.ShapeListTests.testSerialization(ShapeListTests.java:151)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat junit.framework.TestCase.runTest(TestCase.java:176)\n\tat junit.framework.TestCase.runBare(TestCase.java:141)\n\tat junit.framework.TestResult$1.protect(TestResult.java:122)\n\tat junit.framework.TestResult.runProtected(TestResult.java:142)\n\tat junit.framework.TestResult.run(TestResult.java:125)\n\tat junit.framework.TestCase.run(TestCase.java:129)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\n\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\n\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\n\tat org.apache.tools.ant.Task.perform(Task.java:348)\n\tat org.apache.tools.ant.Target.execute(Target.java:392)\n\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\n\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\n\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\n\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\n\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\n\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\n\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\n\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\n\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\n",
+      "elapsed_seconds": 0.6362,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.util.junit.ShapeListTests::testEquals"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 1\n  - org.jfree.chart.util.junit.ShapeListTests::testEquals\n\n\n[failing_tests]\n--- org.jfree.chart.util.junit.ShapeListTests::testEquals\njunit.framework.AssertionFailedError\n\tat junit.framework.Assert.fail(Assert.java:55)\n\tat junit.framework.Assert.assertTrue(Assert.java:22)\n\tat junit.framework.Assert.assertTrue(Assert.java:31)\n\tat junit.framework.TestCase.assertTrue(TestCase.java:201)\n\tat org.jfree.chart.util.junit.ShapeListTests.testEquals(ShapeListTests.java:95)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat junit.framework.TestCase.runTest(TestCase.java:176)\n\tat junit.framework.TestCase.runBare(TestCase.java:141)\n\tat junit.framework.TestResult$1.protect(TestResult.java:122)\n\tat junit.framework.TestResult.runProtected(TestResult.java:142)\n\tat junit.framework.TestResult.run(TestResult.java:125)\n\tat junit.framework.TestCase.run(TestCase.java:129)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\n\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\n\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\n\tat org.apache.tools.ant.Task.perform(Task.java:348)\n\tat org.apache.tools.ant.Target.execute(Target.java:392)\n\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\n\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\n\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\n\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\n\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\n\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\n\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\n\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\n\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\n",
+      "elapsed_seconds": 0.6145,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 0.6448,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.util.junit.ShapeListTests::testSerialization"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.5512,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.jfree.chart.util.junit.ShapeListTests::testEquals"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.5677,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-r"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-6",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 2.9249,
+      "ok": true
+    }
+  ],
+  "memory_before": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "class:numberutils": {
+        "fallback": 1.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "exception:error": {
+        "API-contract": 6.0,
+        "llm-error": -0.25,
+        "null-check": 1.5
+      },
+      "exception:nullpointerexception": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 1.5
+      },
+      "project:Chart": {
+        "API-contract": 4.75,
+        "boundary": 4.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testlang747": {
+        "fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 1.5
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "exception:error": {
+        "not-run": -0.25,
+        "relevant": 7.5
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 1.5
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 13.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:numberutilstest": {
+        "relevant": 1.5
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testlang747": {
+        "relevant": 1.5
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:timeseriestests": {
+        "relevant": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 1.5
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 1.5
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 6.0,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 1.5
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 6.0,
+        "single-hunk:null-check": 3.0,
+        "single-hunk:boundary": 1.5
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "exception:error": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 7.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "project:Chart": {
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 13.5,
+        "trigger-first": -0.5,
+        "compile-before-tests": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 4.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 4.0,
+        "style:boundary|scope:relevant": 3.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "failure_reason": "compile_failure",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  },
+  "checkout_outputs": [
+    "Checking out 1166 to /workspace/artifacts/runs/d4j30-self-evolved-real-v16/ OK\nInit local repository...................................................... OK\nTag post-fix revision...................................................... OK\nExcluding broken/flaky tests............................................... OK\nExcluding broken/flaky tests............................................... OK\nInitialize fixed program version........................................... OK\nApply patch................................................................ OK\nInitialize buggy program version........................................... OK\nDiff 1166:1164............................................................. OK\nApply patch................................................................ OK\nTag pre-fix revision....................................................... OK\nCheck out program version: Chart-6b........................................ OK\n"
+  ],
+  "metrics": {
+    "system": "self_evolved",
+    "case_id": "Chart-6",
+    "project": "Chart",
+    "bug_id": 6,
+    "status": "solved",
+    "pass_at_1": true,
+    "pass_at_3": true,
+    "visible_pass": true,
+    "regression_pass": true,
+    "compile_success": true,
+    "tool_calls": 2,
+    "test_runs": 5,
+    "patch_size": 12,
+    "unsafe_edit": false,
+    "wall_time_seconds": 48.8992,
+    "deepseek_calls": 1,
+    "prompt_tokens": 24568,
+    "completion_tokens": 2372,
+    "estimated_cost_usd": 0.0,
+    "infrastructure_failure": false,
+    "agent_failure": false
+  },
+  "memory_after": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "class:numberutils": {
+        "fallback": 1.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "exception:error": {
+        "API-contract": 6.0,
+        "llm-error": -0.25,
+        "null-check": 1.5
+      },
+      "exception:nullpointerexception": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 1.5
+      },
+      "project:Chart": {
+        "API-contract": 4.75,
+        "boundary": 4.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "API-contract": -0.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testlang747": {
+        "fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 1.5
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "exception:error": {
+        "not-run": -0.25,
+        "relevant": 7.5
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 1.5
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 13.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:numberutilstest": {
+        "relevant": 1.5
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testlang747": {
+        "relevant": 1.5
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:timeseriestests": {
+        "relevant": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 1.5
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "trigger": -0.75,
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 1.5
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 6.0,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 1.5
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 6.0,
+        "single-hunk:null-check": 3.0,
+        "single-hunk:boundary": 1.5
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 1.5
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "exception:error": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 7.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "project:Chart": {
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 13.5,
+        "trigger-first": -0.5,
+        "compile-before-tests": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 4.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 4.0,
+        "style:boundary|scope:relevant": 3.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 1.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "failure_reason": "compile_failure",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  }
+}

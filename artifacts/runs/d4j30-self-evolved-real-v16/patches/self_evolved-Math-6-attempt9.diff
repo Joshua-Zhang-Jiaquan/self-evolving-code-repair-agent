@@ -1,0 +1,10 @@
+--- a/src/main/java/org/apache/commons/math3/optim/nonlinear/scalar/gradient/NonLinearConjugateGradientOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/nonlinear/scalar/gradient/NonLinearConjugateGradientOptimizer.java
+@@ -184,6 +184,7 @@
+     public PointValuePair optimize(OptimizationData... optData)
+         throws TooManyEvaluationsException {
+         // Set up base class and perform computation.
++        incrementIterationCount();
+         return super.optimize(optData);
+     }
+ 

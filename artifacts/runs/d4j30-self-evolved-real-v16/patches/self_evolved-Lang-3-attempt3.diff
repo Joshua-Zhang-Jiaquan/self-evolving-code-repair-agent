@@ -1,0 +1,29 @@
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -580,11 +580,22 @@
+                 // ignore the bad number
+             }
+             try {
+-                return createLong(str);
++                final Float f = createFloat(str);
++                if (!(f.isInfinite() || (f.floatValue() == 0.0F && !isAllZeros(str)))) {
++                    return f;
++                }
+             } catch (final NumberFormatException nfe) { // NOPMD
+-                // ignore the bad number
+-            }
+-            return createBigInteger(str);
++                // ignore
++            }
++            try {
++                final Double d = createDouble(str);
++                if (!(d.isInfinite() || (d.doubleValue() == 0.0D && !isAllZeros(str)))) {
++                    return d;
++                }
++            } catch (final NumberFormatException nfe) { // NOPMD
++                // ignore
++            }
++            return createBigDecimal(str);
+         }
+ 
+         //Must be a Float, Double, BigDecimal

@@ -1,0 +1,34 @@
+--- a/src/main/java/org/apache/commons/math3/optim/nonlinear/scalar/gradient/NonLinearConjugateGradientOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/nonlinear/scalar/gradient/NonLinearConjugateGradientOptimizer.java
+@@ -214,6 +214,7 @@
+         int iter = 0;
+         int maxEval = getMaxEvaluations();
+         while (true) {
++            incrementIterationCount();
+             ++iter;
+ 
+             final double objective = computeObjectiveValue(point);
+--- a/src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/GaussNewtonOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/GaussNewtonOptimizer.java
+@@ -156,7 +156,8 @@
+             }
+ 
+             // Check convergence.
+-            if (previous != null) {
++            incrementIterationCount();
++    if (previous != null) {
+                 converged = checker.converged(iter, previous, current);
+                 if (converged) {
+                     setCost(computeCost(currentResiduals));
+--- a/src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/LevenbergMarquardtOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/nonlinear/vector/jacobian/LevenbergMarquardtOptimizer.java
+@@ -483,7 +483,8 @@
+                     }
+                     xNorm = FastMath.sqrt(xNorm);
+ 
+-                    // tests for convergence.
++                    incrementIterationCount();
++                // tests for convergence.
+                     if (checker != null) {
+                         // we use the vectorial convergence checker
+                         if (checker.converged(iter, previous, current)) {

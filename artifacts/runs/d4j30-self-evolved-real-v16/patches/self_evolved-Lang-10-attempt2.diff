@@ -1,0 +1,29 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -287,6 +287,26 @@
+             strategy.setCalendar(this, cal, matcher.group(i));
+         }
+         pos.setIndex(offset+matcher.end());
++        // LANG-831: Check that the parsed day-of-week matches the date
++        for (int i = 0; i < strategies.length; i++) {
++            if (strategies[i] == DAY_OF_WEEK_STRATEGY) {
++                String dowText = matcher.group(i + 1);
++                DateFormatSymbols symbols = new DateFormatSymbols(locale);
++                String[] weekdays = symbols.getWeekdays();           // full names (0-indexed empty)
++                String[] shortWeekdays = symbols.getShortWeekdays();   // abbreviations
++                int expectedDow = -1;
++                for (int j = 1; j < weekdays.length; j++) {
++                    if (weekdays[j].equalsIgnoreCase(dowText) || shortWeekdays[j].equalsIgnoreCase(dowText)) {
++                        expectedDow = j;
++                        break;
++                    }
++                }
++                if (expectedDow != -1 && expectedDow != cal.get(Calendar.DAY_OF_WEEK)) {
++                    return null;
++                }
++                break;
++            }
++        }
+         return cal.getTime();
+     }
+ 

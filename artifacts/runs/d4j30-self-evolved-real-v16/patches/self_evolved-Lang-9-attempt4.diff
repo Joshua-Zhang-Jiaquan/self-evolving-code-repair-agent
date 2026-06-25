@@ -1,0 +1,32 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -117,6 +117,17 @@
+ 
+         nameValues= new ConcurrentHashMap<Integer, KeyValue[]>();
+ 
++        // Check for unterminated quotes
++        int count = 0;
++        for (int i = 0; i < pattern.length(); i++) {
++            if (pattern.charAt(i) == '\'') count++;
++        }
++        if (count % 2 != 0) {
++            parsePattern = null;
++            strategies = new Strategy[0];
++            return;
++        }
++
+         StringBuilder regex= new StringBuilder();
+         List<Strategy> collector = new ArrayList<Strategy>();
+ 
+@@ -273,6 +284,11 @@
+      */
+     @Override
+     public Date parse(String source, ParsePosition pos) {
++        if (parsePattern == null) {
++            pos.setIndex(0);
++            pos.setErrorIndex(0);
++            return null;
++        }
+         int offset= pos.getIndex();
+         Matcher matcher= parsePattern.matcher(source.substring(offset));
+         if(!matcher.lookingAt()) {

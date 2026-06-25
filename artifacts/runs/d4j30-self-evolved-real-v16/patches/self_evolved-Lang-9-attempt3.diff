@@ -1,0 +1,11 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -782,7 +782,7 @@
+                 }
+             }
+             StringBuilder sb= new StringBuilder();
+-            sb.append("(GMT[+\\-]\\d{0,1}\\d{2}|[+\\-]\\d{2}:?\\d{2}|");
++            sb.append("(GMT[+\\-]\\d{1,2}(:?\\d{2})?|[+\\-]\\d{2}:?\\d{2}|");
+             for(String id : tzNames.keySet()) {
+                 escapeRegex(sb, id, false).append('|');
+             }

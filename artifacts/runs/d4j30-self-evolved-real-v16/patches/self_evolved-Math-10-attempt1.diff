@@ -1,0 +1,18 @@
+--- a/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java
++++ b/src/main/java/org/apache/commons/math3/analysis/differentiation/DSCompiler.java
+@@ -1391,6 +1391,15 @@
+         add(tmp1, 0, tmp2, 0, tmp2, 0);                 // x^2 + y^2
+         rootN(tmp2, 0, 2, tmp1, 0);                     // r = sqrt(x^2 + y^2)
+ 
++        // special case when both arguments are zero
++        if (tmp1[0] == 0) {
++            result[resultOffset] = FastMath.atan2(y[yOffset], x[xOffset]);
++            for (int i = 1; i < getSize(); ++i) {
++                result[resultOffset + i] = 0;
++            }
++            return;
++        }
++
+         if (x[xOffset] >= 0) {
+ 
+             // compute atan2(y, x) = 2 atan(y / (r + x))

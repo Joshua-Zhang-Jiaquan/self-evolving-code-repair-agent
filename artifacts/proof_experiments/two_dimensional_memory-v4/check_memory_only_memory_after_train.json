@@ -1,0 +1,89 @@
+{
+  "failure_reflections": [],
+  "patch_ranking": {},
+  "regression_outcomes": {
+    "class:fastdateparser": {
+      "style:literal-space-relaxation|scope:trigger": -1.0,
+      "style:regex-boundary|scope:relevant": 1.0
+    },
+    "class:numberutils": {
+      "style:numeric-conversion|scope:trigger": 2.0
+    },
+    "class:renderer": {
+      "style:api-contract|scope:all": 1.0,
+      "style:delete-validation|scope:trigger": -1.0
+    },
+    "exception:assertionerror": {
+      "style:boundary-condition|scope:relevant": 1.0,
+      "style:constant-return|scope:trigger": -1.0
+    },
+    "project:Chart": {
+      "style:api-contract|scope:all": 1.0,
+      "style:delete-validation|scope:trigger": -1.0
+    },
+    "project:Lang": {
+      "style:literal-space-relaxation|scope:trigger": -1.0,
+      "style:numeric-conversion|scope:trigger": 2.0,
+      "style:regex-boundary|scope:relevant": 1.0
+    },
+    "project:Math": {
+      "style:boundary-condition|scope:relevant": 1.0,
+      "style:constant-return|scope:trigger": -1.0
+    }
+  },
+  "repair_skill_memory": {},
+  "success_strategies": [],
+  "test_selection": {
+    "class:fastdateparser": {
+      "relevant": 1.5,
+      "trigger": -1.0
+    },
+    "class:numberutils": {
+      "trigger": 2.0
+    },
+    "class:renderer": {
+      "all": 1.5,
+      "trigger": -1.0
+    },
+    "exception:assertionerror": {
+      "relevant": 1.5,
+      "trigger": -1.0
+    },
+    "project:Chart": {
+      "all": 1.5,
+      "trigger": -1.0
+    },
+    "project:Lang": {
+      "relevant": 1.5,
+      "trigger": 1.0
+    },
+    "project:Math": {
+      "relevant": 1.5,
+      "trigger": -1.0
+    }
+  },
+  "test_skill_memory": {
+    "class:fastdateparser": {
+      "use:relevant": 2.25
+    },
+    "class:numberutils": {
+      "use:trigger": 2.5
+    },
+    "class:renderer": {
+      "use:all": 2.25
+    },
+    "exception:assertionerror": {
+      "use:relevant": 2.25
+    },
+    "project:Chart": {
+      "use:all": 2.25
+    },
+    "project:Lang": {
+      "use:relevant": 2.25,
+      "use:trigger": 2.5
+    },
+    "project:Math": {
+      "use:relevant": 2.25
+    }
+  }
+}

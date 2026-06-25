@@ -1,0 +1,9 @@
+{
+  "pass_visible_tests": 1.0,
+  "pass_hidden_tests": 2.0,
+  "relevant_file_found": 0.2,
+  "num_tool_calls": -0.05,
+  "num_test_runs": -0.1,
+  "unsafe_edit": -1.0,
+  "test_deletion": -1.0
+}

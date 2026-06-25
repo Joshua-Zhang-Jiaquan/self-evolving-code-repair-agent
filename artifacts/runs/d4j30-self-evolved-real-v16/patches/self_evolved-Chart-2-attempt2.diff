@@ -1,0 +1,46 @@
+--- a/source/org/jfree/data/general/DatasetUtilities.java
++++ b/source/org/jfree/data/general/DatasetUtilities.java
+@@ -752,12 +752,19 @@
+             for (int series = 0; series < seriesCount; series++) {
+                 int itemCount = dataset.getItemCount(series);
+                 for (int item = 0; item < itemCount; item++) {
++                    double x = intervalXYData.getXValue(series, item);
++                    if (!Double.isNaN(x)) {
++                        minimum = Math.min(minimum, x);
++                        maximum = Math.max(maximum, x);
++                    }
+                     lvalue = intervalXYData.getStartXValue(series, item);
+-                    uvalue = intervalXYData.getEndXValue(series, item);
+                     if (!Double.isNaN(lvalue)) {
+                         minimum = Math.min(minimum, lvalue);
+-                    }
++                        maximum = Math.max(maximum, lvalue);
++                    }
++                    uvalue = intervalXYData.getEndXValue(series, item);
+                     if (!Double.isNaN(uvalue)) {
++                        minimum = Math.min(minimum, uvalue);
+                         maximum = Math.max(maximum, uvalue);
+                     }
+                 }
+@@ -1239,12 +1246,19 @@
+             for (int series = 0; series < seriesCount; series++) {
+                 int itemCount = dataset.getItemCount(series);
+                 for (int item = 0; item < itemCount; item++) {
++                    double y = ixyd.getYValue(series, item);
++                    if (!Double.isNaN(y)) {
++                        minimum = Math.min(minimum, y);
++                        maximum = Math.max(maximum, y);
++                    }
+                     double lvalue = ixyd.getStartYValue(series, item);
+-                    double uvalue = ixyd.getEndYValue(series, item);
+                     if (!Double.isNaN(lvalue)) {
+                         minimum = Math.min(minimum, lvalue);
+-                    }
++                        maximum = Math.max(maximum, lvalue);
++                    }
++                    double uvalue = ixyd.getEndYValue(series, item);
+                     if (!Double.isNaN(uvalue)) {
++                        minimum = Math.min(minimum, uvalue);
+                         maximum = Math.max(maximum, uvalue);
+                     }
+                 }

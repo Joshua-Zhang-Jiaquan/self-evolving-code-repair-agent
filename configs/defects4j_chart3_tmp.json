@@ -1,0 +1,29 @@
+{
+  "dataset": "Defects4J",
+  "cases": [
+    {
+      "project": "Chart",
+      "bug_id": 1
+    },
+    {
+      "project": "Chart",
+      "bug_id": 2
+    },
+    {
+      "project": "Chart",
+      "bug_id": 3
+    }
+  ],
+  "runtime": {
+    "attempt_limits": {
+      "baseline": 1,
+      "feedback": 3,
+      "self_evolved": 5
+    },
+    "memory_attempt_bonus": 2,
+    "max_attempt_cap": 8,
+    "memory_guidance_limit": 5,
+    "memory_path": "artifacts/memory/benchmark_memory.json"
+  },
+  "notes": "30-bug broad benchmark: Chart 1-10, Lang 1 and 3-11 excluding deprecated Lang 2, Math 1-10."
+}

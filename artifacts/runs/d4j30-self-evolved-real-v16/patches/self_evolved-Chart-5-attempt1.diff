@@ -1,0 +1,28 @@
+--- a/source/org/jfree/data/xy/XYSeries.java
++++ b/source/org/jfree/data/xy/XYSeries.java
+@@ -561,7 +561,24 @@
+             // new item...otherwise it will be just -1 and we should just
+             // append the value to the list...
+             if (this.autoSort) {
+-                this.data.add(-index - 1, new XYDataItem(x, y));
++                XYDataItem item = new XYDataItem(x, y);
++                int index = Collections.binarySearch(this.data, item);
++                if (index < 0) {
++                    this.data.add(-index - 1, item);
++                }
++                else {
++                    int size = this.data.size();
++                    while (index < size
++                           && item.compareTo(this.data.get(index)) == 0) {
++                        index++;
++                    }
++                    if (index < this.data.size()) {
++                        this.data.add(index, item);
++                    }
++                    else {
++                        this.data.add(item);
++                    }
++                }
+             }
+             else {
+                 this.data.add(new XYDataItem(x, y));

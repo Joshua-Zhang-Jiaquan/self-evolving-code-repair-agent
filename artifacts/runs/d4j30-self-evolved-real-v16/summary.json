@@ -1,0 +1,24 @@
+{
+  "run_dir": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16",
+  "systems": {
+    "self_evolved": {
+      "cases": 30,
+      "pass_at_1": 0.5667,
+      "pass_at_3": 0.7,
+      "visible_pass_rate": 0.7667,
+      "regression_pass_rate": 0.7333,
+      "compile_success_rate": 1.0,
+      "avg_tool_calls": 6.1667,
+      "avg_test_runs": 11.5667,
+      "avg_patch_size": 11.8667,
+      "unsafe_edit_rate": 0.0,
+      "infrastructure_failures": 0,
+      "agent_failures": 8,
+      "deepseek_calls": 121,
+      "prompt_tokens": 1776537,
+      "completion_tokens": 753279,
+      "estimated_cost_usd": 0.0,
+      "wall_time_seconds": 9271.7438
+    }
+  }
+}

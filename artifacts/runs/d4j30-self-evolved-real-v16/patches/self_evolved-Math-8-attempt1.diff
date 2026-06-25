@@ -1,0 +1,29 @@
+--- a/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java
++++ b/src/main/java/org/apache/commons/math3/distribution/DiscreteDistribution.java
+@@ -184,7 +184,25 @@
+                     sampleSize);
+         }
+ 
+-        final T[]out = (T[]) java.lang.reflect.Array.newInstance(singletons.get(0).getClass(), sampleSize);
++        // Compute the most specific common superclass of the singletons for array creation.
++        Class<?> commonClass = null;
++        for (T singleton : singletons) {
++            if (singleton == null) {
++                commonClass = Object.class;
++                break;
++            }
++            if (commonClass == null) {
++                commonClass = singleton.getClass();
++            } else {
++                while (!commonClass.isAssignableFrom(singleton.getClass())) {
++                    commonClass = commonClass.getSuperclass();
++                }
++            }
++        }
++        if (commonClass == null) {
++            commonClass = Object.class;
++        }
++        final T[]out = (T[]) java.lang.reflect.Array.newInstance(commonClass, sampleSize);
+ 
+         for (int i = 0; i < sampleSize; i++) {
+             out[i] = sample();

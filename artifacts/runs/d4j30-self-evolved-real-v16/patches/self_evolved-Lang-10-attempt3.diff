@@ -1,0 +1,34 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -286,8 +286,29 @@
+             Strategy strategy= strategies[i++];
+             strategy.setCalendar(this, cal, matcher.group(i));
+         }
+-        pos.setIndex(offset+matcher.end());
+-        return cal.getTime();
++        pos.setIndex(offset + matcher.end());
++// Check day-of-week consistency
++for (int i = 0; i < strategies.length; i++) {
++    if (strategies[i] instanceof TextStrategy) {
++        TextStrategy ts = (TextStrategy) strategies[i];
++        if (ts.field == Calendar.DAY_OF_WEEK) {
++            String dayOfWeekText = matcher.group(i + 1);
++            KeyValue[] textKeyValues = getDisplayNames(ts.field);
++            int expectedDayOfWeek = -1;
++            for (KeyValue kv : textKeyValues) {
++                if (dayOfWeekText.equalsIgnoreCase(kv.key)) {
++                    expectedDayOfWeek = kv.value;
++                    break;
++                }
++            }
++            if (expectedDayOfWeek != -1 && expectedDayOfWeek != cal.get(Calendar.DAY_OF_WEEK)) {
++                pos.setErrorIndex(offset);
++                return null;
++            }
++        }
++    }
++}
++return cal.getTime();
+     }
+ 
+     // Support for strategies

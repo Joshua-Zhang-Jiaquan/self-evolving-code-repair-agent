@@ -1,0 +1,15 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -253,9 +253,9 @@
+             if (locale.equals(JAPANESE_IMPERIAL)) {
+                 throw new ParseException(
+                         "(The " +locale + " locale does not support dates before 1868 AD)\n" +
+-                                "Unparseable date: \""+source+"\" does not match "+parsePattern.pattern(), 0);
+-            }
+-            throw new ParseException("Unparseable date: \""+source+"\" does not match "+parsePattern.pattern(), 0);
++                                "Unparseable date: \""+source+"\" does not match "+parsePattern.pattern(), pos.getErrorIndex());
++            }
++            throw new ParseException("Unparseable date: \""+source+"\" does not match "+parsePattern.pattern(), pos.getErrorIndex());
+         }
+         return date;
+     }

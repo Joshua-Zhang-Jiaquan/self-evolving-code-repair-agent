@@ -1,0 +1,19 @@
+{
+  "dataset": "Defects4J",
+  "cases": [
+    {"project": "Chart", "bug_id": 2}
+  ],
+  "runtime": {
+    "attempt_limits": {
+      "baseline": 1,
+      "feedback": 3,
+      "self_evolved": 8
+    },
+    "memory_attempt_bonus": 2,
+    "max_attempt_cap": 10,
+    "memory_guidance_limit": 8,
+    "max_non_patch_rounds": 10,
+    "memory_path": "artifacts/memory/benchmark_memory.json"
+  },
+  "notes": "Focused single-case config for validating generic bounds/assertion-context repair behavior."
+}

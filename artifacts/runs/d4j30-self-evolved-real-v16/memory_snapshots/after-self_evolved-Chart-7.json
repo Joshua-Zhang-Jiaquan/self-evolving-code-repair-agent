@@ -1,0 +1,720 @@
+{
+  "failure_reflections": [
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "compile_failure",
+      "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+      "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+    }
+  ],
+  "patch_ranking": {
+    "class:abstractcategoryitemrenderer": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "class:datasetutilities": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "class:numberutils": {
+      "fallback": 1.5
+    },
+    "class:shapelist": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "class:timeperiodvalues": {
+      "boundary": 1.5
+    },
+    "class:timeseries": {
+      "API-contract": 1.5
+    },
+    "class:xyplot": {
+      "null-check": 1.5
+    },
+    "class:xyseries": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "exception:error": {
+      "API-contract": 6.0,
+      "boundary": 1.5,
+      "llm-error": -0.25,
+      "null-check": 1.5
+    },
+    "exception:indexoutofboundsexception": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "exception:nullpointerexception": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75,
+      "null-check": 1.5
+    },
+    "exception:numberformatexception": {
+      "fallback": 1.5
+    },
+    "project:Chart": {
+      "API-contract": 4.75,
+      "boundary": 6.0,
+      "guard": -0.5,
+      "llm-error": -1.0,
+      "null-check": 3.0
+    },
+    "project:Lang": {
+      "fallback": 1.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "trigger:datasetutilitiestests": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:logaxistests": {
+      "null-check": 1.5
+    },
+    "trigger:numberaxistests": {
+      "null-check": 1.5
+    },
+    "trigger:numberutilstest": {
+      "fallback": 1.5
+    },
+    "trigger:shapelisttests": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:test2947660": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "trigger:testbug1955483": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:testbug2849731_3": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:testcreatecopy3": {
+      "API-contract": 1.5
+    },
+    "trigger:testequals": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "boundary": 1.5
+    },
+    "trigger:testlang747": {
+      "fallback": 1.5
+    },
+    "trigger:testserialization": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:testxyautorange1": {
+      "null-check": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "null-check": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "boundary": 1.5
+    },
+    "trigger:timeseriestests": {
+      "API-contract": 1.5
+    },
+    "trigger:xyseriestests": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    }
+  },
+  "regression_outcomes": {
+    "class:abstractcategoryitemrenderer": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "class:datasetutilities": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "class:numberutils": {
+      "style:fallback|scope:relevant": 1.0
+    },
+    "class:shapelist": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "class:timeperiodvalues": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:timeseries": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "class:xyplot": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "class:xyseries": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "exception:error": {
+      "style:API-contract|scope:relevant": 4.0,
+      "style:boundary|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "exception:indexoutofboundsexception": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "exception:nullpointerexception": {
+      "style:boundary|scope:relevant": 2.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "exception:numberformatexception": {
+      "style:fallback|scope:relevant": 1.0
+    },
+    "project:Chart": {
+      "style:API-contract|scope:relevant": 4.0,
+      "style:boundary|scope:relevant": 4.0,
+      "style:null-check|scope:relevant": 2.0
+    },
+    "project:Lang": {
+      "style:fallback|scope:relevant": 1.0
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:datasetutilitiestests": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:logaxistests": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:numberaxistests": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:numberutilstest": {
+      "style:fallback|scope:relevant": 1.0
+    },
+    "trigger:shapelisttests": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:test2947660": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:testbug1955483": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testbug2849731_2": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:testbug2849731_3": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:testcreatecopy3": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testequals": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testlang747": {
+      "style:fallback|scope:relevant": 1.0
+    },
+    "trigger:testserialization": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:testxyautorange1": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:testxyautorange2": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:timeperiodvaluestests": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:timeseriestests": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:xyseriestests": {
+      "style:boundary|scope:relevant": 1.0
+    }
+  },
+  "repair_skill_memory": {
+    "class:abstractcategoryitemrenderer": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "class:datasetutilities": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "class:numberutils": {
+      "single-hunk:fallback": 1.5
+    },
+    "class:shapelist": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "class:timeperiodvalues": {
+      "single-hunk:boundary": 1.5
+    },
+    "class:timeseries": {
+      "single-hunk:API-contract": 1.5
+    },
+    "class:xyplot": {
+      "single-hunk:null-check": 1.5
+    },
+    "class:xyseries": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "exception:error": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 6.0,
+      "single-hunk:boundary": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "exception:indexoutofboundsexception": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "exception:nullpointerexception": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5,
+      "single-hunk:null-check": 1.5
+    },
+    "exception:numberformatexception": {
+      "single-hunk:fallback": 1.5
+    },
+    "project:Chart": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -1.0,
+      "single-hunk:API-contract": 6.0,
+      "single-hunk:boundary": 3.0,
+      "single-hunk:null-check": 3.0
+    },
+    "project:Lang": {
+      "single-hunk:fallback": 1.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:datasetutilitiestests": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:logaxistests": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:numberaxistests": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:numberutilstest": {
+      "single-hunk:fallback": 1.5
+    },
+    "trigger:shapelisttests": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:test2947660": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:testbug1955483": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:testbug2849731_3": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:testcreatecopy3": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testequals": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testlang747": {
+      "single-hunk:fallback": 1.5
+    },
+    "trigger:testserialization": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:testxyautorange1": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:timeseriestests": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:xyseriestests": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    }
+  },
+  "success_strategies": [
+    {
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+      "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+      "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+      "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+    }
+  ],
+  "test_selection": {
+    "class:abstractcategoryitemrenderer": {
+      "relevant": 3.0
+    },
+    "class:datasetutilities": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "class:numberutils": {
+      "relevant": 1.5
+    },
+    "class:shapelist": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "class:timeperiodvalues": {
+      "relevant": 1.5
+    },
+    "class:timeseries": {
+      "relevant": 1.5
+    },
+    "class:xyplot": {
+      "relevant": 1.5
+    },
+    "class:xyseries": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "exception:error": {
+      "not-run": -0.25,
+      "relevant": 9.0
+    },
+    "exception:indexoutofboundsexception": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "exception:nullpointerexception": {
+      "not-run": -0.75,
+      "relevant": 4.5,
+      "trigger": -1.0
+    },
+    "exception:numberformatexception": {
+      "relevant": 1.5
+    },
+    "project:Chart": {
+      "not-run": -1.0,
+      "relevant": 15.0,
+      "trigger": -1.75
+    },
+    "project:Lang": {
+      "relevant": 1.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "relevant": 3.0
+    },
+    "trigger:datasetutilitiestests": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:logaxistests": {
+      "relevant": 1.5
+    },
+    "trigger:numberaxistests": {
+      "relevant": 1.5
+    },
+    "trigger:numberutilstest": {
+      "relevant": 1.5
+    },
+    "trigger:shapelisttests": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:test2947660": {
+      "relevant": 3.0
+    },
+    "trigger:testbug1955483": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "trigger:testbug2849731_2": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:testbug2849731_3": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:testcreatecopy3": {
+      "relevant": 1.5
+    },
+    "trigger:testequals": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "relevant": 1.5
+    },
+    "trigger:testlang747": {
+      "relevant": 1.5
+    },
+    "trigger:testserialization": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:testxyautorange1": {
+      "relevant": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "relevant": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "relevant": 1.5
+    },
+    "trigger:timeseriestests": {
+      "relevant": 1.5
+    },
+    "trigger:xyseriestests": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    }
+  },
+  "test_skill_memory": {
+    "class:abstractcategoryitemrenderer": {
+      "regression-relevant-passed": 3.0
+    },
+    "class:datasetutilities": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "class:numberutils": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:shapelist": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "class:timeperiodvalues": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:timeseries": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:xyplot": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:xyseries": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "exception:error": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 9.0
+    },
+    "exception:indexoutofboundsexception": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "exception:nullpointerexception": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 4.5,
+      "trigger-first": -0.5
+    },
+    "exception:numberformatexception": {
+      "regression-relevant-passed": 1.5
+    },
+    "project:Chart": {
+      "compile-before-tests": -0.5,
+      "no-test-run": -1.0,
+      "regression-relevant-passed": 15.0,
+      "trigger-first": -0.5
+    },
+    "project:Lang": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:datasetutilitiestests": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:logaxistests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:numberaxistests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:numberutilstest": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:shapelisttests": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:test2947660": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testbug1955483": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:testbug2849731_3": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:testcreatecopy3": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testequals": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testlang747": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testserialization": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testxyautorange1": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:timeseriestests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:xyseriestests": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    }
+  }
+}

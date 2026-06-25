@@ -1,0 +1,12 @@
+--- a/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
++++ b/src/main/java/org/apache/commons/math3/optim/BaseOptimizer.java
+@@ -197,6 +197,9 @@
+                 continue;
+             }
+         }
++        if (iterations.getMaximalCount() == 0) {
++            iterations.setMaximalCount(Integer.MAX_VALUE);
++        }
+     }
+ 
+     /**

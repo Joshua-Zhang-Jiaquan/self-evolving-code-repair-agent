@@ -1,0 +1,26 @@
+--- a/source/org/jfree/data/general/DatasetUtilities.java
++++ b/source/org/jfree/data/general/DatasetUtilities.java
+@@ -760,6 +760,11 @@
+                     if (!Double.isNaN(uvalue)) {
+                         maximum = Math.max(maximum, uvalue);
+                     }
++                    double x = dataset.getXValue(series, item);
++                    if (!Double.isNaN(x)) {
++                        minimum = Math.min(minimum, x);
++                        maximum = Math.max(maximum, x);
++                    }
+                 }
+             }
+         }
+@@ -1247,6 +1252,11 @@
+                     if (!Double.isNaN(uvalue)) {
+                         maximum = Math.max(maximum, uvalue);
+                     }
++                    double y = dataset.getYValue(series, item);
++                    if (!Double.isNaN(y)) {
++                        minimum = Math.min(minimum, y);
++                        maximum = Math.max(maximum, y);
++                    }
+                 }
+             }
+         }

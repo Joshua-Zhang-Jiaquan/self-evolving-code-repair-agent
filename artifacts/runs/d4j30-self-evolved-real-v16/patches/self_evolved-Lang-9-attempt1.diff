@@ -1,0 +1,33 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDateParser.java
+@@ -126,7 +126,29 @@
+         }
+ 
+         currentFormatField= patternMatcher.group();
+-        Strategy currentStrategy= getStrategy(currentFormatField);
++        Strategy currentStrategy;
++        if (currentFormatField.startsWith("'")) {
++            // Quoted literal, need to unquote and treat as literal
++            // Two single quotes within quotes represent a single quote
++            String literal = currentFormatField.substring(1, currentFormatField.length()-1);
++            literal = literal.replace("''", "'");
++            final String escapedLiteral = literal;
++            currentStrategy = new Strategy() {
++                @Override
++                boolean isNumber() { return false; }
++                @Override
++                boolean addRegex(FastDateParser parser, StringBuilder regex) {
++                    regex.append(Pattern.quote(escapedLiteral));
++                    return true;
++                }
++                @Override
++                public void setCalendar(FastDateParser parser, Calendar cal, String value) {
++                    // no-op
++                }
++            };
++        } else {
++            currentStrategy = getStrategy(currentFormatField);
++        }
+         for(;;) {
+             patternMatcher.region(patternMatcher.end(), patternMatcher.regionEnd());
+             if(!patternMatcher.lookingAt()) {

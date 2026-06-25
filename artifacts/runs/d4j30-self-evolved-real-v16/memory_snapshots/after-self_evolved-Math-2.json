@@ -1,0 +1,1912 @@
+{
+  "failure_reflections": [
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "compile_failure",
+      "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+      "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java,src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: no-op hunk; src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "parse_error",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+      "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:stringutilstest,trigger:testescapesurrogatepairs,exception:stringindexoutofboundsexception,class:charsequencetranslator",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_printertest,trigger:testcalendartimezonerespected,trigger:fastdateprintertest,exception:error,class:fastdateprinter",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_printertest,trigger:testcalendartimezonerespected,trigger:fastdateprintertest,exception:error,class:fastdateprinter",
+      "reflection": "patch_apply_failure: style=null-check; files=src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java: old text not found"
+    },
+    {
+      "failure_reason": "compile_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_832,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "compile_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-9/src/main/java/org/apache/commons/lang3/time/FastDateParser.java:140: error: addRegex(FastDateParser,StringBuilder) in <anonymous org.apache.commons.lang3.time.FastDateParser$1> cannot implement addRegex(FastDatePa"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_832,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java,src/main/java/org/apache/commons/lang3/time/FastDateParser.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDateParser.java: old text not found; src/main/java/org/apache/commons/lang3/time/FastDateParser.java: old text not found"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_832,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java,src/main/java/org/apache/commons/lang3/time/FastDateParser.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDateParser.java: old text not found"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "read_request_without_patch",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "read_request_without_patch: model asked to read files but produced no patch; use supplied source snippets and exact old/new text in the next repair attempt"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "parse_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDateParser.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java,src/main/java/org/apache/commons/lang3/time/FastDateParser.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/time/FastDateParser.java: old text not found"
+    },
+    {
+      "failure_reason": "parse_error",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+    },
+    {
+      "failure_reason": "compile_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "compile_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-10/src/main/java/org/apache/commons/lang3/time/FastDateParser.java:256: error: cannot find symbol\n[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-10/src/main/java/org/apache/comm"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_831,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java,src/main/java/org/apache/commons/lang3/time/FastDateParser.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+    },
+    {
+      "failure_reason": "read_request_without_patch",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "read_request_without_patch: model asked to read files but produced no patch; use supplied source snippets and exact old/new text in the next repair attempt"
+    },
+    {
+      "failure_reason": "parse_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "patch_apply_failure: style=guard; files=src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/BigFraction.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/math3/fraction/Fraction.java: old text not found; src/main/java/org/apache/commons/math3/fraction/BigFraction.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/BigFraction.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/math3/fraction/Fraction.java: old text not found; src/main/java/org/apache/commons/math3/fraction/BigFraction.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "patch_apply_failure: style=guard; files=src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/BigFraction.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/math3/fraction/Fraction.java: old text not found; src/main/java/org/apache/commons/math3/fraction/BigFraction.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "patch_apply_failure: style=control-flow; files=src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/BigFraction.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/math3/fraction/Fraction.java: old text not found; src/main/java/org/apache/commons/math3/fraction/BigFraction.java: old text not found"
+    },
+    {
+      "failure_reason": "patch_apply_failure",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "patch_apply_failure: style=guard; files=src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/Fraction.java,src/main/java/org/apache/commons/math3/fraction/BigFraction.java,src/main/ja; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/math3/fraction/BigFraction.java: old text not found"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:bigfractiontest,trigger:testdigitlimitconstructor,trigger:fractiontest,exception:fractionconversionexception,class:bigfraction,class:fraction",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    },
+    {
+      "failure_reason": "llm_error",
+      "features": "project:Math,trigger:hypergeometricdistributiontest,trigger:testmath1021,exception:error,class:hypergeometricdistribution",
+      "reflection": "llm_error: URLError: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)>; retry with smaller, more grounded patch request"
+    }
+  ],
+  "patch_ranking": {
+    "class:abstractcategoryitemrenderer": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "class:bigfraction": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "class:charsequencetranslator": {
+      "API-contract": -0.5,
+      "boundary": 1.5
+    },
+    "class:datasetutilities": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "class:fastdateparser": {
+      "API-contract": -3.5,
+      "boundary": -2.0,
+      "fallback": -0.5,
+      "invalid-response": -0.5,
+      "llm-error": -1.0,
+      "null-check": 1.25
+    },
+    "class:fastdateprinter": {
+      "API-contract": 1.5,
+      "boundary": -0.25,
+      "null-check": -0.25
+    },
+    "class:fraction": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "class:hypergeometricdistribution": {
+      "llm-error": -3.0
+    },
+    "class:localeutils": {
+      "boundary": 1.5
+    },
+    "class:lookuptranslator": {
+      "API-contract": 1.5
+    },
+    "class:numberutils": {
+      "API-contract": 0.0,
+      "boundary": -0.5,
+      "fallback": 2.5,
+      "invalid-response": -0.25,
+      "llm-error": -0.25
+    },
+    "class:randomstringutils": {
+      "boundary": 1.5
+    },
+    "class:shapelist": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "class:standardtooltiptagfragmentgenerator": {
+      "API-contract": 1.5
+    },
+    "class:timeperiodvalues": {
+      "boundary": 1.5
+    },
+    "class:timeseries": {
+      "API-contract": 1.5,
+      "boundary": 1.5
+    },
+    "class:week": {
+      "API-contract": 1.5
+    },
+    "class:xyplot": {
+      "null-check": 1.5
+    },
+    "class:xyseries": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "exception:error": {
+      "API-contract": 7.0,
+      "boundary": 0.25,
+      "fallback": -1.0,
+      "invalid-response": -0.75,
+      "llm-error": -4.5,
+      "null-check": 2.5
+    },
+    "exception:fractionconversionexception": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "exception:illegalargumentexception": {
+      "boundary": 3.0
+    },
+    "exception:indexoutofboundsexception": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "exception:nullpointerexception": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75,
+      "null-check": 1.5
+    },
+    "exception:numberformatexception": {
+      "API-contract": 1.5,
+      "fallback": 3.0
+    },
+    "exception:stringindexoutofboundsexception": {
+      "API-contract": -0.5,
+      "boundary": 1.5
+    },
+    "project:Chart": {
+      "API-contract": 7.75,
+      "boundary": 7.5,
+      "guard": -0.5,
+      "llm-error": -1.0,
+      "null-check": 3.0
+    },
+    "project:Lang": {
+      "API-contract": -1.0,
+      "boundary": 1.75,
+      "fallback": 2.0,
+      "invalid-response": -0.75,
+      "llm-error": -1.25,
+      "null-check": 1.0
+    },
+    "project:Math": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -5.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "trigger:bigfractiontest": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "trigger:datasetutilitiestests": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:fastdateformat_parsertest": {
+      "API-contract": -3.5,
+      "boundary": -2.0,
+      "fallback": -0.5,
+      "invalid-response": -0.5,
+      "llm-error": -1.0,
+      "null-check": 1.25
+    },
+    "trigger:fastdateformat_printertest": {
+      "API-contract": 1.5,
+      "boundary": -0.25,
+      "null-check": -0.25
+    },
+    "trigger:fastdateparsertest": {
+      "API-contract": -3.5,
+      "boundary": -2.0,
+      "fallback": -0.5,
+      "invalid-response": -0.5,
+      "llm-error": -1.0,
+      "null-check": 1.25
+    },
+    "trigger:fastdateprintertest": {
+      "API-contract": 1.5,
+      "boundary": -0.25,
+      "null-check": -0.25
+    },
+    "trigger:fractiontest": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "trigger:hypergeometricdistributiontest": {
+      "llm-error": -3.0
+    },
+    "trigger:localeutilstest": {
+      "boundary": 1.5
+    },
+    "trigger:logaxistests": {
+      "null-check": 1.5
+    },
+    "trigger:lookuptranslatortest": {
+      "API-contract": 1.5
+    },
+    "trigger:numberaxistests": {
+      "null-check": 1.5
+    },
+    "trigger:numberutilstest": {
+      "API-contract": 0.0,
+      "boundary": -0.5,
+      "fallback": 2.5,
+      "invalid-response": -0.25,
+      "llm-error": -0.25
+    },
+    "trigger:randomstringutilstest": {
+      "boundary": 1.5
+    },
+    "trigger:shapelisttests": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:standardtooltiptagfragmentgeneratortests": {
+      "API-contract": 1.5
+    },
+    "trigger:stringutilstest": {
+      "API-contract": -0.5,
+      "boundary": 1.5
+    },
+    "trigger:test2947660": {
+      "API-contract": 1.5,
+      "null-check": 1.5
+    },
+    "trigger:testbug1864222": {
+      "boundary": 1.5
+    },
+    "trigger:testbug1955483": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:testbug2849731_3": {
+      "API-contract": -0.5,
+      "boundary": 3.0,
+      "guard": -0.5,
+      "llm-error": -0.75
+    },
+    "trigger:testcalendartimezonerespected": {
+      "API-contract": 1.5,
+      "boundary": -0.25,
+      "null-check": -0.25
+    },
+    "trigger:testconstructor": {
+      "API-contract": 1.5
+    },
+    "trigger:testcreatecopy3": {
+      "API-contract": 1.5
+    },
+    "trigger:testcreatenumber": {
+      "API-contract": 1.5
+    },
+    "trigger:testdigitlimitconstructor": {
+      "boundary": -0.5,
+      "control-flow": -0.25,
+      "guard": -0.75,
+      "invalid-response": -0.25,
+      "llm-error": -2.5
+    },
+    "trigger:testequals": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:testescapesurrogatepairs": {
+      "API-contract": -0.5,
+      "boundary": 1.5
+    },
+    "trigger:testgenerateurlfragment": {
+      "API-contract": 1.5
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "boundary": 1.5
+    },
+    "trigger:testlang747": {
+      "fallback": 3.0
+    },
+    "trigger:testlang807": {
+      "boundary": 1.5
+    },
+    "trigger:testlang865": {
+      "boundary": 1.5
+    },
+    "trigger:testlang882": {
+      "API-contract": 1.5
+    },
+    "trigger:testlang_831": {
+      "API-contract": -2.5,
+      "boundary": -1.5,
+      "fallback": -0.5,
+      "invalid-response": -0.5,
+      "llm-error": -1.0,
+      "null-check": -0.25
+    },
+    "trigger:testlang_832": {
+      "API-contract": -1.0,
+      "boundary": -0.5,
+      "null-check": 1.5
+    },
+    "trigger:testmath1021": {
+      "llm-error": -3.0
+    },
+    "trigger:testserialization": {
+      "API-contract": 3.0,
+      "llm-error": -0.25
+    },
+    "trigger:teststringcreatenumberensurenoprecisionloss": {
+      "API-contract": -1.5,
+      "boundary": -0.5,
+      "fallback": -0.5,
+      "invalid-response": -0.25,
+      "llm-error": -0.25
+    },
+    "trigger:testxyautorange1": {
+      "null-check": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "null-check": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "boundary": 1.5
+    },
+    "trigger:timeseriestests": {
+      "API-contract": 1.5,
+      "boundary": 1.5
+    },
+    "trigger:weektests": {
+      "API-contract": 1.5
+    },
+    "trigger:xyseriestests": {
+      "API-contract": -0.75,
+      "boundary": 1.5
+    }
+  },
+  "regression_outcomes": {
+    "class:abstractcategoryitemrenderer": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "class:charsequencetranslator": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:datasetutilities": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "class:fastdateparser": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "class:fastdateprinter": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "class:localeutils": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:lookuptranslator": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "class:numberutils": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:fallback|scope:relevant": 2.0
+    },
+    "class:randomstringutils": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:shapelist": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "class:standardtooltiptagfragmentgenerator": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "class:timeperiodvalues": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:timeseries": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:boundary|scope:relevant": 1.0
+    },
+    "class:week": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "class:xyplot": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "class:xyseries": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "exception:error": {
+      "style:API-contract|scope:relevant": 8.0,
+      "style:boundary|scope:relevant": 2.0,
+      "style:null-check|scope:relevant": 2.0
+    },
+    "exception:illegalargumentexception": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "exception:indexoutofboundsexception": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "exception:nullpointerexception": {
+      "style:boundary|scope:relevant": 2.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "exception:numberformatexception": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:fallback|scope:relevant": 2.0
+    },
+    "exception:stringindexoutofboundsexception": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "project:Chart": {
+      "style:API-contract|scope:relevant": 6.0,
+      "style:boundary|scope:relevant": 5.0,
+      "style:null-check|scope:relevant": 2.0
+    },
+    "project:Lang": {
+      "style:API-contract|scope:relevant": 3.0,
+      "style:boundary|scope:relevant": 3.0,
+      "style:fallback|scope:relevant": 2.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:datasetutilitiestests": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:fastdateformat_parsertest": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:fastdateformat_printertest": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:fastdateparsertest": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:fastdateprintertest": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:localeutilstest": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:logaxistests": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:lookuptranslatortest": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:numberaxistests": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:numberutilstest": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:fallback|scope:relevant": 2.0
+    },
+    "trigger:randomstringutilstest": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:shapelisttests": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:standardtooltiptagfragmentgeneratortests": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:stringutilstest": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:test2947660": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:testbug1864222": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testbug1955483": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testbug2849731_2": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:testbug2849731_3": {
+      "style:boundary|scope:relevant": 2.0
+    },
+    "trigger:testcalendartimezonerespected": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testconstructor": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testcreatecopy3": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testcreatenumber": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testequals": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:testescapesurrogatepairs": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testgenerateurlfragment": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testlang747": {
+      "style:fallback|scope:relevant": 2.0
+    },
+    "trigger:testlang807": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testlang865": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:testlang882": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:testlang_832": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:testserialization": {
+      "style:API-contract|scope:relevant": 2.0
+    },
+    "trigger:testxyautorange1": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:testxyautorange2": {
+      "style:null-check|scope:relevant": 1.0
+    },
+    "trigger:timeperiodvaluestests": {
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:timeseriestests": {
+      "style:API-contract|scope:relevant": 1.0,
+      "style:boundary|scope:relevant": 1.0
+    },
+    "trigger:weektests": {
+      "style:API-contract|scope:relevant": 1.0
+    },
+    "trigger:xyseriestests": {
+      "style:boundary|scope:relevant": 1.0
+    }
+  },
+  "repair_skill_memory": {
+    "class:abstractcategoryitemrenderer": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "class:bigfraction": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "class:charsequencetranslator": {
+      "retry-after-feedback": -0.25,
+      "single-hunk:boundary": 1.5
+    },
+    "class:datasetutilities": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "class:fastdateparser": {
+      "exact-old-text-grounding": -1.0,
+      "format-and-patch-grounding": -0.5,
+      "multi-hunk:null-check": 1.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -2.75
+    },
+    "class:fastdateprinter": {
+      "exact-old-text-grounding": -0.5,
+      "single-hunk:API-contract": 1.5
+    },
+    "class:fraction": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "class:hypergeometricdistribution": {
+      "recover-from-llm-error": -3.0
+    },
+    "class:localeutils": {
+      "single-hunk:boundary": 1.5
+    },
+    "class:lookuptranslator": {
+      "single-hunk:API-contract": 1.5
+    },
+    "class:numberutils": {
+      "exact-old-text-grounding": -1.5,
+      "format-and-patch-grounding": -0.25,
+      "recover-from-llm-error": -0.25,
+      "retry-after-feedback": -0.5,
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:fallback": 3.0
+    },
+    "class:randomstringutils": {
+      "single-hunk:boundary": 1.5
+    },
+    "class:shapelist": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "class:standardtooltiptagfragmentgenerator": {
+      "single-hunk:API-contract": 1.5
+    },
+    "class:timeperiodvalues": {
+      "single-hunk:boundary": 1.5
+    },
+    "class:timeseries": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:boundary": 1.5
+    },
+    "class:week": {
+      "single-hunk:API-contract": 1.5
+    },
+    "class:xyplot": {
+      "single-hunk:null-check": 1.5
+    },
+    "class:xyseries": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "exception:error": {
+      "exact-old-text-grounding": -3.0,
+      "format-and-patch-grounding": -0.75,
+      "multi-hunk:null-check": 1.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -4.5,
+      "retry-after-feedback": -3.25,
+      "single-hunk:API-contract": 12.0,
+      "single-hunk:boundary": 3.0,
+      "single-hunk:null-check": 1.5
+    },
+    "exception:fractionconversionexception": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "exception:illegalargumentexception": {
+      "single-hunk:boundary": 3.0
+    },
+    "exception:indexoutofboundsexception": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "exception:nullpointerexception": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5,
+      "single-hunk:null-check": 1.5
+    },
+    "exception:numberformatexception": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:fallback": 3.0
+    },
+    "exception:stringindexoutofboundsexception": {
+      "retry-after-feedback": -0.25,
+      "single-hunk:boundary": 1.5
+    },
+    "project:Chart": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -1.0,
+      "single-hunk:API-contract": 9.0,
+      "single-hunk:boundary": 4.5,
+      "single-hunk:null-check": 3.0
+    },
+    "project:Lang": {
+      "exact-old-text-grounding": -3.0,
+      "format-and-patch-grounding": -0.75,
+      "multi-hunk:null-check": 1.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -1.25,
+      "retry-after-feedback": -3.5,
+      "single-hunk:API-contract": 4.5,
+      "single-hunk:boundary": 4.5,
+      "single-hunk:fallback": 3.0
+    },
+    "project:Math": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -5.5
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:bigfractiontest": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "trigger:datasetutilitiestests": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:fastdateformat_parsertest": {
+      "exact-old-text-grounding": -1.0,
+      "format-and-patch-grounding": -0.5,
+      "multi-hunk:null-check": 1.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -2.75
+    },
+    "trigger:fastdateformat_printertest": {
+      "exact-old-text-grounding": -0.5,
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:fastdateparsertest": {
+      "exact-old-text-grounding": -1.0,
+      "format-and-patch-grounding": -0.5,
+      "multi-hunk:null-check": 1.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -2.75
+    },
+    "trigger:fastdateprintertest": {
+      "exact-old-text-grounding": -0.5,
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:fractiontest": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "trigger:hypergeometricdistributiontest": {
+      "recover-from-llm-error": -3.0
+    },
+    "trigger:localeutilstest": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:logaxistests": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:lookuptranslatortest": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:numberaxistests": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:numberutilstest": {
+      "exact-old-text-grounding": -1.5,
+      "format-and-patch-grounding": -0.25,
+      "recover-from-llm-error": -0.25,
+      "retry-after-feedback": -0.5,
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:fallback": 3.0
+    },
+    "trigger:randomstringutilstest": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:shapelisttests": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:standardtooltiptagfragmentgeneratortests": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:stringutilstest": {
+      "retry-after-feedback": -0.25,
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:test2947660": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:testbug1864222": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testbug1955483": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:testbug2849731_3": {
+      "multi-hunk:boundary": 3.0,
+      "recover-from-llm-error": -0.75,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:testcalendartimezonerespected": {
+      "exact-old-text-grounding": -0.5,
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testconstructor": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testcreatecopy3": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testcreatenumber": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testdigitlimitconstructor": {
+      "exact-old-text-grounding": -1.25,
+      "format-and-patch-grounding": -0.25,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -2.5
+    },
+    "trigger:testequals": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:testescapesurrogatepairs": {
+      "retry-after-feedback": -0.25,
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testgenerateurlfragment": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testlang747": {
+      "single-hunk:fallback": 3.0
+    },
+    "trigger:testlang807": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testlang865": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:testlang882": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:testlang_831": {
+      "exact-old-text-grounding": -0.75,
+      "format-and-patch-grounding": -0.5,
+      "read-before-patch": -0.25,
+      "recover-from-llm-error": -1.0,
+      "retry-after-feedback": -2.0
+    },
+    "trigger:testlang_832": {
+      "exact-old-text-grounding": -0.25,
+      "multi-hunk:null-check": 1.5,
+      "retry-after-feedback": -0.75
+    },
+    "trigger:testmath1021": {
+      "recover-from-llm-error": -3.0
+    },
+    "trigger:testserialization": {
+      "recover-from-llm-error": -0.25,
+      "single-hunk:API-contract": 3.0
+    },
+    "trigger:teststringcreatenumberensurenoprecisionloss": {
+      "exact-old-text-grounding": -1.5,
+      "format-and-patch-grounding": -0.25,
+      "recover-from-llm-error": -0.25,
+      "retry-after-feedback": -0.5
+    },
+    "trigger:testxyautorange1": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "single-hunk:null-check": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:timeseriestests": {
+      "single-hunk:API-contract": 1.5,
+      "single-hunk:boundary": 1.5
+    },
+    "trigger:weektests": {
+      "single-hunk:API-contract": 1.5
+    },
+    "trigger:xyseriestests": {
+      "retry-after-feedback": -0.5,
+      "single-hunk:boundary": 1.5
+    }
+  },
+  "success_strategies": [
+    {
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+      "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+      "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+      "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:weektests,trigger:testconstructor,exception:error,class:week",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:timeseriestests,trigger:testbug1864222,exception:illegalargumentexception,class:timeseries",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Chart,trigger:standardtooltiptagfragmentgeneratortests,trigger:testgenerateurlfragment,class:standardtooltiptagfragmentgenerator",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java; approach=The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+      "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=Replaced hex digit counting logic with a try-Integer-then-Long-then-BigInteger fallback chain, matching the existing integral cascade, so that 8-digit hex values beyond int range become Long instead of throwing NumberFormatException.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:lookuptranslatortest,trigger:testlang882,exception:error,class:lookuptranslator",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java; approach=Convert CharSequence key to String when inserting into the lookup map so that the subsequent lookup using the String returned by input.subSequence() succeeds for all CharSequence types, fixing LANG-882.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:localeutilstest,trigger:testlang865,exception:illegalargumentexception,class:localeutils",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=src/main/java/org/apache/commons/lang3/LocaleUtils.java; approach=Add a new branch to handle locale strings that start with an underscore. This branch validates the country code (must be two uppercase letters) and optional variant, returning an appropriate Locale, while the existing logic for language-prefixed strings remains unchanged.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:stringutilstest,trigger:testescapesurrogatepairs,exception:stringindexoutofboundsexception,class:charsequencetranslator",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java; approach=Add a guard to the for-loop so that pos never exceeds len when translators return a char count that is larger than the number of code points. This prevents the StringIndexOutOfBoundsException while keeping the existing translator contracts unchanged.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:numberutilstest,trigger:testcreatenumber,exception:error,exception:numberformatexception,class:numberutils",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=Replace the incorrect return null with a NumberFormatException for '--' input to align with the method contract that invalid numbers cause an exception.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:fastdateformat_printertest,trigger:testcalendartimezonerespected,trigger:fastdateprintertest,exception:error,class:fastdateprinter",
+      "strategy": "successful strategy: style=API-contract; scope=relevant; files=src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java; approach=Modified TimeZoneNameRule.appendTo to use calendar.getTimeZone() for time zone name display, matching SimpleDateFormat's behavior.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:fastdateformat_parsertest,trigger:testlang_832,trigger:fastdateparsertest,exception:error,class:fastdateparser",
+      "strategy": "successful strategy: style=null-check; scope=relevant; files=src/main/java/org/apache/commons/lang3/time/FastDateParser.java; approach=If the pattern contains an odd number of single quotes (unterminated), the parser is deemed invalid. In init(), we detect this and skip building the parse pattern and strategies, causing parse() to return null. This matches the expected behavior for LANG-832 where an invalid pattern must not produce a date.; require exact old/new text from current snippets and verify trigger plus regression"
+    },
+    {
+      "features": "project:Lang,trigger:randomstringutilstest,trigger:testlang807,exception:error,class:randomstringutils",
+      "strategy": "successful strategy: style=boundary; scope=relevant; files=src/main/java/org/apache/commons/lang3/RandomStringUtils.java; approach=Insert a guard before the gap computation to throw an IllegalArgumentException with both 'start' and 'end' in the message when the range is empty (start >= end), satisfying the test's assertion.; require exact old/new text from current snippets and verify trigger plus regression"
+    }
+  ],
+  "test_selection": {
+    "class:abstractcategoryitemrenderer": {
+      "relevant": 3.0
+    },
+    "class:bigfraction": {
+      "not-run": -4.25
+    },
+    "class:charsequencetranslator": {
+      "relevant": 1.5,
+      "trigger": -0.5
+    },
+    "class:datasetutilities": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "class:fastdateparser": {
+      "not-run": -2.75,
+      "relevant": 1.5,
+      "trigger": -5.0
+    },
+    "class:fastdateprinter": {
+      "not-run": -0.5,
+      "relevant": 1.5
+    },
+    "class:fraction": {
+      "not-run": -4.25
+    },
+    "class:hypergeometricdistribution": {
+      "not-run": -3.0
+    },
+    "class:localeutils": {
+      "relevant": 1.5
+    },
+    "class:lookuptranslator": {
+      "relevant": 1.5
+    },
+    "class:numberutils": {
+      "not-run": -2.0,
+      "relevant": 4.5,
+      "trigger": -1.0
+    },
+    "class:randomstringutils": {
+      "relevant": 1.5
+    },
+    "class:shapelist": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "class:standardtooltiptagfragmentgenerator": {
+      "relevant": 1.5
+    },
+    "class:timeperiodvalues": {
+      "relevant": 1.5
+    },
+    "class:timeseries": {
+      "relevant": 3.0
+    },
+    "class:week": {
+      "relevant": 1.5
+    },
+    "class:xyplot": {
+      "relevant": 1.5
+    },
+    "class:xyseries": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "exception:error": {
+      "not-run": -8.5,
+      "relevant": 18.0,
+      "trigger": -6.0
+    },
+    "exception:fractionconversionexception": {
+      "not-run": -4.25
+    },
+    "exception:illegalargumentexception": {
+      "relevant": 3.0
+    },
+    "exception:indexoutofboundsexception": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "exception:nullpointerexception": {
+      "not-run": -0.75,
+      "relevant": 4.5,
+      "trigger": -1.0
+    },
+    "exception:numberformatexception": {
+      "relevant": 4.5
+    },
+    "exception:stringindexoutofboundsexception": {
+      "relevant": 1.5,
+      "trigger": -0.5
+    },
+    "project:Chart": {
+      "not-run": -1.0,
+      "relevant": 19.5,
+      "trigger": -1.75
+    },
+    "project:Lang": {
+      "not-run": -5.25,
+      "relevant": 13.5,
+      "trigger": -6.5
+    },
+    "project:Math": {
+      "not-run": -7.25
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "relevant": 3.0
+    },
+    "trigger:bigfractiontest": {
+      "not-run": -4.25
+    },
+    "trigger:datasetutilitiestests": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:fastdateformat_parsertest": {
+      "not-run": -2.75,
+      "relevant": 1.5,
+      "trigger": -5.0
+    },
+    "trigger:fastdateformat_printertest": {
+      "not-run": -0.5,
+      "relevant": 1.5
+    },
+    "trigger:fastdateparsertest": {
+      "not-run": -2.75,
+      "relevant": 1.5,
+      "trigger": -5.0
+    },
+    "trigger:fastdateprintertest": {
+      "not-run": -0.5,
+      "relevant": 1.5
+    },
+    "trigger:fractiontest": {
+      "not-run": -4.25
+    },
+    "trigger:hypergeometricdistributiontest": {
+      "not-run": -3.0
+    },
+    "trigger:localeutilstest": {
+      "relevant": 1.5
+    },
+    "trigger:logaxistests": {
+      "relevant": 1.5
+    },
+    "trigger:lookuptranslatortest": {
+      "relevant": 1.5
+    },
+    "trigger:numberaxistests": {
+      "relevant": 1.5
+    },
+    "trigger:numberutilstest": {
+      "not-run": -2.0,
+      "relevant": 4.5,
+      "trigger": -1.0
+    },
+    "trigger:randomstringutilstest": {
+      "relevant": 1.5
+    },
+    "trigger:shapelisttests": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:standardtooltiptagfragmentgeneratortests": {
+      "relevant": 1.5
+    },
+    "trigger:stringutilstest": {
+      "relevant": 1.5,
+      "trigger": -0.5
+    },
+    "trigger:test2947660": {
+      "relevant": 3.0
+    },
+    "trigger:testbug1864222": {
+      "relevant": 1.5
+    },
+    "trigger:testbug1955483": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    },
+    "trigger:testbug2849731_2": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:testbug2849731_3": {
+      "not-run": -0.75,
+      "relevant": 3.0,
+      "trigger": -1.0
+    },
+    "trigger:testcalendartimezonerespected": {
+      "not-run": -0.5,
+      "relevant": 1.5
+    },
+    "trigger:testconstructor": {
+      "relevant": 1.5
+    },
+    "trigger:testcreatecopy3": {
+      "relevant": 1.5
+    },
+    "trigger:testcreatenumber": {
+      "relevant": 1.5
+    },
+    "trigger:testdigitlimitconstructor": {
+      "not-run": -4.25
+    },
+    "trigger:testequals": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:testescapesurrogatepairs": {
+      "relevant": 1.5,
+      "trigger": -0.5
+    },
+    "trigger:testgenerateurlfragment": {
+      "relevant": 1.5
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "relevant": 1.5
+    },
+    "trigger:testlang747": {
+      "relevant": 3.0
+    },
+    "trigger:testlang807": {
+      "relevant": 1.5
+    },
+    "trigger:testlang865": {
+      "relevant": 1.5
+    },
+    "trigger:testlang882": {
+      "relevant": 1.5
+    },
+    "trigger:testlang_831": {
+      "not-run": -2.5,
+      "trigger": -3.75
+    },
+    "trigger:testlang_832": {
+      "not-run": -0.25,
+      "relevant": 1.5,
+      "trigger": -1.25
+    },
+    "trigger:testmath1021": {
+      "not-run": -3.0
+    },
+    "trigger:testserialization": {
+      "not-run": -0.25,
+      "relevant": 3.0
+    },
+    "trigger:teststringcreatenumberensurenoprecisionloss": {
+      "not-run": -2.0,
+      "trigger": -1.0
+    },
+    "trigger:testxyautorange1": {
+      "relevant": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "relevant": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "relevant": 1.5
+    },
+    "trigger:timeseriestests": {
+      "relevant": 3.0
+    },
+    "trigger:weektests": {
+      "relevant": 1.5
+    },
+    "trigger:xyseriestests": {
+      "relevant": 1.5,
+      "trigger": -0.75
+    }
+  },
+  "test_skill_memory": {
+    "class:abstractcategoryitemrenderer": {
+      "regression-relevant-passed": 3.0
+    },
+    "class:bigfraction": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "class:charsequencetranslator": {
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -0.25
+    },
+    "class:datasetutilities": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "class:fastdateparser": {
+      "compile-before-tests": -1.0,
+      "no-test-run": -1.75,
+      "not-run-first": -1.0,
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -1.75
+    },
+    "class:fastdateprinter": {
+      "not-run-first": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "class:fraction": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "class:hypergeometricdistribution": {
+      "no-test-run": -3.0
+    },
+    "class:localeutils": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:lookuptranslator": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:numberutils": {
+      "no-test-run": -0.5,
+      "not-run-first": -1.5,
+      "regression-relevant-passed": 4.5,
+      "trigger-first": -0.5
+    },
+    "class:randomstringutils": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:shapelist": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "class:standardtooltiptagfragmentgenerator": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:timeperiodvalues": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:timeseries": {
+      "regression-relevant-passed": 3.0
+    },
+    "class:week": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:xyplot": {
+      "regression-relevant-passed": 1.5
+    },
+    "class:xyseries": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "exception:error": {
+      "compile-before-tests": -1.0,
+      "no-test-run": -5.5,
+      "not-run-first": -3.0,
+      "regression-relevant-passed": 18.0,
+      "trigger-first": -2.25
+    },
+    "exception:fractionconversionexception": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "exception:illegalargumentexception": {
+      "regression-relevant-passed": 3.0
+    },
+    "exception:indexoutofboundsexception": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "exception:nullpointerexception": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 4.5,
+      "trigger-first": -0.5
+    },
+    "exception:numberformatexception": {
+      "regression-relevant-passed": 4.5
+    },
+    "exception:stringindexoutofboundsexception": {
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -0.25
+    },
+    "project:Chart": {
+      "compile-before-tests": -0.5,
+      "no-test-run": -1.0,
+      "regression-relevant-passed": 19.5,
+      "trigger-first": -0.5
+    },
+    "project:Lang": {
+      "compile-before-tests": -1.0,
+      "no-test-run": -2.25,
+      "not-run-first": -3.0,
+      "regression-relevant-passed": 13.5,
+      "trigger-first": -2.5
+    },
+    "project:Math": {
+      "no-test-run": -6.0,
+      "not-run-first": -1.25
+    },
+    "trigger:abstractcategoryitemrenderertests": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:bigfractiontest": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "trigger:datasetutilitiestests": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:fastdateformat_parsertest": {
+      "compile-before-tests": -1.0,
+      "no-test-run": -1.75,
+      "not-run-first": -1.0,
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -1.75
+    },
+    "trigger:fastdateformat_printertest": {
+      "not-run-first": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:fastdateparsertest": {
+      "compile-before-tests": -1.0,
+      "no-test-run": -1.75,
+      "not-run-first": -1.0,
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -1.75
+    },
+    "trigger:fastdateprintertest": {
+      "not-run-first": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:fractiontest": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "trigger:hypergeometricdistributiontest": {
+      "no-test-run": -3.0
+    },
+    "trigger:localeutilstest": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:logaxistests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:lookuptranslatortest": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:numberaxistests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:numberutilstest": {
+      "no-test-run": -0.5,
+      "not-run-first": -1.5,
+      "regression-relevant-passed": 4.5,
+      "trigger-first": -0.5
+    },
+    "trigger:randomstringutilstest": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:shapelisttests": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:standardtooltiptagfragmentgeneratortests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:stringutilstest": {
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -0.25
+    },
+    "trigger:test2947660": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testbug1864222": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testbug1955483": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testbug2849731_2": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:testbug2849731_3": {
+      "no-test-run": -0.75,
+      "regression-relevant-passed": 3.0,
+      "trigger-first": -0.5
+    },
+    "trigger:testcalendartimezonerespected": {
+      "not-run-first": -0.5,
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testconstructor": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testcreatecopy3": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testcreatenumber": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testdigitlimitconstructor": {
+      "no-test-run": -3.0,
+      "not-run-first": -1.25
+    },
+    "trigger:testequals": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testescapesurrogatepairs": {
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -0.25
+    },
+    "trigger:testgenerateurlfragment": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testgetmaxmiddleindex": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testlang747": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:testlang807": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testlang865": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testlang882": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testlang_831": {
+      "compile-before-tests": -0.5,
+      "no-test-run": -1.75,
+      "not-run-first": -0.75,
+      "trigger-first": -1.5
+    },
+    "trigger:testlang_832": {
+      "compile-before-tests": -0.5,
+      "not-run-first": -0.25,
+      "regression-relevant-passed": 1.5,
+      "trigger-first": -0.25
+    },
+    "trigger:testmath1021": {
+      "no-test-run": -3.0
+    },
+    "trigger:testserialization": {
+      "no-test-run": -0.25,
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:teststringcreatenumberensurenoprecisionloss": {
+      "no-test-run": -0.5,
+      "not-run-first": -1.5,
+      "trigger-first": -0.5
+    },
+    "trigger:testxyautorange1": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:testxyautorange2": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:timeperiodvaluestests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:timeseriestests": {
+      "regression-relevant-passed": 3.0
+    },
+    "trigger:weektests": {
+      "regression-relevant-passed": 1.5
+    },
+    "trigger:xyseriestests": {
+      "compile-before-tests": -0.5,
+      "regression-relevant-passed": 1.5
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "failure_reflections": [
+    {
+      "failure_reason": "regression_failure",
+      "features": "project:Lang,class:fastdateparser",
+      "reflection": "literal-space-relaxation passed visible checks but failed regression"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,class:numberutils",
+      "reflection": "float-before-double failed the trigger test and should not be retried"
+    },
+    {
+      "failure_reason": "visible_failure",
+      "features": "project:Lang,class:numberutils",
+      "reflection": "float-before-double failed the trigger test and should not be retried"
+    },
+    {
+      "failure_reason": "regression_failure",
+      "features": "project:Math,exception:assertionerror",
+      "reflection": "constant-return passed visible checks but failed regression"
+    },
+    {
+      "failure_reason": "regression_failure",
+      "features": "project:Chart,class:renderer",
+      "reflection": "delete-validation passed visible checks but failed regression"
+    }
+  ],
+  "patch_ranking": {
+    "class:fastdateparser": {
+      "literal-space-relaxation": -1.0,
+      "regex-boundary": 1.5
+    },
+    "class:numberutils": {
+      "float-before-double": -1.0,
+      "numeric-conversion": 3.0
+    },
+    "class:renderer": {
+      "api-contract": 1.5,
+      "delete-validation": -1.0
+    },
+    "exception:assertionerror": {
+      "boundary-condition": 1.5,
+      "constant-return": -1.0
+    },
+    "project:Chart": {
+      "api-contract": 1.5,
+      "delete-validation": -1.0
+    },
+    "project:Lang": {
+      "float-before-double": -1.0,
+      "literal-space-relaxation": -1.0,
+      "numeric-conversion": 3.0,
+      "regex-boundary": 1.5
+    },
+    "project:Math": {
+      "boundary-condition": 1.5,
+      "constant-return": -1.0
+    }
+  },
+  "regression_outcomes": {},
+  "repair_skill_memory": {
+    "class:fastdateparser": {
+      "avoid:literal-space-relaxation": 0.75,
+      "use:regex-boundary": 1.5
+    },
+    "class:numberutils": {
+      "avoid:float-before-double": -0.5,
+      "use:numeric-conversion": 3.0
+    },
+    "class:renderer": {
+      "avoid:delete-validation": 0.75,
+      "use:api-contract": 1.5
+    },
+    "exception:assertionerror": {
+      "avoid:constant-return": 0.75,
+      "use:boundary-condition": 1.5
+    },
+    "project:Chart": {
+      "avoid:delete-validation": 0.75,
+      "use:api-contract": 1.5
+    },
+    "project:Lang": {
+      "avoid:float-before-double": -0.5,
+      "avoid:literal-space-relaxation": 0.75,
+      "use:numeric-conversion": 3.0,
+      "use:regex-boundary": 1.5
+    },
+    "project:Math": {
+      "avoid:constant-return": 0.75,
+      "use:boundary-condition": 1.5
+    }
+  },
+  "success_strategies": [
+    {
+      "features": "project:Lang,class:fastdateparser",
+      "strategy": "Use regex-boundary and validate with relevant"
+    },
+    {
+      "features": "project:Lang,class:numberutils",
+      "strategy": "Use numeric-conversion and validate with trigger"
+    },
+    {
+      "features": "project:Lang,class:numberutils",
+      "strategy": "Use numeric-conversion and validate with trigger"
+    },
+    {
+      "features": "project:Math,exception:assertionerror",
+      "strategy": "Use boundary-condition and validate with relevant"
+    },
+    {
+      "features": "project:Chart,class:renderer",
+      "strategy": "Use api-contract and validate with all"
+    }
+  ],
+  "test_selection": {},
+  "test_skill_memory": {}
+}

@@ -1,0 +1,18 @@
+--- a/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java
++++ b/src/main/java/org/apache/commons/lang3/time/FastDatePrinter.java
+@@ -1131,11 +1131,12 @@
+          */
+         @Override
+         public void appendTo(StringBuffer buffer, Calendar calendar) {
+-            if (zone.useDaylightTime()
++            TimeZone timeZone = calendar.getTimeZone();
++            if (timeZone.useDaylightTime()
+                     && calendar.get(Calendar.DST_OFFSET) != 0) {
+-                buffer.append(getTimeZoneDisplay(zone, true, mStyle, mLocale));
++                buffer.append(getTimeZoneDisplay(timeZone, true, mStyle, mLocale));
+             } else {
+-                buffer.append(getTimeZoneDisplay(zone, false, mStyle, mLocale));
++                buffer.append(getTimeZoneDisplay(timeZone, false, mStyle, mLocale));
+             }
+         }
+     }

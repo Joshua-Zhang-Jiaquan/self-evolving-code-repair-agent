@@ -1,0 +1,20 @@
+{
+  "dataset": "Defects4J",
+  "cases": [
+    {"project": "Chart", "bug_id": 6},
+    {"project": "Lang", "bug_id": 1}
+  ],
+  "runtime": {
+    "attempt_limits": {
+      "baseline": 1,
+      "feedback": 3,
+      "self_evolved": 5
+    },
+    "memory_attempt_bonus": 2,
+    "max_attempt_cap": 8,
+    "memory_guidance_limit": 5,
+    "max_non_patch_rounds": 8,
+    "memory_path": "artifacts/memory/benchmark_memory.json"
+  },
+  "notes": "Focused framework-regression config for tasks that expose helper retrieval, compile-feedback, and LLM retry-budget behavior."
+}

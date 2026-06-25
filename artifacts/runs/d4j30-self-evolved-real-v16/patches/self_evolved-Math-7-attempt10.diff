@@ -1,0 +1,10 @@
+--- a/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
++++ b/src/main/java/org/apache/commons/math3/ode/AbstractIntegrator.java
+@@ -366,6 +366,7 @@
+                     // invalidate the derivatives, we need to recompute them
+                     System.arraycopy(eventY, 0, y, 0, y.length);
+                     computeDerivatives(eventT, y, yDot);
++                    statesInitialized = false;
+                     resetOccurred = true;
+                     for (final EventState remaining : occuringEvents) {
+                         remaining.stepAccepted(eventT, eventY);

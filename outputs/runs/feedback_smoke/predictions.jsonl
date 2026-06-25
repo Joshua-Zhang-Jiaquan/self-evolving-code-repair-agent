@@ -1,1 +1,0 @@
-{"instance_id":"feedback-local-0001","model_name_or_path":"rule_based_local","model_patch":"--- a/math_utils.py\n+++ b/math_utils.py\n@@ -1,2 +1,2 @@\n def add_numbers(left, right):\n-    return left - right\n+    return left + right\n"}

@@ -1,0 +1,22 @@
+--- a/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
++++ b/src/main/java/org/apache/commons/lang3/math/NumberUtils.java
+@@ -506,6 +506,19 @@
+             }
+             dec = null;
+         }
++        if (expPos > -1) {
++            // allow for exponent to affect the number of decimal places
++            try {
++                int exponentValue = Integer.parseInt(str.substring(expPos + 1));
++                if (exponentValue > 0) {
++                    numDecimals = Math.max(0, numDecimals - exponentValue);
++                } else {
++                    numDecimals += Math.abs(exponentValue);
++                }
++            } catch (NumberFormatException nfe) {
++                // ignore
++            }
++        }
+         if (!Character.isDigit(lastChar) && lastChar != '.') {
+             if (expPos > -1 && expPos < str.length() - 1) {
+                 exp = str.substring(expPos + 1, str.length() - 1);

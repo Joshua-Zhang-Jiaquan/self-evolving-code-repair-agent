@@ -1,0 +1,2311 @@
+{
+  "system": "self_evolved",
+  "case": {
+    "project": "Lang",
+    "bug_id": 4,
+    "case_id": "Lang-4"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "patch_attempt": 1,
+      "prompt": [
+        {
+          "role": "system",
+          "content": "You are a code repair agent for Defects4J Java bugs. Return only JSON. Do not edit tests, build files, generated files, secrets, or paths outside the checkout. Snippets marked [read-only-test] are visible tests for diagnosis only and must not be patched. Use exact old/new text replacements for source files only. The old field must be copied verbatim from source_snippets without inventing missing context. Prefer a short unique old block over a long uncertain block; do not use line 1 as a placeholder anchor. Prefer the smallest semantic source change that fixes the root cause. Do not delete existing validation, parsing, serialization, or boundary logic unless the failing evidence specifically shows it is wrong. If current_diff is empty, previous failed patches are not present in the workspace; never use failed patch text as old. Prioritize failing_summary and visible test assertions over long stack traces. Do not return empty patch_hunks; if you request files_to_read, still provide the best grounded patch from current snippets. Output the final JSON object immediately; do not spend tokens on hidden reasoning."
+        },
+        {
+          "role": "user",
+          "content": "{\n  \"project\": \"Lang\",\n  \"bug_id\": 4,\n  \"attempt\": 1,\n  \"metadata\": {\n    \"dir.src.classes\": \"src/main/java\",\n    \"dir.src.tests\": \"src/test/java\",\n    \"tests.trigger\": \"org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\",\n    \"tests.relevant\": \"org.apache.commons.lang3.StringEscapeUtilsTest\\norg.apache.commons.lang3.StringUtilsTest\\norg.apache.commons.lang3.reflect.TypeUtilsTest\\norg.apache.commons.lang3.text.translate.LookupTranslatorTest\",\n    \"classes.modified\": \"org.apache.commons.lang3.text.translate.LookupTranslator\"\n  },\n  \"failing_summary\": \"--- org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\\njunit.framework.AssertionFailedError: Incorrect codepoint consumption expected:<3> but was:<0>\",\n  \"failing_output\": \"Running ant (compile.tests)................................................ OK\\nRunning ant (run.dev.tests)................................................ OK\\nFailing tests: 1\\n  - org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\\n\\n\\n[failing_tests]\\n--- org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\\njunit.framework.AssertionFailedError: Incorrect codepoint consumption expected:<3> but was:<0>\\n\\tat org.junit.Assert.fail(Assert.java:88)\\n\\tat org.junit.Assert.failNotEquals(Assert.java:834)\\n\\tat org.junit.Assert.assertEquals(Assert.java:645)\\n\\tat org.apache.commons.lang3.text.translate.LookupTranslatorTest.testLang882(LookupTranslatorTest.java:48)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\\n\\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)\\n\\tat org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)\\n\\tat org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)\\n\\tat org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)\\n\\tat org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)\\n\\tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)\\n\\tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)\\n\\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\\n\\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\\n\\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\\n\\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\\n\\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\\n\\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnit4TestMethodAdapter.run(JUnit4TestMethodAdapter.java:109)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\\n\\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\\n\\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\\n\\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\\n\\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\\n\\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\\n\\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\\n\\tat org.apache.tools.ant.Task.perform(Task.java:348)\\n\\tat org.apache.tools.ant.Target.execute(Target.java:392)\\n\\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\\n\\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\\n\\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\\n\\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\\n\\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\\n\\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\\n\\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\\n\\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\\n\\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\\n\",\n  \"visible_test_assertions\": [\n    \"full_test_method: testLang882() throws IOException { | final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\\\"one\\\"), new StringBuffer(\\\"two\\\") } }); | final StringWriter out = new StringWriter(); | final int result = lt.translate(new StringBuffer(\\\"one\\\"), 0, out); | assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result); | assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString()); | }\",\n    \"final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\\\"one\\\"), new StringBuffer(\\\"two\\\") } }); | final StringWriter out = new StringWriter(); | final int result = lt.translate(new StringBuffer(\\\"one\\\"), 0, out); | assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result);\",\n    \"final StringWriter out = new StringWriter(); | final int result = lt.translate(new StringBuffer(\\\"one\\\"), 0, out); | assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result); | assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString());\"\n  ],\n  \"derived_repair_constraints\": [],\n  \"source_snippets\": {\n    \"src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java\": \"/*\\n * Licensed to the Apache Software Foundation (ASF) under one or more\\n * contributor license agreements.  See the NOTICE file distributed with\\n * this work for additional information regarding copyright ownership.\\n * The ASF licenses this file to You under the Apache License, Version 2.0\\n * (the \\\"License\\\"); you may not use this file except in compliance with\\n * the License.  You may obtain a copy of the License at\\n * \\n *      http://www.apache.org/licenses/LICENSE-2.0\\n * \\n * Unless required by applicable law or agreed to in writing, software\\n * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n * See the License for the specific language governing permissions and\\n * limitations under the License.\\n */\\npackage org.apache.commons.lang3.text.translate;\\n\\nimport java.io.IOException;\\nimport java.io.Writer;\\nimport java.util.HashMap;\\n\\n/**\\n * Translates a value using a lookup table.\\n *\\n * @since 3.0\\n * @version $Id$\\n */\\npublic class LookupTranslator extends CharSequenceTranslator {\\n\\n    private final HashMap<CharSequence, CharSequence> lookupMap;\\n    private final int shortest;\\n    private final int longest;\\n\\n    /**\\n     * Define the lookup table to be used in translation\\n     *\\n     * Note that, as of Lang 3.1, the key to the lookup table is converted to a \\n     * java.lang.String, while the value remains as a java.lang.CharSequence. \\n     * This is because we need the key to support hashCode and equals(Object), \\n     * allowing it to be the key for a HashMap. See LANG-882.\\n     *\\n     * @param lookup CharSequence[][] table of size [*][2]\\n     */\\n    public LookupTranslator(final CharSequence[]... lookup) {\\n        lookupMap = new HashMap<CharSequence, CharSequence>();\\n        int _shortest = Integer.MAX_VALUE;\\n        int _longest = 0;\\n        if (lookup != null) {\\n            for (final CharSequence[] seq : lookup) {\\n                this.lookupMap.put(seq[0], seq[1]);\\n                final int sz = seq[0].length();\\n                if (sz < _shortest) {\\n                    _shortest = sz;\\n                }\\n                if (sz > _longest) {\\n                    _longest = sz;\\n                }\\n            }\\n        }\\n        shortest = _shortest;\\n        longest = _longest;\\n    }\\n\\n    /**\\n     * {@inheritDoc}\\n     */\\n    @Override\\n    public int translate(final CharSequence input, final int index, final Writer out) throws IOException {\\n        int max = longest;\\n        if (index + longest > input.length()) {\\n            max = input.length() - index;\\n        }\\n        // descend so as to get a greedy algorithm\\n        for (int i = max; i >= shortest; i--) {\\n            final CharSequence subSeq = input.subSequence(index, index + i);\\n            final CharSequence result = lookupMap.get(subSeq);\\n            if (result != null) {\\n                out.write(result.toString());\\n                return i;\\n            }\\n        }\\n        return 0;\\n    }\\n}\\n\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\": \"/*\\n * Licensed to the Apache Software Foundation (ASF) under one or more\\n * contributor license agreements.  See the NOTICE file distributed with\\n * this work for additional information regarding copyright ownership.\\n * The ASF licenses this file to You under the Apache License, Version 2.0\\n * (the \\\"License\\\"); you may not use this file except in compliance with\\n * the License.  You may obtain a copy of the License at\\n * \\n *      http://www.apache.org/licenses/LICENSE-2.0\\n * \\n * Unless required by applicable law or agreed to in writing, software\\n * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n * See the License for the specific language governing permissions and\\n * limitations under the License.\\n */\\npackage org.apache.commons.lang3.text.translate;\\n\\nimport java.io.IOException;\\nimport java.io.StringWriter;\\nimport java.io.Writer;\\nimport java.util.Locale;\\n\\n/**\\n * An API for translating text. \\n * Its core use is to escape and unescape text. Because escaping and unescaping \\n * is completely contextual, the API does not present two separate signatures.\\n * \\n * @since 3.0\\n * @version $Id$\\n */\\npublic abstract class CharSequenceTranslator {\\n\\n    /**\\n     * Translate a set of codepoints, represented by an int index into a CharSequence, \\n     * into another set of codepoints. The number of codepoints consumed must be returned, \\n     * and the only IOExceptions thrown must be from interacting with the Writer so that \\n     * the top level API may reliable ignore StringWriter IOExceptions. \\n     *\\n     * @param input CharSequence that is being translated\\n     * @param index int representing the current point of translation\\n     * @param out Writer to translate the text to\\n     * @return int count of codepoints consumed\\n     * @throws IOException if and only if the Writer produces an IOException\\n     */\\n    public abstract int translate(CharSequence input, int index, Writer out) throws IOException;\\n\\n    /**\\n     * Helper for non-Writer usage. \\n     * @param input CharSequence to be translated\\n     * @return String output of translation\\n     */\\n    public final String translate(final CharSequence input) {\\n        if (input == null) {\\n            return null;\\n        }\\n        try {\\n            final StringWriter writer = new StringWriter(input.length() * 2);\\n            translate(input, writer);\\n            return writer.toString();\\n        } catch (final IOException ioe) {\\n            // \\n...[truncated]...\\nact with translators is that they have to understand codepoints \\n//          // and they just took care of a surrogate pair\\n            for (int pt = 0; pt < consumed; pt++) {\\n                pos += Character.charCount(Character.codePointAt(input, pt));\\n            }\\n        }\\n    }\\n\\n    /**\\n     * Helper method to create a merger of this translator with another set of \\n     * translators. Useful in customizing the standard functionality.\\n     *\\n     * @param translators CharSequenceTranslator array of translators to merge with this one\\n     * @return CharSequenceTranslator merging this translator with the others\\n     */\\n    public final CharSequenceTranslator with(final CharSequenceTranslator... translators) {\\n        final CharSequenceTranslator[] newArray = new CharSequenceTranslator[translators.length + 1];\\n        newArray[0] = this;\\n        System.arraycopy(translators, 0, newArray, 1, translators.length);\\n        return new AggregateTranslator(newArray);\\n    }\\n\\n    /**\\n     * <p>Returns an upper case hexadecimal <code>String</code> for the given\\n     * character.</p>\\n     *\\n     * @param codepoint The codepoint to convert.\\n     * @return An upper case hexadecimal <code>String</code>\\n     */\\n    public static String hex(final int codepoint) {\\n        return Integer.toHexString(codepoint).toUpperCase(Locale.ENGLISH);\\n    }\\n\\n}\\n\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/AggregateTranslator.java\": \"/*\\n * Licensed to the Apache Software Foundation (ASF) under one or more\\n * contributor license agreements.  See the NOTICE file distributed with\\n * this work for additional information regarding copyright ownership.\\n * The ASF licenses this file to You under the Apache License, Version 2.0\\n * (the \\\"License\\\"); you may not use this file except in compliance with\\n * the License.  You may obtain a copy of the License at\\n * \\n *      http://www.apache.org/licenses/LICENSE-2.0\\n * \\n * Unless required by applicable law or agreed to in writing, software\\n * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n * See the License for the specific language governing permissions and\\n * limitations under the License.\\n */\\npackage org.apache.commons.lang3.text.translate;\\n\\nimport java.io.IOException;\\nimport java.io.Writer;\\n\\nimport org.apache.commons.lang3.ArrayUtils;\\n\\n/**\\n * Executes a sequence of translators one after the other. Execution ends whenever \\n * the first translator consumes codepoints from the input.\\n * \\n * @since 3.0\\n * @version $Id$\\n */\\npublic class AggregateTranslator extends CharSequenceTranslator {\\n\\n    private final CharSequenceTranslator[] translators;\\n\\n    /**\\n     * Specify the translators to be used at creation time. \\n     *\\n     * @param translators CharSequenceTranslator array to aggregate\\n     */\\n    public AggregateTranslator(final CharSequenceTranslator... translators) {\\n        this.translators = ArrayUtils.clone(translators);\\n    }\\n\\n    /**\\n     * The first translator to consume codepoints from the input is the 'winner'. \\n     * Execution stops with the number of consumed codepoints being returned. \\n     * {@inheritDoc}\\n     */\\n    @Override\\n    public int translate(final CharSequence input, final int index, final Writer out) throws IOException {\\n        for (final CharSequenceTranslator translator : translators) {\\n            final int consumed = translator.translate(input, index, out);\\n            if(consumed != 0) {\\n                return consumed;\\n            }\\n        }\\n        return 0;\\n    }\\n\\n}\\n\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/CodePointTranslator.java\": \"/*\\n * Licensed to the Apache Software Foundation (ASF) under one or more\\n * contributor license agreements.  See the NOTICE file distributed with\\n * this work for additional information regarding copyright ownership.\\n * The ASF licenses this file to You under the Apache License, Version 2.0\\n * (the \\\"License\\\"); you may not use this file except in compliance with\\n * the License.  You may obtain a copy of the License at\\n * \\n *      http://www.apache.org/licenses/LICENSE-2.0\\n * \\n * Unless required by applicable law or agreed to in writing, software\\n * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n * See the License for the specific language governing permissions and\\n * limitations under the License.\\n */\\npackage org.apache.commons.lang3.text.translate;\\n\\nimport java.io.IOException;\\nimport java.io.Writer;\\n\\n/**\\n * Helper subclass to CharSequenceTranslator to allow for translations that \\n * will replace up to one character at a time.\\n * \\n * @since 3.0\\n * @version $Id$\\n */\\npublic abstract class CodePointTranslator extends CharSequenceTranslator {\\n\\n    /**\\n     * Implementation of translate that maps onto the abstract translate(int, Writer) method. \\n     * {@inheritDoc}\\n     */\\n    @Override\\n    public final int translate(final CharSequence input, final int index, final Writer out) throws IOException {\\n        final int codepoint = Character.codePointAt(input, index);\\n        final boolean consumed = translate(codepoint, out);\\n        if (consumed) {\\n            return 1;\\n        } else {\\n            return 0;\\n        }\\n    }\\n\\n    /**\\n     * Translate the specified codepoint into another. \\n     * \\n     * @param codepoint int character input to translate\\n     * @param out Writer to optionally push the translated output to\\n     * @return boolean as to whether translation occurred or not\\n     * @throws IOException if and only if the Writer produces an IOException\\n     */\\n    public abstract boolean translate(int codepoint, Writer out) throws IOException;\\n\\n}\\n\",\n    \"src/test/java/org/apache/commons/lang3/text/translate/LookupTranslatorTest.java [read-only-test]\": \"/*\\n * Licensed to the Apache Software Foundation (ASF) under one or more\\n * contributor license agreements.  See the NOTICE file distributed with\\n * this work for additional information regarding copyright ownership.\\n * The ASF licenses this file to You under the Apache License, Version 2.0\\n * (the \\\"License\\\"); you may not use this file except in compliance with\\n * the License.  You may obtain a copy of the License at\\n * \\n *      http://www.apache.org/licenses/LICENSE-2.0\\n * \\n * Unless required by applicable law or agreed to in writing, software\\n * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n * See the License for the specific language governing permissions and\\n * limitations under the License.\\n */\\n\\npackage org.apache.commons.lang3.text.translate;\\n\\nimport static org.junit.Assert.assertEquals;\\n\\nimport java.io.IOException;\\nimport java.io.StringWriter;\\n\\nimport org.junit.Test;\\n\\n/**\\n * Unit tests for {@link org.apache.commons.lang3.text.translate.LookupTranslator}.\\n * @version $Id$\\n */\\npublic class LookupTranslatorTest  {\\n\\n    @Test\\n    public void testBasicLookup() throws IOException {\\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { \\\"one\\\", \\\"two\\\" } });\\n        final StringWriter out = new StringWriter();\\n        final int result = lt.translate(\\\"one\\\", 0, out);\\n        assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result);\\n        assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString());\\n    }\\n\\n    // Tests: https://issues.apache.org/jira/browse/LANG-882\\n    @Test\\n    public void testLang882() throws IOException {\\n        final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\\\"one\\\"), new StringBuffer(\\\"two\\\") } });\\n        final StringWriter out = new StringWriter();\\n        final int result = lt.translate(new StringBuffer(\\\"one\\\"), 0, out);\\n        assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result);\\n        assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString());\\n    }\\n\\n}\\n\"\n  },\n  \"source_snippet_line_numbers\": {\n    \"src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java\": \"1: /*\\n2:  * Licensed to the Apache Software Foundation (ASF) under one or more\\n3:  * contributor license agreements.  See the NOTICE file distributed with\\n4:  * this work for additional information regarding copyright ownership.\\n5:  * The ASF licenses this file to You under the Apache License, Version 2.0\\n6:  * (the \\\"License\\\"); you may not use this file except in compliance with\\n7:  * the License.  You may obtain a copy of the License at\\n8:  * \\n9:  *      http://www.apache.org/licenses/LICENSE-2.0\\n10:  * \\n11:  * Unless required by applicable law or agreed to in writing, software\\n12:  * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n13:  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n14:  * See the License for the specific language governing permissions and\\n15:  * limitations under the License.\\n16:  */\\n17: package org.apache.commons.lang3.text.translate;\\n18: \\n19: import java.io.IOException;\\n20: import java.io.Writer;\\n21: import java.util.HashMap;\\n22: \\n23: /**\\n24:  * Translates a value using a lookup table.\\n25:  *\\n26:  * @since 3.0\\n27:  * @version $Id$\\n28:  */\\n29: public class LookupTranslator extends CharSequenceTranslator {\\n30: \\n31:     private final HashMap<CharSequence, CharSequence> lookupMap;\\n32:     private final int shortest;\\n33:     private final int longest;\\n34: \\n35:     /**\\n36:      * Define the lookup table to be used in translation\\n37:      *\\n38:      * Note that, as of Lang 3.1, the key to the lookup table is converted to a \\n39:      * java.lang.String, while the value remains as a java.lang.CharSequence. \\n40:      * This is because we need the key to support hashCode and equals(Object), \\n41:      * allowing it to be the key for a HashMap. See LANG-882.\\n42:      *\\n43:      * @param lookup CharSequence[][] table of size [*][2]\\n44:      */\\n45:     public LookupTranslator(final CharSequence[]... lookup) {\\n46:         lookupMap = new HashMap<CharSequence, CharSequence>();\\n47:         int _shortest = Integer.MAX_VALUE;\\n48:         int _longest = 0;\\n49:         if (lookup != null) {\\n50:             for (final CharSequence[] seq : lookup) {\\n51:                 this.lookupMap.put(seq[0], seq[1]);\\n52:                 final int sz = seq[0].length();\\n53:                 if (sz < _shortest) {\\n54:                     _shortest = sz;\\n55:                 }\\n56:                 if (sz > _longest) {\\n57:                     _longest = sz;\\n58:                 }\\n59:             }\\n60:         }\\n61:         shortest = _shortest;\\n62:         longest = _longest;\\n63:     }\\n64: \\n65:     /**\\n66:      * {@inheritDoc}\\n67:      */\\n68:     @Override\\n69:     public int translate(final CharSequence input, final int index, final Writer out) throws IOException {\\n70:         int max = longest;\\n71:         if (index + longest > input.length()) {\\n72:             max = input.length() - index;\\n73:         }\\n74:         // descend so as to get a greedy algorithm\\n75:         for (int i = max; i >= shortest; i--) {\\n76:             final CharSequence subSeq = input.subSequence(index, index + i);\\n77:             final CharSequence result = lookupMap.get(subSeq);\\n78:             if (result != null) {\\n79:                 out.write(result.toString());\\n80:                 return i;\\n81:             }\\n82:         }\\n83:         return 0;\\n84:     }\\n85: }\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/CharSequenceTranslator.java\": \"1: /*\\n2:  * Licensed to the Apache Software Foundation (ASF) under one or more\\n3:  * contributor license agreements.  See the NOTICE file distributed with\\n4:  * this work for additional information regarding copyright ownership.\\n5:  * The ASF licenses this file to You under the Apache License, Version 2.0\\n6:  * (the \\\"License\\\"); you may not use this file except in compliance with\\n7:  * the License.  You may obtain a copy of the License at\\n8:  * \\n9:  *      http://www.apache.org/licenses/LICENSE-2.0\\n10:  * \\n11:  * Unless required by applicable law or agreed to in writing, software\\n12:  * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n13:  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n14:  * See the License for the specific language governing permissions and\\n15:  * limitations under the License.\\n16:  */\\n1\\n...[truncated]...\\nslator(newArray);\\n112:     }\\n113: \\n114:     /**\\n115:      * <p>Returns an upper case hexadecimal <code>String</code> for the given\\n116:      * character.</p>\\n117:      *\\n118:      * @param codepoint The codepoint to convert.\\n119:      * @return An upper case hexadecimal <code>String</code>\\n120:      */\\n121:     public static String hex(final int codepoint) {\\n122:         return Integer.toHexString(codepoint).toUpperCase(Locale.ENGLISH);\\n123:     }\\n124: \\n125: }\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/AggregateTranslator.java\": \"1: /*\\n2:  * Licensed to the Apache Software Foundation (ASF) under one or more\\n3:  * contributor license agreements.  See the NOTICE file distributed with\\n4:  * this work for additional information regarding copyright ownership.\\n5:  * The ASF licenses this file to You under the Apache License, Version 2.0\\n6:  * (the \\\"License\\\"); you may not use this file except in compliance with\\n7:  * the License.  You may obtain a copy of the License at\\n8:  * \\n9:  *      http://www.apache.org/licenses/LICENSE-2.0\\n10:  * \\n11:  * Unless required by applicable law or agreed to in writing, software\\n12:  * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n13:  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n14:  * See the License for the specific language governing permissions and\\n15:  * limitations under the License.\\n16:  */\\n1\\n...[truncated]...\\n7:      * {@inheritDoc}\\n48:      */\\n49:     @Override\\n50:     public int translate(final CharSequence input, final int index, final Writer out) throws IOException {\\n51:         for (final CharSequenceTranslator translator : translators) {\\n52:             final int consumed = translator.translate(input, index, out);\\n53:             if(consumed != 0) {\\n54:                 return consumed;\\n55:             }\\n56:         }\\n57:         return 0;\\n58:     }\\n59: \\n60: }\",\n    \"src/main/java/org/apache/commons/lang3/text/translate/CodePointTranslator.java\": \"1: /*\\n2:  * Licensed to the Apache Software Foundation (ASF) under one or more\\n3:  * contributor license agreements.  See the NOTICE file distributed with\\n4:  * this work for additional information regarding copyright ownership.\\n5:  * The ASF licenses this file to You under the Apache License, Version 2.0\\n6:  * (the \\\"License\\\"); you may not use this file except in compliance with\\n7:  * the License.  You may obtain a copy of the License at\\n8:  * \\n9:  *      http://www.apache.org/licenses/LICENSE-2.0\\n10:  * \\n11:  * Unless required by applicable law or agreed to in writing, software\\n12:  * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n13:  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n14:  * See the License for the specific language governing permissions and\\n15:  * limitations under the License.\\n16:  */\\n1\\n...[truncated]...\\n      * Translate the specified codepoint into another. \\n48:      * \\n49:      * @param codepoint int character input to translate\\n50:      * @param out Writer to optionally push the translated output to\\n51:      * @return boolean as to whether translation occurred or not\\n52:      * @throws IOException if and only if the Writer produces an IOException\\n53:      */\\n54:     public abstract boolean translate(int codepoint, Writer out) throws IOException;\\n55: \\n56: }\",\n    \"src/test/java/org/apache/commons/lang3/text/translate/LookupTranslatorTest.java [read-only-test]\": \"1: /*\\n2:  * Licensed to the Apache Software Foundation (ASF) under one or more\\n3:  * contributor license agreements.  See the NOTICE file distributed with\\n4:  * this work for additional information regarding copyright ownership.\\n5:  * The ASF licenses this file to You under the Apache License, Version 2.0\\n6:  * (the \\\"License\\\"); you may not use this file except in compliance with\\n7:  * the License.  You may obtain a copy of the License at\\n8:  * \\n9:  *      http://www.apache.org/licenses/LICENSE-2.0\\n10:  * \\n11:  * Unless required by applicable law or agreed to in writing, software\\n12:  * distributed under the License is distributed on an \\\"AS IS\\\" BASIS,\\n13:  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\\n14:  * See the License for the specific language governing permissions and\\n15:  * limitations under the License.\\n16:  */\\n17: \\n18: package org.apache.commons.lang3.text.translate;\\n19: \\n20: import static org.junit.Assert.assertEquals;\\n21: \\n22: import java.io.IOException;\\n23: import java.io.StringWriter;\\n24: \\n25: import org.junit.Test;\\n26: \\n27: /**\\n28:  * Unit tests for {@link org.apache.commons.lang3.text.translate.LookupTranslator}.\\n29:  * @version $Id$\\n30:  */\\n31: public class LookupTranslatorTest  {\\n32: \\n33:     @Test\\n34:     public void testBasicLookup() throws IOException {\\n35:         final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { \\\"one\\\", \\\"two\\\" } });\\n36:         final StringWriter out = new StringWriter();\\n37:         final int result = lt.translate(\\\"one\\\", 0, out);\\n38:         assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result);\\n39:         assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString());\\n40:     }\\n41: \\n42:     // Tests: https://issues.apache.org/jira/browse/LANG-882\\n43:     @Test\\n44:     public void testLang882() throws IOException {\\n45:         final LookupTranslator lt = new LookupTranslator(new CharSequence[][] { { new StringBuffer(\\\"one\\\"), new StringBuffer(\\\"two\\\") } });\\n46:         final StringWriter out = new StringWriter();\\n47:         final int result = lt.translate(new StringBuffer(\\\"one\\\"), 0, out);\\n48:         assertEquals(\\\"Incorrect codepoint consumption\\\", 3, result);\\n49:         assertEquals(\\\"Incorrect value\\\", \\\"two\\\", out.toString());\\n50:     }\\n51: \\n52: }\"\n  },\n  \"patch_grounding_instructions\": \"Use raw source_snippets for old/new text. If line-number comments are present, use them only to fill optional line_start/line_end; never include line-number prefixes in old/new. If a previous attempt says old text was not found, choose a smaller exact block from the current snippet and update line_start/line_end only when the numbered snippet shows those exact lines. Previous failed hunk text is diagnostic only; do not use it as old text unless current_diff or source_snippets contain it.\",\n  \"current_diff\": \"\",\n  \"memory_preferred_patch_styles\": [\n    \"API-contract\",\n    \"fallback\",\n    \"null-check\",\n    \"boundary\"\n  ],\n  \"memory_preferred_repair_skills\": [\n    \"single-hunk:API-contract\",\n    \"single-hunk:fallback\",\n    \"single-hunk:boundary\",\n    \"single-hunk:null-check\"\n  ],\n  \"memory_preferred_test_skills\": [\n    \"regression-relevant-passed\"\n  ],\n  \"memory_regression_warnings\": [],\n  \"memory_successful_strategies\": [\n    \"successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression\",\n    \"successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression\"\n  ],\n  \"previous_attempt_failures\": [],\n  \"relevant_failure_reflections\": [\n    \"patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts\",\n    \"llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request\",\n    \"patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts\",\n    \"patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts\",\n    \"patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts\"\n  ],\n  \"context_budget_chars\": 56000,\n  \"required_json_schema\": {\n    \"diagnosis\": \"short root-cause hypothesis\",\n    \"files_to_read\": [\n      \"optional additional source files\"\n    ],\n    \"patch_hunks\": [\n      {\n        \"file\": \"relative/source/File.java\",\n        \"old\": \"exact text without line-number prefixes\",\n        \"new\": \"replacement text without line-number prefixes\",\n        \"line_start\": \"optional 1-based source line for the old text\",\n        \"line_end\": \"optional inclusive 1-based source line for the old text\"\n      }\n    ],\n    \"tests_to_run_next\": [\n      \"Defects4J test names or scopes\"\n    ],\n    \"confidence\": 0.0,\n    \"final_explanation\": \"short patch explanation\",\n    \"patch_style\": \"one label such as guard, boundary, null-check, arithmetic, API-contract\"\n  }\n}"
+        }
+      ],
+      "memory_preferences": [
+        "API-contract",
+        "fallback",
+        "null-check",
+        "boundary"
+      ],
+      "repair_skills": [
+        "single-hunk:API-contract",
+        "single-hunk:fallback",
+        "single-hunk:boundary",
+        "single-hunk:null-check"
+      ],
+      "test_skills": [
+        "regression-relevant-passed"
+      ],
+      "regression_warnings": [],
+      "success_strategies": [
+        "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression",
+        "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=Replaced hex digit counting logic with a try-Integer-then-Long-then-BigInteger fallback chain, matching the existing integral cascade, so that 8-digit hex values beyond int range become Long instead of throwing NumberFormatException.; require exact old/new text from current snippets and verify trigger plus regression"
+      ],
+      "reflections": [
+        "patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts",
+        "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request",
+        "patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts",
+        "patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts",
+        "patch_apply_failure: previous old text did not match the current source; use only exact lines visible in source snippets or a minimal anchored window, and do not reuse absent identifiers from failed attempts"
+      ],
+      "prompt_budget_scale": 1.0,
+      "prompt_context_budget_chars": 56000,
+      "response": {
+        "diagnosis": "LookupTranslator stores CharSequence keys directly in HashMap, but subSequence() returns a String, which fails to match StringBuffer or other CharSequence types lacking value equality. The fix converts keys to String on construction.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "old": "                this.lookupMap.put(seq[0], seq[1]);",
+            "new": "                this.lookupMap.put(seq[0].toString(), seq[1]);",
+            "line_start": 51,
+            "line_end": 51
+          }
+        ],
+        "tests_to_run_next": [
+          "org.apache.commons.lang3.text.translate.LookupTranslatorTest"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "Convert CharSequence key to String when inserting into the lookup map so that the subsequent lookup using the String returned by input.subSequence() succeeds for all CharSequence types, fixing LANG-882.",
+        "patch_style": "API-contract"
+      },
+      "repair_plan": {
+        "diagnosis": "LookupTranslator stores CharSequence keys directly in HashMap, but subSequence() returns a String, which fails to match StringBuffer or other CharSequence types lacking value equality. The fix converts keys to String on construction.",
+        "files_to_read": [],
+        "patch_hunks": [
+          {
+            "file": "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java",
+            "old": "                this.lookupMap.put(seq[0], seq[1]);",
+            "new": "                this.lookupMap.put(seq[0].toString(), seq[1]);",
+            "line_start": 51,
+            "line_end": 51
+          }
+        ],
+        "tests_to_run_next": [
+          "org.apache.commons.lang3.text.translate.LookupTranslatorTest"
+        ],
+        "confidence": 0.95,
+        "final_explanation": "Convert CharSequence key to String when inserting into the lookup map so that the subsequent lookup using the String returned by input.subSequence() succeeds for all CharSequence types, fixing LANG-882.",
+        "patch_style": "API-contract"
+      },
+      "requested_files_for_next_attempt": [
+        "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java"
+      ],
+      "patch_apply": {
+        "ok": true,
+        "unsafe": false,
+        "changed_files": [
+          "src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java"
+        ],
+        "diff": "--- a/src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java\n+++ b/src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java\n@@ -48,7 +48,7 @@\n         int _longest = 0;\n         if (lookup != null) {\n             for (final CharSequence[] seq : lookup) {\n-                this.lookupMap.put(seq[0], seq[1]);\n+                this.lookupMap.put(seq[0].toString(), seq[1]);\n                 final int sz = seq[0].length();\n                 if (sz < _shortest) {\n                     _shortest = sz;",
+        "errors": [],
+        "patch_size": 2
+      },
+      "patch_path": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/patches/self_evolved-Lang-4-attempt1.diff",
+      "compile": {
+        "command": [
+          "defects4j",
+          "compile"
+        ],
+        "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+        "returncode": 0,
+        "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+        "elapsed_seconds": 0.5785,
+        "ok": true
+      },
+      "visible_tests": {
+        "scope": "trigger",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-t",
+              "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.4812,
+            "ok": true
+          }
+        ]
+      },
+      "regression_tests": {
+        "scope": "relevant",
+        "passed": true,
+        "results": [
+          {
+            "command": [
+              "defects4j",
+              "test",
+              "-r"
+            ],
+            "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+            "returncode": 0,
+            "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+            "elapsed_seconds": 0.657,
+            "ok": true
+          }
+        ]
+      }
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 3.2451,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 1\n  - org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\n\n\n[failing_tests]\n--- org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882\njunit.framework.AssertionFailedError: Incorrect codepoint consumption expected:<3> but was:<0>\n\tat org.junit.Assert.fail(Assert.java:88)\n\tat org.junit.Assert.failNotEquals(Assert.java:834)\n\tat org.junit.Assert.assertEquals(Assert.java:645)\n\tat org.apache.commons.lang3.text.translate.LookupTranslatorTest.testLang882(LookupTranslatorTest.java:48)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)\n\tat java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)\n\tat org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)\n\tat org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)\n\tat org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)\n\tat org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)\n\tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)\n\tat org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)\n\tat org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)\n\tat org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)\n\tat org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)\n\tat org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)\n\tat org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)\n\tat org.junit.runners.ParentRunner.run(ParentRunner.java:363)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnit4TestMethodAdapter.run(JUnit4TestMethodAdapter.java:109)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner.run(JUnitTestRunner.java:520)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeInVM(JUnitTask.java:1492)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:878)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeOrQueue(JUnitTask.java:1980)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.executeTests(JUnitTask.java:830)\n\tat org.apache.tools.ant.taskdefs.optional.junit.JUnitTask.execute(JUnitTask.java:2287)\n\tat org.apache.tools.ant.UnknownElement.execute(UnknownElement.java:291)\n\tat jdk.internal.reflect.GeneratedMethodAccessor4.invoke(Unknown Source)\n\tat java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)\n\tat java.base/java.lang.reflect.Method.invoke(Method.java:566)\n\tat org.apache.tools.ant.dispatch.DispatchUtils.execute(DispatchUtils.java:106)\n\tat org.apache.tools.ant.Task.perform(Task.java:348)\n\tat org.apache.tools.ant.Target.execute(Target.java:392)\n\tat org.apache.tools.ant.Target.performTasks(Target.java:413)\n\tat org.apache.tools.ant.Project.executeSortedTargets(Project.java:1399)\n\tat org.apache.tools.ant.Project.executeTarget(Project.java:1368)\n\tat org.apache.tools.ant.helper.DefaultExecutor.executeTargets(DefaultExecutor.java:41)\n\tat org.apache.tools.ant.Project.executeTargets(Project.java:1251)\n\tat org.apache.tools.ant.Main.runBuild(Main.java:811)\n\tat org.apache.tools.ant.Main.startAnt(Main.java:217)\n\tat org.apache.tools.ant.launch.Launcher.run(Launcher.java:280)\n\tat org.apache.tools.ant.launch.Launcher.main(Launcher.java:109)\n",
+      "elapsed_seconds": 0.4826,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "compile"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+      "returncode": 0,
+      "output": "Running ant (compile)...................................................... OK\nRunning ant (compile.tests)................................................ OK\n",
+      "elapsed_seconds": 0.5785,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-t",
+        "org.apache.commons.lang3.text.translate.LookupTranslatorTest::testLang882"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.4812,
+      "ok": true
+    },
+    {
+      "command": [
+        "defects4j",
+        "test",
+        "-r"
+      ],
+      "cwd": "/workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Lang-4",
+      "returncode": 0,
+      "output": "Running ant (compile.tests)................................................ OK\nRunning ant (run.dev.tests)................................................ OK\nFailing tests: 0\n",
+      "elapsed_seconds": 0.657,
+      "ok": true
+    }
+  ],
+  "memory_before": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "class:numberutils": {
+        "fallback": 2.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "API-contract": 1.5
+      },
+      "class:timeperiodvalues": {
+        "boundary": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "class:week": {
+        "API-contract": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:error": {
+        "API-contract": 7.5,
+        "boundary": 1.0,
+        "llm-error": -0.5,
+        "null-check": 1.5,
+        "fallback": -0.5,
+        "invalid-response": -0.25
+      },
+      "exception:illegalargumentexception": {
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 3.0
+      },
+      "project:Chart": {
+        "API-contract": 7.75,
+        "boundary": 7.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 2.5,
+        "API-contract": 0.0,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 2.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "API-contract": 1.5
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug1864222": {
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:testbug2849731_3": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:testconstructor": {
+        "API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testgenerateurlfragment": {
+        "API-contract": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "boundary": 1.5
+      },
+      "trigger:testlang747": {
+        "fallback": 3.0
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "boundary": 1.5
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:weektests": {
+        "API-contract": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "fallback": -0.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:lookuptranslatortest": {
+        "API-contract": 1.5
+      },
+      "trigger:testlang882": {
+        "API-contract": 1.5
+      },
+      "class:lookuptranslator": {
+        "API-contract": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 3.0,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "relevant": 1.5
+      },
+      "class:timeperiodvalues": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 3.0
+      },
+      "class:week": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "exception:error": {
+        "not-run": -2.25,
+        "relevant": 12.0,
+        "trigger": -1.0
+      },
+      "exception:illegalargumentexception": {
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 3.0
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 19.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 4.5,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:numberutilstest": {
+        "relevant": 3.0,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "relevant": 1.5
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug1864222": {
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testconstructor": {
+        "relevant": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "relevant": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "relevant": 1.5
+      },
+      "trigger:testlang747": {
+        "relevant": 3.0
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "relevant": 1.5
+      },
+      "trigger:timeseriestests": {
+        "relevant": 3.0
+      },
+      "trigger:weektests": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:lookuptranslatortest": {
+        "relevant": 1.5
+      },
+      "trigger:testlang882": {
+        "relevant": 1.5
+      },
+      "class:lookuptranslator": {
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeperiodvalues": {
+        "single-hunk:boundary": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:week": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.5,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:boundary": 1.5,
+        "single-hunk:null-check": 1.5,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25
+      },
+      "exception:illegalargumentexception": {
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 3.0
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:boundary": 4.5,
+        "single-hunk:null-check": 3.0
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug1864222": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testconstructor": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 3.0
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:weektests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "trigger:lookuptranslatortest": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testlang882": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:lookuptranslator": {
+        "single-hunk:API-contract": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 3.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeperiodvalues": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:week": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:error": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 12.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5
+      },
+      "exception:illegalargumentexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 3.0
+      },
+      "project:Chart": {
+        "compile-before-tests": -0.5,
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 19.5,
+        "trigger-first": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 4.5,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 3.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug1864222": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testconstructor": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:weektests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:lookuptranslatortest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testlang882": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:lookuptranslator": {
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeperiodvalues": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:week": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:illegalargumentexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 2.0,
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug1864222": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testconstructor": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:timeperiodvaluestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:weektests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:lookuptranslatortest": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testlang882": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:lookuptranslator": {
+        "style:API-contract|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "compile_failure",
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java,src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: no-op hunk; src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "parse_error",
+        "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:weektests,trigger:testconstructor,exception:error,class:week",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testbug1864222,exception:illegalargumentexception,class:timeseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:standardtooltiptagfragmentgeneratortests,trigger:testgenerateurlfragment,class:standardtooltiptagfragmentgenerator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java; approach=The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=Replaced hex digit counting logic with a try-Integer-then-Long-then-BigInteger fallback chain, matching the existing integral cascade, so that 8-digit hex values beyond int range become Long instead of throwing NumberFormatException.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:lookuptranslatortest,trigger:testlang882,exception:error,class:lookuptranslator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java; approach=Convert CharSequence key to String when inserting into the lookup map so that the subsequent lookup using the String returned by input.subSequence() succeeds for all CharSequence types, fixing LANG-882.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  },
+  "checkout_outputs": [
+    "Checking out 0cdc9766 to /workspace/artifacts/runs/d4j30-self-evolved-real- OK\nInit local repository...................................................... OK\nTag post-fix revision...................................................... OK\nApply patch................................................................ OK\nApply patch................................................................ OK\nApply patch................................................................ OK\nApply patch................................................................ OK\nRun post-checkout hook..................................................... OK\nExcluding broken/flaky tests............................................... OK\nExcluding broken/flaky tests............................................... OK\nExcluding broken/flaky tests............................................... OK\nBacking up build file: /workspace/artifacts/runs/d4j30-self-evolved-real-v1 OK\nInitialize fixed program version........................................... OK\nApply patch................................................................ OK\nInitialize buggy program version........................................... OK\nDiff 0cdc9766:cd91a4f2..................................................... OK\nApply patch................................................................ OK\nTag pre-fix revision....................................................... OK\nCheck out program version: Lang-4b......................................... OK\n"
+  ],
+  "metrics": {
+    "system": "self_evolved",
+    "case_id": "Lang-4",
+    "project": "Lang",
+    "bug_id": 4,
+    "status": "solved",
+    "pass_at_1": true,
+    "pass_at_3": true,
+    "visible_pass": true,
+    "regression_pass": true,
+    "compile_success": true,
+    "tool_calls": 2,
+    "test_runs": 3,
+    "patch_size": 2,
+    "unsafe_edit": false,
+    "wall_time_seconds": 23.8393,
+    "deepseek_calls": 1,
+    "prompt_tokens": 9259,
+    "completion_tokens": 1055,
+    "estimated_cost_usd": 0.0,
+    "infrastructure_failure": false,
+    "agent_failure": false
+  },
+  "memory_after": {
+    "patch_ranking": {
+      "class:abstractcategoryitemrenderer": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "class:numberutils": {
+        "fallback": 2.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "class:shapelist": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "API-contract": 1.5
+      },
+      "class:timeperiodvalues": {
+        "boundary": 1.5
+      },
+      "class:timeseries": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "class:week": {
+        "API-contract": 1.5
+      },
+      "class:xyplot": {
+        "null-check": 1.5
+      },
+      "class:xyseries": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:error": {
+        "API-contract": 7.5,
+        "boundary": 1.0,
+        "llm-error": -0.5,
+        "null-check": 1.5,
+        "fallback": -0.5,
+        "invalid-response": -0.25
+      },
+      "exception:illegalargumentexception": {
+        "boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75,
+        "null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "fallback": 3.0
+      },
+      "project:Chart": {
+        "API-contract": 7.75,
+        "boundary": 7.5,
+        "guard": -0.5,
+        "llm-error": -1.0,
+        "null-check": 3.0
+      },
+      "project:Lang": {
+        "fallback": 2.5,
+        "API-contract": 0.0,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:logaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "null-check": 1.5
+      },
+      "trigger:numberutilstest": {
+        "fallback": 2.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:shapelisttests": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "API-contract": 1.5
+      },
+      "trigger:test2947660": {
+        "API-contract": 1.5,
+        "null-check": 1.5
+      },
+      "trigger:testbug1864222": {
+        "boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:testbug2849731_3": {
+        "API-contract": -0.5,
+        "boundary": 3.0,
+        "guard": -0.5,
+        "llm-error": -0.75
+      },
+      "trigger:testconstructor": {
+        "API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "API-contract": 1.5
+      },
+      "trigger:testequals": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testgenerateurlfragment": {
+        "API-contract": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "boundary": 1.5
+      },
+      "trigger:testlang747": {
+        "fallback": 3.0
+      },
+      "trigger:testserialization": {
+        "API-contract": 3.0,
+        "llm-error": -0.25
+      },
+      "trigger:testxyautorange1": {
+        "null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "null-check": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "boundary": 1.5
+      },
+      "trigger:timeseriestests": {
+        "API-contract": 1.5,
+        "boundary": 1.5
+      },
+      "trigger:weektests": {
+        "API-contract": 1.5
+      },
+      "trigger:xyseriestests": {
+        "API-contract": -0.75,
+        "boundary": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "fallback": -0.5,
+        "API-contract": -1.5,
+        "invalid-response": -0.25,
+        "llm-error": -0.25,
+        "boundary": -0.5
+      },
+      "trigger:lookuptranslatortest": {
+        "API-contract": 1.5
+      },
+      "trigger:testlang882": {
+        "API-contract": 1.5
+      },
+      "class:lookuptranslator": {
+        "API-contract": 1.5
+      }
+    },
+    "test_selection": {
+      "class:abstractcategoryitemrenderer": {
+        "relevant": 3.0
+      },
+      "class:datasetutilities": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "class:numberutils": {
+        "relevant": 3.0,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "class:shapelist": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "relevant": 1.5
+      },
+      "class:timeperiodvalues": {
+        "relevant": 1.5
+      },
+      "class:timeseries": {
+        "relevant": 3.0
+      },
+      "class:week": {
+        "relevant": 1.5
+      },
+      "class:xyplot": {
+        "relevant": 1.5
+      },
+      "class:xyseries": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "exception:error": {
+        "not-run": -2.25,
+        "relevant": 12.0,
+        "trigger": -1.0
+      },
+      "exception:illegalargumentexception": {
+        "relevant": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "exception:nullpointerexception": {
+        "not-run": -0.75,
+        "relevant": 4.5,
+        "trigger": -1.0
+      },
+      "exception:numberformatexception": {
+        "relevant": 3.0
+      },
+      "project:Chart": {
+        "not-run": -1.0,
+        "relevant": 19.5,
+        "trigger": -1.75
+      },
+      "project:Lang": {
+        "relevant": 4.5,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "relevant": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:logaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:numberaxistests": {
+        "relevant": 1.5
+      },
+      "trigger:numberutilstest": {
+        "relevant": 3.0,
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:shapelisttests": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "relevant": 1.5
+      },
+      "trigger:test2947660": {
+        "relevant": 3.0
+      },
+      "trigger:testbug1864222": {
+        "relevant": 1.5
+      },
+      "trigger:testbug1955483": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "trigger:testbug2849731_2": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testbug2849731_3": {
+        "not-run": -0.75,
+        "relevant": 3.0,
+        "trigger": -1.0
+      },
+      "trigger:testconstructor": {
+        "relevant": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "relevant": 1.5
+      },
+      "trigger:testequals": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "relevant": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "relevant": 1.5
+      },
+      "trigger:testlang747": {
+        "relevant": 3.0
+      },
+      "trigger:testserialization": {
+        "not-run": -0.25,
+        "relevant": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "relevant": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "relevant": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "relevant": 1.5
+      },
+      "trigger:timeseriestests": {
+        "relevant": 3.0
+      },
+      "trigger:weektests": {
+        "relevant": 1.5
+      },
+      "trigger:xyseriestests": {
+        "relevant": 1.5,
+        "trigger": -0.75
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "not-run": -2.0,
+        "trigger": -1.0
+      },
+      "trigger:lookuptranslatortest": {
+        "relevant": 1.5
+      },
+      "trigger:testlang882": {
+        "relevant": 1.5
+      },
+      "class:lookuptranslator": {
+        "relevant": 1.5
+      }
+    },
+    "repair_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "class:datasetutilities": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "class:numberutils": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "class:shapelist": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:timeperiodvalues": {
+        "single-hunk:boundary": 1.5
+      },
+      "class:timeseries": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "class:week": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:xyplot": {
+        "single-hunk:null-check": 1.5
+      },
+      "class:xyseries": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:error": {
+        "recover-from-llm-error": -0.5,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:boundary": 1.5,
+        "single-hunk:null-check": 1.5,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25
+      },
+      "exception:illegalargumentexception": {
+        "single-hunk:boundary": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "exception:nullpointerexception": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5,
+        "single-hunk:null-check": 1.5
+      },
+      "exception:numberformatexception": {
+        "single-hunk:fallback": 3.0
+      },
+      "project:Chart": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -1.0,
+        "retry-after-feedback": -1.0,
+        "single-hunk:API-contract": 9.0,
+        "single-hunk:boundary": 4.5,
+        "single-hunk:null-check": 3.0
+      },
+      "project:Lang": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:datasetutilitiestests": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:logaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberaxistests": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:numberutilstest": {
+        "single-hunk:fallback": 3.0,
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "trigger:shapelisttests": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:test2947660": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testbug1864222": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug1955483": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "multi-hunk:boundary": 3.0,
+        "recover-from-llm-error": -0.75,
+        "retry-after-feedback": -0.5
+      },
+      "trigger:testconstructor": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testequals": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:testlang747": {
+        "single-hunk:fallback": 3.0
+      },
+      "trigger:testserialization": {
+        "recover-from-llm-error": -0.25,
+        "single-hunk:API-contract": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "single-hunk:null-check": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:timeseriestests": {
+        "single-hunk:API-contract": 1.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:weektests": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:xyseriestests": {
+        "retry-after-feedback": -0.5,
+        "single-hunk:boundary": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "exact-old-text-grounding": -1.5,
+        "retry-after-feedback": -0.5,
+        "format-and-patch-grounding": -0.25,
+        "recover-from-llm-error": -0.25
+      },
+      "trigger:lookuptranslatortest": {
+        "single-hunk:API-contract": 1.5
+      },
+      "trigger:testlang882": {
+        "single-hunk:API-contract": 1.5
+      },
+      "class:lookuptranslator": {
+        "single-hunk:API-contract": 1.5
+      }
+    },
+    "test_skill_memory": {
+      "class:abstractcategoryitemrenderer": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:datasetutilities": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "class:numberutils": {
+        "regression-relevant-passed": 3.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "class:shapelist": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeperiodvalues": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:timeseries": {
+        "regression-relevant-passed": 3.0
+      },
+      "class:week": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyplot": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:xyseries": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:error": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 12.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5
+      },
+      "exception:illegalargumentexception": {
+        "regression-relevant-passed": 1.5
+      },
+      "exception:indexoutofboundsexception": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "exception:nullpointerexception": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 4.5,
+        "trigger-first": -0.5
+      },
+      "exception:numberformatexception": {
+        "regression-relevant-passed": 3.0
+      },
+      "project:Chart": {
+        "compile-before-tests": -0.5,
+        "no-test-run": -1.0,
+        "regression-relevant-passed": 19.5,
+        "trigger-first": -0.5
+      },
+      "project:Lang": {
+        "regression-relevant-passed": 4.5,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:datasetutilitiestests": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:logaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberaxistests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:numberutilstest": {
+        "regression-relevant-passed": 3.0,
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:shapelisttests": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:test2947660": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testbug1864222": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug1955483": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testbug2849731_2": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testbug2849731_3": {
+        "no-test-run": -0.75,
+        "regression-relevant-passed": 3.0,
+        "trigger-first": -0.5
+      },
+      "trigger:testconstructor": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testcreatecopy3": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testequals": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testlang747": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testserialization": {
+        "no-test-run": -0.25,
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:testxyautorange1": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testxyautorange2": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeperiodvaluestests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:timeseriestests": {
+        "regression-relevant-passed": 3.0
+      },
+      "trigger:weektests": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:xyseriestests": {
+        "compile-before-tests": -0.5,
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:teststringcreatenumberensurenoprecisionloss": {
+        "not-run-first": -1.5,
+        "trigger-first": -0.5,
+        "no-test-run": -0.5
+      },
+      "trigger:lookuptranslatortest": {
+        "regression-relevant-passed": 1.5
+      },
+      "trigger:testlang882": {
+        "regression-relevant-passed": 1.5
+      },
+      "class:lookuptranslator": {
+        "regression-relevant-passed": 1.5
+      }
+    },
+    "regression_outcomes": {
+      "class:abstractcategoryitemrenderer": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:datasetutilities": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "class:numberutils": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "class:shapelist": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "class:standardtooltiptagfragmentgenerator": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:timeperiodvalues": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:timeseries": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "class:week": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:xyplot": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "class:xyseries": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:error": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:illegalargumentexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:indexoutofboundsexception": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "exception:nullpointerexception": {
+        "style:boundary|scope:relevant": 2.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "exception:numberformatexception": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "project:Chart": {
+        "style:API-contract|scope:relevant": 6.0,
+        "style:boundary|scope:relevant": 5.0,
+        "style:null-check|scope:relevant": 2.0
+      },
+      "project:Lang": {
+        "style:fallback|scope:relevant": 2.0,
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:abstractcategoryitemrenderertests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:datasetutilitiestests": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:logaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberaxistests": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:numberutilstest": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "trigger:shapelisttests": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:standardtooltiptagfragmentgeneratortests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:test2947660": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testbug1864222": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug1955483": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testbug2849731_2": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testbug2849731_3": {
+        "style:boundary|scope:relevant": 2.0
+      },
+      "trigger:testconstructor": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testcreatecopy3": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testequals": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testgenerateurlfragment": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testgetmaxmiddleindex": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:testlang747": {
+        "style:fallback|scope:relevant": 2.0
+      },
+      "trigger:testserialization": {
+        "style:API-contract|scope:relevant": 2.0
+      },
+      "trigger:testxyautorange1": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:testxyautorange2": {
+        "style:null-check|scope:relevant": 1.0
+      },
+      "trigger:timeperiodvaluestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:timeseriestests": {
+        "style:API-contract|scope:relevant": 1.0,
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:weektests": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:xyseriestests": {
+        "style:boundary|scope:relevant": 1.0
+      },
+      "trigger:lookuptranslatortest": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "trigger:testlang882": {
+        "style:API-contract|scope:relevant": 1.0
+      },
+      "class:lookuptranslator": {
+        "style:API-contract|scope:relevant": 1.0
+      }
+    },
+    "failure_reflections": [
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=guard; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "visible_failure",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "visible_failure: style=API-contract; files=source/org/jfree/data/general/DatasetUtilities.java,source/org/jfree/data/general/DatasetUtilities.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "failure_reason": "llm_error",
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "reflection": "llm_error: DeepSeek returned empty message content; retry with smaller, more grounded patch request"
+      },
+      {
+        "failure_reason": "compile_failure",
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "reflection": "compile_failure: style=API-contract; files=source/org/jfree/data/xy/XYSeries.java; patch did not compile; compile_tail=[javac] /workspace/artifacts/runs/d4j30-self-evolved-real-v16/work/self_evolved/Chart-5/source/org/jfree/data/xy/XYSeries.java:565: error: variable index is already defined in method addOrUpdate(Number,Number)"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java,src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: no-op hunk; src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "visible_failure",
+        "reflection": "visible_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; patch compiled but trigger tests still failed, so use failing_tests assertion details and change strategy"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "parse_error",
+        "reflection": "parse_error: response JSON is truncated before a complete patch_hunks array; request concrete non-empty patch_hunks"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=API-contract; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "llm_error",
+        "reflection": "llm_error: DeepSeek returned empty message content without json_mode; retry with smaller, more grounded patch request"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=boundary; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:teststringcreatenumberensurenoprecisionloss,exception:error,class:numberutils",
+        "failure_reason": "patch_apply_failure",
+        "reflection": "patch_apply_failure: style=fallback; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; old/new text was not grounded in current source, so re-read exact snippets and use a minimal anchored edit; apply_errors=src/main/java/org/apache/commons/lang3/math/NumberUtils.java: old text not found"
+      }
+    ],
+    "success_strategies": [
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=The equals method relied on super.equals which compared objects via ObjectUtilities.equal, but that falls back to reference equality for shapes like Line2D.Double. By overriding equals to use ShapeUtilities.equal, the testEqual and testSerialization assertions pass.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=The hex parsing in createNumber used hex digit count to select Integer, Long, or BigInteger, but that fails for 8-digit hex values that exceed int range and for 16-digit hex values that exceed long range. Replaced with a fallback cascade (Integer -> Long -> BigInteger) that catches NumberFormatException, consistent with the non-hex integral parsing logic.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() that returned empty collection when dataset was present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to correctly handle IntervalXYDataset: update both minimum and maximum using each non‑NaN interval endpoint, and fall back to the regular x/y value when both endpoints are NaN.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:abstractcategoryitemrenderertests,trigger:test2947660,exception:error,class:abstractcategoryitemrenderer",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/renderer/category/AbstractCategoryItemRenderer.java; approach=Fix inverted null check in getLegendItems() to return empty collection only when dataset is null, not when it is present.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:datasetutilitiestests,trigger:testbug2849731_2,trigger:testbug2849731_3,exception:nullpointerexception,class:datasetutilities",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/general/DatasetUtilities.java; approach=Modified iterateDomainBounds and iterateRangeBounds to include the regular X/Y value of an IntervalXYDataset as a fallback when interval endpoints are NaN, and updated both minimum and maximum for every non‑NaN endpoint. This matches the test expectations and the successful repair strategy from memory.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testcreatecopy3,exception:error,class:timeseries",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=Reset the copy's minY and maxY to NaN before populating it in createCopy(int, int) so that the bounds are computed solely from the copied subset, not inherited from the original series.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:logaxistests,trigger:testxyautorange1,trigger:testxyautorange2,trigger:numberaxistests,exception:nullpointerexception,class:xyplot",
+        "strategy": "successful strategy: style=null-check; scope=relevant; files=source/org/jfree/chart/plot/XYPlot.java; approach=Guard the renderer annotation collection with a null check to prevent NullPointerException when no renderer is associated with a dataset.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:xyseriestests,trigger:testbug1955483,exception:indexoutofboundsexception,class:xyseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/xy/XYSeries.java; approach=Fix the insertion logic in addOrUpdate when autoSort is true and a duplicate x-value exists. Instead of always using -index-1 (which is negative for duplicates), correctly scan past any existing duplicates and insert at the found position, preserving the order of insertion.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:shapelisttests,trigger:testserialization,trigger:testequals,exception:error,class:shapelist",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/util/ShapeList.java; approach=Override equals in ShapeList to use ShapeUtilities.equal for shape comparison, fixing equality for shape instances like Line2D.Double that do not override equals.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeperiodvaluestests,trigger:testgetmaxmiddleindex,exception:error,class:timeperiodvalues",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimePeriodValues.java; approach=The maxMiddleIndex update logic had a copy-paste error that used minMiddleIndex instead of maxMiddleIndex to retrieve the previous maximum middle period. Replacing both references with maxMiddleIndex ensures the comparison is against the correct period, preventing the index from being incorrectly promoted when a new period's middle exceeds the current minimum but not the actual maximum.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:weektests,trigger:testconstructor,exception:error,class:week",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/data/time/Week.java; approach=The deprecated Week(Date, TimeZone) constructor erroneously passed RegularTimePeriod.DEFAULT_TIME_ZONE instead of the supplied zone. This caused week numbers to be computed against the wrong time zone, making the test fail. The fix passes the actual given zone while still using the default locale.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:timeseriestests,trigger:testbug1864222,exception:illegalargumentexception,class:timeseries",
+        "strategy": "successful strategy: style=boundary; scope=relevant; files=source/org/jfree/data/time/TimeSeries.java; approach=When start and end periods both lie between the same pair of existing data points, the index calculations produce startIndex > endIndex, causing the int-based createCopy to throw. By setting emptyRange to true in this case, an empty copy is returned as expected.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Chart,trigger:standardtooltiptagfragmentgeneratortests,trigger:testgenerateurlfragment,class:standardtooltiptagfragmentgenerator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=source/org/jfree/chart/imagemap/StandardToolTipTagFragmentGenerator.java; approach=The generateToolTipFragment method was returning the raw tooltip text without escaping special HTML characters. The test expects double quotes to be escaped as &quot;, which the existing ImageMapUtilities.htmlEscape provides. This matches the approach used in other tooltip generators in the same package.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:numberutilstest,trigger:testlang747,exception:numberformatexception,class:numberutils",
+        "strategy": "successful strategy: style=fallback; scope=relevant; files=src/main/java/org/apache/commons/lang3/math/NumberUtils.java; approach=Replaced hex digit counting logic with a try-Integer-then-Long-then-BigInteger fallback chain, matching the existing integral cascade, so that 8-digit hex values beyond int range become Long instead of throwing NumberFormatException.; require exact old/new text from current snippets and verify trigger plus regression"
+      },
+      {
+        "features": "project:Lang,trigger:lookuptranslatortest,trigger:testlang882,exception:error,class:lookuptranslator",
+        "strategy": "successful strategy: style=API-contract; scope=relevant; files=src/main/java/org/apache/commons/lang3/text/translate/LookupTranslator.java; approach=Convert CharSequence key to String when inserting into the lookup map so that the subsequent lookup using the String returned by input.subSequence() succeeds for all CharSequence types, fixing LANG-882.; require exact old/new text from current snippets and verify trigger plus regression"
+      }
+    ]
+  }
+}

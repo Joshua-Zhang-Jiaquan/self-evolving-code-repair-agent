@@ -1,48 +1,23 @@
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+.pytest_cache/
 *.egg-info/
 dist/
 build/
 
-# Virtual environments and caches
-/.venv/
-/venv/
-/env/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.ipynb_checkpoints/
-
-# Local/runtime artifacts
-logs/*
-!logs/.gitkeep
-*.log
-swebench_workdirs/
-.eval_*
-/testbed/
-
-# Models and large downloaded artifacts
-models/
-*.safetensors
-*.gguf
-*.bin
-
-# Archives/submission bundles
-*.tar
-*.zip
-homework*/
-submissions*/
-libpod/
-
-# Editor/OS
+# Local scratch/test outputs
+tmp*/
+.DS_Store
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
-.DS_Store
-Thumbs.db
 
-# Planning/private workspace
-.omo/
+# Large Defects4J checkout workdirs
+artifacts/runs/*/work/
+artifacts/d4j_test_sweeps/*/work/
+
+# Local-only generated push workspace
+submission_dist/git-push-work/

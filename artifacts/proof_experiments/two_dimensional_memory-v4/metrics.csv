@@ -1,0 +1,17 @@
+variant,case_id,selected_scope,required_scope,selected_patch_style,required_patch_style,check_correct,repair_correct,solved,duplicate_risk,regression_overfit_risk,simulated_tool_calls,simulated_test_runs
+feedback_only,eval-regex-parser-transfer,trigger,relevant,direct-default,regex-boundary,False,False,False,True,True,5,1
+feedback_only,eval-numeric-types-transfer,trigger,trigger,direct-default,numeric-conversion,True,False,False,True,False,3,1
+feedback_only,eval-math-boundary-transfer,trigger,relevant,direct-default,boundary-condition,False,False,False,True,True,5,1
+feedback_only,eval-api-contract-transfer,trigger,all,direct-default,api-contract,False,False,False,True,True,5,1
+check_memory_only,eval-regex-parser-transfer,relevant,relevant,direct-default,regex-boundary,True,False,False,True,False,3,2
+check_memory_only,eval-numeric-types-transfer,trigger,trigger,direct-default,numeric-conversion,True,False,False,True,False,3,1
+check_memory_only,eval-math-boundary-transfer,relevant,relevant,direct-default,boundary-condition,True,False,False,True,False,3,2
+check_memory_only,eval-api-contract-transfer,all,all,direct-default,api-contract,True,False,False,True,False,3,2
+repair_memory_only,eval-regex-parser-transfer,trigger,relevant,regex-boundary,regex-boundary,False,True,False,False,True,5,1
+repair_memory_only,eval-numeric-types-transfer,trigger,trigger,numeric-conversion,numeric-conversion,True,True,True,False,False,3,1
+repair_memory_only,eval-math-boundary-transfer,trigger,relevant,boundary-condition,boundary-condition,False,True,False,False,True,5,1
+repair_memory_only,eval-api-contract-transfer,trigger,all,api-contract,api-contract,False,True,False,False,True,5,1
+two_dimensional_memory,eval-regex-parser-transfer,relevant,relevant,regex-boundary,regex-boundary,True,True,True,False,False,3,2
+two_dimensional_memory,eval-numeric-types-transfer,trigger,trigger,numeric-conversion,numeric-conversion,True,True,True,False,False,3,1
+two_dimensional_memory,eval-math-boundary-transfer,relevant,relevant,boundary-condition,boundary-condition,True,True,True,False,False,3,2
+two_dimensional_memory,eval-api-contract-transfer,all,all,api-contract,api-contract,True,True,True,False,False,3,2
